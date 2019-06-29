@@ -94,12 +94,16 @@ const dm = {
     }, this.tempo);
   },
   stop: function stop(m) {
-    if (m === undefined) {
-      clearInterval(this.playingSeq);
-    }
-    setTimeout(() => {
-      clearInterval(this.playingSeq);
-    }, m);
+    return new Promise(resolve => {
+      if (m === undefined) {
+        clearInterval(this.playingSeq);
+        return resolve();
+      }
+      setTimeout(() => {
+        clearInterval(this.playingSeq);
+        return resolve();
+      }, m);
+    });
   },
   triggerSounds: function triggerSounds(dmState) {
     for (let instrument in dmState) {
@@ -115,8 +119,8 @@ const dm = {
   }
 };
 
-const sequencer = new Sequencer(DrumMachineState, 8);
-const seq = sequencer.initSeq();
+let sequencer = new Sequencer(DrumMachineState, 8);
+let seq = sequencer.initSeq();
 
 seq[0].setState("kick", true, 1);
 seq[4].setState("kick", true, 0.8);
@@ -140,3 +144,30 @@ seq[7].setState("perc2", true, 0.25);
 
 dm.setTempo(127, 4);
 dm.start(seq);
+
+dm.stop(4000).then(() => {
+  seq[0].setState("kick", true, 1);
+  seq[4].setState("kick", true, 0.8);
+  seq[4].setState("clap", true);
+  seq[2].setState("hat", true, 0.2);
+  seq[6].setState("hat", true, 0.24);
+  seq[0].setState("shaker", true, 0.2);
+  seq[1].setState("shaker", true, 0.1);
+  seq[2].setState("shaker", true, 0.2);
+  seq[3].setState("shaker", true, 0.1);
+  seq[4].setState("shaker", true, 0.2);
+  seq[5].setState("shaker", true, 0.1);
+  seq[6].setState("shaker", true, 0.2);
+  seq[7].setState("shaker", true, 0.1);
+  seq[1].setState("perc", true, 0.3);
+  seq[2].setState("perc", true, 0.4);
+  seq[0].setState("perc", true, 0.3);
+  seq[4].setState("perc2", true, 0.3);
+  seq[0].setState("perc2", true, 0.5);
+  seq[6].setState("perc2", true, 0.25);
+
+  dm.setTempo(127, 2);
+
+  dm.start(seq);
+  dm.stop(4000);
+});
