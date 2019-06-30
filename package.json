@@ -4,11 +4,12 @@
   "description": "",
   "main": "drum-machine.js",
   "scripts": {
+    "start": "./node_modules/http-server/bin/http-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "play-sound": "^1.1.3"
+    "http-server": "^0.11.1"
   }
 }
