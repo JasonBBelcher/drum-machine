@@ -4,7 +4,7 @@
   "description": "",
   "main": "drum-machine.js",
   "scripts": {
-    "start": "./node_modules/http-server/bin/http-server --cors='Access-Control-Allow-Origin: *'",
+    "start": "./node_modules/http-server/bin/http-server --cors='Access-Control-Allow-Origin: *' -o",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
