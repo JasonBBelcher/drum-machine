@@ -7,33 +7,43 @@
     <title>Document</title>
   </head>
   <body>
-    <button id="start">click me to start the demo loop</button>
-    <button id="stop">click me to stop the demo loop</button>
-    <h1>Open developer console to play with the sequence.</h1>
-    <p>
-      Edit the sequence by picking an index of the seq array that represents a
-      tick of the sequencer. use the method signature like this:
-      <code>setState(drum, boolean, volumeLevel)</code>
+    <div style="margin: 0 46%;">
+      <button
+        style="background: green; padding: 0 50px; height: 50px; "
+        id="start"
+      >
+        on
+      </button>
+    </div>
+    <div style="width: 80%; margin: 0 auto;">
+      <h1 style="text-align: center;">
+        Open developer console to play with the sequence.
+      </h1>
+      <p>
+        Edit the sequence by picking an index of the seq array that represents a
+        tick of the sequencer. use the method signature like this:
+        <code>setState(drum, boolean, volumeLevel)</code>
 
-      drums available are:
-    </p>
-    <ul>
-      <li>kick</li>
-      <li>clap</li>
-      <li>shaker</li>
-      <li>hat</li>
-      <li>hat</li>
-      <li>perc</li>
-      <li>perc2</li>
-    </ul>
-    <h2>Things to try</h2>
-    <p>
-      Try turning individual drums on or off. Increase the tempo. Mess with the
-      volume. Make an entirely new drum beat. Increase the sequence length from
-      8 to 16
-    </p>
-    <div style="width: 40%">
-      <pre>
+        drums available are:
+      </p>
+      <ul style="font-weight: 400; list-style: none; font-size: 24px">
+        <li>kick</li>
+        <li>clap</li>
+        <li>snare</li>
+        <li>shaker</li>
+        <li>hat</li>
+        <li>perc</li>
+        <li>perc2</li>
+      </ul>
+      <h2 style="text-align: center;">Things to try</h2>
+      <p>
+        Try turning individual drums on or off. Increase the tempo. Mess with
+        the volume. Make an entirely new drum beat. Increase the sequence length
+        from 8 to 16
+      </p>
+    </div>
+    <div>
+      <pre style="text-align: center;">
         <code>
             let sequencer = new Sequencer(DrumMachineState, 8);
             let seq = sequencer.initSeq();

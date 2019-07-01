@@ -1,44 +1,50 @@
 const start = document.querySelector("#start");
-const stop = document.querySelector("#stop");
 
-let power = false;
+// feed howler sound lib with sounds from the server
 
-var kick = new Howl({
+const kick = new Howl({
   src: [
     `${
       location.origin
     }/samples/Deep%20House%20Drum%20Samples/bd_kick/bd_909dwsd.wav`
   ]
 });
-var clap = new Howl({
+const clap = new Howl({
   src: [
     `${
       location.origin
     }/samples/Deep%20House%20Drum%20Samples/clap/clp_analogue.wav`
   ]
 });
-var hat = new Howl({
+const snare = new Howl({
+  src: [
+    `${
+      location.origin
+    }/samples/Deep%20House%20Drum%20Samples/snare/snr_answer8bit.wav`
+  ]
+});
+const hat = new Howl({
   src: [
     `${
       location.origin
     }/samples/Deep%20House%20Drum%20Samples/hats/hat_darkstar.wav`
   ]
 });
-var shaker = new Howl({
+const shaker = new Howl({
   src: [
     `${
       location.origin
     }/samples/Deep%20House%20Drum%20Samples/shaker_tambourine/shaker_quicky.wav`
   ]
 });
-var bongo1 = new Howl({
+const bongo1 = new Howl({
   src: [
     `${
       location.origin
     }/samples/Deep%20House%20Drum%20Samples/percussion/prc_bongodrm.wav`
   ]
 });
-var congaz = new Howl({
+const congaz = new Howl({
   src: [
     `${
       location.origin
@@ -63,6 +69,12 @@ function DrumMachineState(id) {
     name: "clap",
     volume: volume => (clap._volume = volume),
     play: () => clap.play()
+  };
+  this.snare = {
+    on: false,
+    name: "snare",
+    volume: volume => (snare._volume = volume),
+    play: () => snare.play()
   };
   this.hat = {
     on: false,
@@ -89,24 +101,29 @@ function DrumMachineState(id) {
     play: () => congaz.play()
   };
 }
+// used by drum machine to retrieve samples set to on = true or not to play by on = false;
+// if sample on = true then play the sample using howler
 
 DrumMachineState.prototype.getState = function(name) {
   return this[name];
 };
-DrumMachineState.prototype.setState = function(name, on, volume) {
+DrumMachineState.prototype.setState = function(name, on = true, volume) {
   this[name].on = on;
   this[name].volume(volume) || this[name].volume(1);
   this[name].name = name;
 };
 
 // dependency inject the drum machine state into sequencer
-function Sequencer(drumMachineState, length) {
-  this.drumMachineState = drumMachineState;
+function Sequencer(length) {
+  this.drumMachineState = DrumMachineState;
   this.length = length;
   this.sequence = [];
 }
 
+// use this to initialize the sequence with state.
+// each use there after will reset the sequence
 Sequencer.prototype.initSeq = function() {
+  this.sequence = [];
   for (let i = 0; i < this.length; i += 1) {
     this.sequence.push(new this.drumMachineState(i + 1));
   }
@@ -174,8 +191,11 @@ const dm = {
   }
 };
 
-let sequencer = new Sequencer(DrumMachineState, 16);
+let sequencer = new Sequencer(16);
 let seq = sequencer.initSeq();
+
+// demo loop
+
 seq[0].setState("kick", true, 1);
 seq[6].setState("kick", true, 0.8);
 seq[14].setState("kick", true, 0.8);
@@ -212,8 +232,13 @@ seq[9].setState("perc2", true, 0.1);
 dm.setTempo(120, 4);
 
 start.addEventListener("click", function() {
-  dm.start(seq);
-});
-stop.addEventListener("click", function() {
-  dm.stop();
+  if (!dm.isPlaying) {
+    this.style.background = "red";
+    this.textContent = "off";
+    dm.start(seq);
+  } else {
+    this.textContent = "on";
+    this.style.background = "green";
+    dm.stop();
+  }
 });
