@@ -115,14 +115,13 @@ function DrumMachineState(id) {
 // used by drum machine to retrieve samples set to on = true or not to play by on = false;
 // if sample on = true then play the sample using howler
 
-DrumMachineState.prototype.getState = function(name) {
-  return this[name];
+DrumMachineState.prototype.getState = function(drum) {
+  return this[drum];
 };
-DrumMachineState.prototype.setState = function(name, on = true, volume) {
-  this[name].on = on;
-  console.log(this[name].on);
-  this[name].volume(volume) || this[name].volume(1);
-  this[name].name = name;
+DrumMachineState.prototype.setState = function(drum, on = true, volume) {
+  this[drum].on = on;
+  this[drum].volume(volume) || this[drum].volume(1);
+  this[drum].name = drum;
 };
 
 // dependency inject the drum machine state into sequencer
@@ -208,10 +207,10 @@ const dm = {
     });
   },
   triggerSounds: function triggerSounds(dmState) {
-    for (let instrument in dmState) {
-      if (dmState.hasOwnProperty(instrument)) {
-        if (dmState[instrument].on) {
-          dmState.getState(instrument).play();
+    for (let drum in dmState) {
+      if (dmState.hasOwnProperty(drum)) {
+        if (dmState[drum].on) {
+          dmState.getState(drum).play();
         }
       }
     }

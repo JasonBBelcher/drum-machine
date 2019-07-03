@@ -5,12 +5,14 @@ const start = document.querySelector("#start");
 
 start.addEventListener("click", function() {
   if (!dm.isPlaying) {
-    this.style.background = "red";
-    this.textContent = "off";
+    this.classList.add("play-stop-btn-red");
+    this.classList.remove("play-stop-btn-green");
+    this.textContent = "stop";
     dm.start(seq);
   } else {
-    this.textContent = "on";
-    this.style.background = "green";
+    this.textContent = "play";
+    this.classList.add("play-stop-btn-green");
+    this.classList.remove("play-stop-btn-red");
     dm.stop();
   }
 });
@@ -22,22 +24,25 @@ function createNewElement(
   drumName,
   ...classList
 ) {
-  console.log("drum: ", drumName);
   childEl = document.createElement(childEl);
   childEl.classList.add(...classList);
   parentEl.appendChild(childEl);
+  addBtnHandler(childEl, currentState, drumName);
+}
+
+function addBtnHandler(el, currentState, drumName) {
   if (currentState && drumName) {
-    childEl.addEventListener("click", function() {
+    el.addEventListener("click", function() {
       let clicked = false;
       if (drumName.on === clicked) {
         currentState.setState(drumName.name, true);
         clicked = !clicked;
-        childEl.classList.add("btn-on");
+        el.classList.add("btn-on");
       } else if (!drumName.on === clicked) {
         currentState.setState(drumName.name, false);
         clicked = !clicked;
-        childEl.classList.remove("btn-on");
-        childEl.classList.add("seq-btn");
+        el.classList.remove("btn-on");
+        el.classList.add("seq-btn");
       }
     });
   }
@@ -57,8 +62,6 @@ function spawnSeqBtns(sequence = []) {
     }
     sequence.forEach((dmState, j) => {
       if (dmState[key].name === key) {
-        console.log("key:", key);
-
         createNewElement(
           document.querySelector(".seq-row" + i),
           "div",
