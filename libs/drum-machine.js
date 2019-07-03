@@ -49,6 +49,13 @@ const congaz = new Howl({
     }/samples/Deep%20House%20Drum%20Samples/percussion/prc_congaz.wav`
   ]
 });
+const harmony = new Howl({
+  src: [
+    `${
+      location.origin
+    }/samples/Deep%20House%20Drum%20Samples/percussion/prc_harmony.wav`
+  ]
+});
 
 // For each tick in a sequence this object will be checked
 // to determine what instruments need
@@ -98,6 +105,12 @@ function DrumMachineState(id) {
     volume: volume => (congaz._volume = volume),
     play: () => congaz.play()
   };
+  this.perc3 = {
+    on: false,
+    name: "perc3",
+    volume: volume => (harmony._volume = volume),
+    play: () => harmony.play()
+  };
 }
 // used by drum machine to retrieve samples set to on = true or not to play by on = false;
 // if sample on = true then play the sample using howler
@@ -107,6 +120,7 @@ DrumMachineState.prototype.getState = function(name) {
 };
 DrumMachineState.prototype.setState = function(name, on = true, volume) {
   this[name].on = on;
+  console.log(this[name].on);
   this[name].volume(volume) || this[name].volume(1);
   this[name].name = name;
 };
@@ -125,9 +139,23 @@ Sequencer.prototype.initSeq = function() {
   for (let i = 0; i < this.length; i += 1) {
     this.sequence.push(new this.drumMachineState(i + 1));
   }
-
+  spawnSeqBtns(this.sequence);
   return this.sequence;
 };
+
+function calculateTicks(bars) {
+  let tickMultiples = [];
+  if (bars % 4 == 0 && bars % 3 !== 0) {
+    for (var i = 0; i <= bars; i += 1) {
+      if ((i * 16) % 16 === 0) {
+        tickMultiples.push(i * 16);
+      }
+    }
+    return tickMultiples;
+  } else {
+    return tickMultiples;
+  }
+}
 
 // drum machine player
 const dm = {
@@ -157,6 +185,7 @@ const dm = {
       this.playingSeq = setInterval(() => {
         this.isPlaying = true;
         this.triggerSounds(initializedSequence[this.playHead]);
+        playHeadPosition(this.playHead);
         this.playHead++;
         if (this.playHead === initializedSequence.length) {
           this.playHead = 0;

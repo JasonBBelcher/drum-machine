@@ -3,11 +3,16 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="assets/css/styles.css" />
     <title>Document</title>
   </head>
   <body>
-    <div style="margin: 0 46%;">
+    <div class="header" style="margin: 0 46%;">
       <button
         style="background: green; padding: 0 50px; height: 50px; "
         id="start"
@@ -15,7 +20,7 @@
         on
       </button>
     </div>
-    <div style="width: 80%; margin: 0 auto;">
+    <div class="container" style="width: 80%; margin: 0 auto;">
       <h1 style="text-align: center;">
         Open developer console to play with the sequence.
       </h1>
@@ -41,6 +46,8 @@
         the volume. Make an entirely new drum beat. Increase the sequence length
         from 8 to 16
       </p>
+
+      <div class="dm"></div>
     </div>
     <div>
       <pre style="text-align: center;">
@@ -76,6 +83,7 @@
     </div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js"></script>
-  <script src="drum-machine.js"></script>
+  <script src="libs/view.js"></script>
+  <script src="libs/drum-machine.js"></script>
   <script src="dj.js"></script>
 </html>

@@ -1,0 +1,23 @@
+.seq-container {
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: calc(2vh);
+    padding: 10px;
+
+}
+
+.seq-btn {
+    flex-basis: 1%;
+    background: rgb(255, 255, 157);
+    border: 1px solid black;
+}
+
+.seq-playhead {
+    background: blue;
+}
+
+.btn-on {
+    background: red;
+}

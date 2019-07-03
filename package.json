@@ -5,6 +5,7 @@
   "main": "drum-machine.js",
   "scripts": {
     "start": "./node_modules/http-server/bin/http-server --cors='Access-Control-Allow-Origin: *' -o",
+    "start:dev": "browser-sync start --server --files 'assets/css/*.css' 'libs/*.js' 'dj.js' 'index.html'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
