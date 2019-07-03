@@ -2,35 +2,85 @@
     font-family: 'Orbitron', sans-serif;
 }
 
+h1 {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.header {
+    margin-bottom: 12vh;
+}
+
 .seq-container {
-    border: 1px solid black;
+    border: 1px solid #222;
+    border-radius: 2px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    height: calc(2vh);
+    height: 20px;
     padding: 10px;
+    background: #333;
+}
 
+.dm-label-container {
+    display: block;
+    float: left;
+    width: 10%;
+}
+
+.track-name {
+    text-align: center;
+    padding: 10px 10px;
+    margin: 4px 5px;
+    border: 1px solid black;
+    border-radius: 30px;
+}
+
+.track-volume {
+    text-align: center;
+    padding: 8px 10px;
+    margin: 3px 5px;
+    border: 1px solid black;
+    border-radius: 30px;
+}
+
+.track-volume-output {
+    text-align: center;
+    padding: 10px 10px;
+    margin: 4px 5px;
+    border: 1px solid black;
+    border-radius: 30px;
+}
+
+.vol-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    background: rgba(28, 6, 53, 0.2);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 20px;
 }
 
 .seq-btn {
-    flex-basis: 1%;
-    background: rgb(255, 255, 157);
-    border: 1px solid black;
+    flex-basis: 2%;
+    background: rgb(68, 68, 63);
+    border: 1px solid gray;
+    border-radius: 100%;
 }
 
 .seq-playhead {
-    background: blue;
+    background: linear-gradient(-45deg, rgb(212, 203, 200), rgb(224, 217, 220), rgb(175, 232, 253), #23D5AB);
+    box-shadow: 1px 5px 5px rgba(132, 255, 0, 0.8);
 }
 
 .btn-on {
-    background: red;
+    background: #8a8;
+    border: 1px solid yellow;
+    box-shadow: 1px 5px 5px rgba(132, 255, 0, 0.8);
 }
-
-
-.seq-btn:hover {
-    background: red;
-}
-
 
 .play-stop-btn {
     background: rgb(93, 141, 93);
@@ -40,10 +90,6 @@
     border-radius: 20px;
 }
 
-.play-stop-btn-green {
-    background: rgb(93, 141, 93);
-}
-
 .play-stop-btn-red {
     background: rgb(228, 31, 31);
 }
@@ -51,6 +97,64 @@
 .play-btn-container {
     display: flex;
     flex-direction: row;
-    justify-content: flex-start;
+    justify-content: center;
     padding-bottom: 1em;
+}
+
+.container {
+    max-width: 90%;
+    box-shadow: #222;
+    margin: 0 auto;
+}
+
+
+body {
+
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, rgb(3, 142, 192), rgb(68, 20, 192));
+    background-size: 400% 400%;
+    -webkit-animation: Gradient 15s ease infinite;
+    -moz-animation: Gradient 15s ease infinite;
+    animation: Gradient 15s ease infinite;
+}
+
+@-webkit-keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@-moz-keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
+}
+
+@keyframes Gradient {
+    0% {
+        background-position: 0% 50%
+    }
+
+    50% {
+        background-position: 100% 50%
+    }
+
+    100% {
+        background-position: 0% 50%
+    }
 }

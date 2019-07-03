@@ -93,21 +93,21 @@ function DrumMachineState(id) {
     volume: volume => (shaker._volume = volume),
     play: () => shaker.play()
   };
-  this.perc = {
+  this.bongo = {
     on: false,
-    name: "perc",
+    name: "bongo",
     volume: volume => (bongo1._volume = volume),
     play: () => bongo1.play()
   };
-  this.perc2 = {
+  this.conga = {
     on: false,
-    name: "perc2",
+    name: "conga",
     volume: volume => (congaz._volume = volume),
     play: () => congaz.play()
   };
-  this.perc3 = {
+  this.perc = {
     on: false,
-    name: "perc3",
+    name: "perc",
     volume: volume => (harmony._volume = volume),
     play: () => harmony.play()
   };
@@ -208,6 +208,7 @@ const dm = {
   },
   triggerSounds: function triggerSounds(dmState) {
     for (let drum in dmState) {
+      getVolumeSettingsAndSetVolumeState(dmState);
       if (dmState.hasOwnProperty(drum)) {
         if (dmState[drum].on) {
           dmState.getState(drum).play();

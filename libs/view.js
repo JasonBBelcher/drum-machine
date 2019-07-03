@@ -2,32 +2,59 @@ let dmDiv = document.querySelector(".dm");
 let element = document.createElement("div");
 
 const start = document.querySelector("#start");
+const volumeSliders = document.querySelectorAll("input");
+const volumeOutputContainer = document.querySelector(".volume-output");
 
 start.addEventListener("click", function() {
   if (!dm.isPlaying) {
-    this.classList.add("play-stop-btn-red");
-    this.classList.remove("play-stop-btn-green");
+    this.classList.toggle("play-stop-btn-red", true);
     this.textContent = "stop";
     dm.start(seq);
   } else {
     this.textContent = "play";
-    this.classList.add("play-stop-btn-green");
-    this.classList.remove("play-stop-btn-red");
+    this.classList.toggle("play-stop-btn-red", false);
     dm.stop();
   }
 });
+
+volumeSliders.forEach(slider => {
+  let output = createNewElement(
+    volumeOutputContainer,
+    "div",
+    null,
+    null,
+    null,
+    "track-volume-output"
+  );
+  output.innerText = "0.50";
+  slider.addEventListener("input", function(e) {
+    output.innerText = e.target.value;
+  });
+});
+
+function getVolumeSettingsAndSetVolumeState(dmState) {
+  volumeSliders.forEach(slider => {
+    if (dmState[slider.name]) {
+      dmState[slider.name].volume(slider.value);
+    }
+  });
+}
 
 function createNewElement(
   parentEl,
   childEl,
   currentState,
   drumName,
+  cb,
   ...classList
 ) {
   childEl = document.createElement(childEl);
   childEl.classList.add(...classList);
   parentEl.appendChild(childEl);
-  addBtnHandler(childEl, currentState, drumName);
+  if (cb && currentState && drumName) {
+    cb(childEl, currentState, drumName);
+  }
+  return childEl;
 }
 
 function addBtnHandler(el, currentState, drumName) {
@@ -56,6 +83,7 @@ function spawnSeqBtns(sequence = []) {
         "div",
         null,
         null,
+        addBtnHandler,
         "seq-container",
         "seq-row" + i
       );
@@ -67,6 +95,7 @@ function spawnSeqBtns(sequence = []) {
           "div",
           dmState,
           dmState[key],
+          addBtnHandler,
 
           "seq-btn",
           "seq" + j

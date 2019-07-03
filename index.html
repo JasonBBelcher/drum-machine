@@ -16,17 +16,127 @@
     <title>Drum Sequencer</title>
   </head>
   <body>
-    <div class="container" style="width: 80%; margin: 0 auto;">
-      <div class="header" style="margin: 0 46%;"></div>
-      <h1 style="text-align: center;">
+    <div class="header">
+      <h1>
         Drum Sequencer
       </h1>
+
       <div class="play-btn-container">
         <button class="play-stop-btn" id="start">
           play
         </button>
       </div>
-
+    </div>
+    <div class="container">
+      <div class="dm-label-container">
+        <div class="track-name">kick</div>
+        <div class="track-name">clap</div>
+        <div class="track-name">snare</div>
+        <div class="track-name">hat</div>
+        <div class="track-name">shaker</div>
+        <div class="track-name">bongo</div>
+        <div class="track-name">conga</div>
+        <div class="track-name">perc</div>
+      </div>
+      <div class="dm-label-container">
+        <div class="track-volume">
+          <input
+            class="vol-slider"
+            type="range"
+            id="start"
+            name="kick"
+            value="0.50"
+            min="0"
+            step="0.01"
+            max="1"
+          />
+        </div>
+        <div class="track-volume">
+          <input
+            class="vol-slider"
+            type="range"
+            id="start"
+            name="clap"
+            value="0.50"
+            step="0.01"
+            min="0"
+            max="1"
+          />
+        </div>
+        <div class="track-volume">
+          <input
+            class="vol-slider"
+            type="range"
+            id="start"
+            name="snare"
+            value="0.50"
+            step="0.01"
+            min="0"
+            max="1"
+          />
+        </div>
+        <div class="track-volume">
+          <input
+            class="vol-slider"
+            type="range"
+            id="start"
+            name="hat"
+            value="0.50"
+            step="0.01"
+            min="0"
+            max="1"
+          />
+        </div>
+        <div class="track-volume">
+          <input
+            class="vol-slider"
+            type="range"
+            id="start"
+            name="shaker"
+            value="0.50"
+            step="0.01"
+            min="0"
+            max="1"
+          />
+        </div>
+        <div class="track-volume">
+          <input
+            class="vol-slider"
+            type="range"
+            id="start"
+            name="bongo"
+            value="0.50"
+            step="0.01"
+            min="0"
+            max="1"
+          />
+        </div>
+        <div class="track-volume">
+          <input
+            class="vol-slider"
+            type="range"
+            id="start"
+            name="conga"
+            value="0.50"
+            step="0.01"
+            min="0"
+            max="1"
+          />
+        </div>
+        <div class="track-volume">
+          <input
+            class="vol-slider"
+            type="range"
+            id="start"
+            name="perc"
+            value="0.50"
+            step="0.01"
+            min="0"
+            max="1"
+          />
+        </div>
+      </div>
+      <div class="dm-label-container volume-output"></div>
       <div class="dm"></div>
     </div>
   </body>
