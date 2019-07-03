@@ -22,64 +22,10 @@
     </div>
     <div class="container" style="width: 80%; margin: 0 auto;">
       <h1 style="text-align: center;">
-        Open developer console to play with the sequence.
+        Drum Sequencer
       </h1>
-      <p>
-        Edit the sequence by picking an index of the seq array that represents a
-        tick of the sequencer. use the method signature like this:
-        <code>setState(drum, boolean, volumeLevel)</code>
-
-        drums available are:
-      </p>
-      <ul style="font-weight: 400; list-style: none; font-size: 24px">
-        <li>kick</li>
-        <li>clap</li>
-        <li>snare</li>
-        <li>shaker</li>
-        <li>hat</li>
-        <li>perc</li>
-        <li>perc2</li>
-      </ul>
-      <h2 style="text-align: center;">Things to try</h2>
-      <p>
-        Try turning individual drums on or off. Increase the tempo. Mess with
-        the volume. Make an entirely new drum beat. Increase the sequence length
-        from 8 to 16
-      </p>
 
       <div class="dm"></div>
-    </div>
-    <div>
-      <pre style="text-align: center;">
-        <code>
-            let sequencer = new Sequencer(DrumMachineState, 8);
-            let seq = sequencer.initSeq();
-            seq[0].setState("kick", true, 1);
-            seq[4].setState("kick", true, 0.8);
-            seq[4].setState("clap", true, 0.5);
-
-            seq[2].setState("hat", true, 0.2);
-            seq[6].setState("hat", true, 0.24);
-            seq[0].setState("shaker", true, 0.2);
-            seq[1].setState("shaker", true, 0.1);
-            seq[2].setState("shaker", true, 0.2);
-            seq[3].setState("shaker", true, 0.1);
-            seq[4].setState("shaker", true, 0.2);
-            seq[5].setState("shaker", true, 0.1);
-            seq[6].setState("shaker", true, 0.2);
-            seq[7].setState("shaker", true, 0.1);
-            seq[1].setState("perc", true, 0.3);
-            seq[4].setState("perc", true, 0.4);
-            seq[5].setState("perc", true, 0.3);
-            seq[2].setState("perc2", true, 0.3);
-            seq[3].setState("perc2", true, 0.5);
-            seq[7].setState("perc2", true, 0.25);
-            dm.setTempo(120, 2000);
-            dm.start(seq);
-            dm.stop(20000)
-        </code>
-
-      </pre>
     </div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js"></script>
