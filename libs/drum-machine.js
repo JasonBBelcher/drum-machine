@@ -12,7 +12,8 @@ const kick = new Howl({
     `${
       location.origin
     }/samples/Deep%20House%20Drum%20Samples/bd_kick/bd_909dwsd.wav`
-  ]
+  ],
+  html5: true
 });
 const clap = new Howl({
   src: [
