@@ -19,49 +19,56 @@ const clap = new Howl({
     `${
       location.origin
     }/samples/Deep%20House%20Drum%20Samples/clap/clp_analogue.wav`
-  ]
+  ],
+  html5: true
 });
 const snare = new Howl({
   src: [
     `${
       location.origin
     }/samples/Deep%20House%20Drum%20Samples/snare/snr_answer8bit.wav`
-  ]
+  ],
+  html5: true
 });
 const hat = new Howl({
   src: [
     `${
       location.origin
     }/samples/Deep%20House%20Drum%20Samples/hats/hat_darkstar.wav`
-  ]
+  ],
+  html5: true
 });
 const shaker = new Howl({
   src: [
     `${
       location.origin
     }/samples/Deep%20House%20Drum%20Samples/shaker_tambourine/shaker_quicky.wav`
-  ]
+  ],
+  html5: true
 });
 const bongo1 = new Howl({
   src: [
     `${
       location.origin
     }/samples/Deep%20House%20Drum%20Samples/percussion/prc_bongodrm.wav`
-  ]
+  ],
+  html5: true
 });
 const congaz = new Howl({
   src: [
     `${
       location.origin
     }/samples/Deep%20House%20Drum%20Samples/percussion/prc_congaz.wav`
-  ]
+  ],
+  html5: true
 });
 const harmony = new Howl({
   src: [
     `${
       location.origin
     }/samples/Deep%20House%20Drum%20Samples/percussion/prc_harmony.wav`
-  ]
+  ],
+  html5: true
 });
 
 /* For each tick in a sequence this object will be checked
