@@ -172,7 +172,7 @@ function spawnSeqBtns(sequence = []) {
 }
 
 /* this function is consumed by the start method
- of the drum machine engine Turns a light indicator
+ of the drum machine engine and turns a light indicator
  on and off quickly as the playhead loops
 */
 

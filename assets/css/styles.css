@@ -41,11 +41,11 @@ h1 {
 
 .track-volume-output {
     text-align: center;
-    padding: 13.5px 2px;
+    padding: 15.5px 2px;
     margin: 1px 16px;
     border: 1px solid black;
     border-radius: 2px;
-    font-size: 12px;
+    font-size: 8px;
 }
 
 .seq-length-slider {
@@ -67,9 +67,11 @@ h1 {
 }
 
 .sequence-instructions {
-    color: whitesmoke;
+
+    color: rgba(245, 245, 245, 0.5);
     text-align: center;
     margin: 16px 0;
+
 }
 
 .sequence-length {
@@ -190,12 +192,12 @@ h1 {
 }
 
 .container {
-    max-width: 90%;
+    max-width: 95%;
     margin: 0 auto;
 }
 
 
-body {
+.animated-body {
 
     background: linear-gradient(-45deg, #EE7752, #E73C7E, rgb(3, 142, 192), rgb(68, 20, 192));
     background-size: 400% 400%;
@@ -250,9 +252,33 @@ body {
 @media only screen and (min-device-width : 150px) and (max-device-width : 480px) {
 
     /* Styles */
+
+    .sequence-instructions {
+        display: none;
+    }
+
+    .play-stop-btn {
+        padding: 0;
+    }
+
+
+    .reset-btn {
+        padding: 0;
+    }
+
     .dm-label-container {
         display: block;
         width: 50%;
+        margin: 32px 0;
+    }
+
+    .track-volume-output {
+        text-align: center;
+        padding: 14px 2px;
+        margin: 1px 1px;
+        border: 1px solid black;
+        border-radius: 2px;
+        font-size: 12px;
     }
 
     .seq-length-slider {
@@ -262,25 +288,256 @@ body {
     .seq-length-output {
         display: none;
     }
+
+    .seq-btn {
+        flex-basis: 5%;
+    }
 }
 
-/* Smartphones (landscape) ----------- */
-@media only screen and (min-width : 321px) {
+
+
+/* iPhone 5 ----------- */
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
 
     /* Styles */
     .dm-label-container {
         display: block;
-        width: 20%;
+        width: 50%;
+        margin: 32px 0;
+    }
+
+    .track-volume-output {
+        text-align: center;
+        padding: 14px 2px;
+        margin: 1px 1px;
+        border: 1px solid black;
+        border-radius: 2px;
+        font-size: 12px;
+    }
+
+    .seq-btn {
+        flex-basis: 5%;
+    }
+
+    .play-stop-btn {
+        padding: 0;
+    }
+
+    .reset-btn {
+        padding: 0;
     }
 }
 
-/* Smartphones (portrait) ----------- */
-@media only screen and (max-width : 320px) {
+@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2) {
+
     /* Styles */
+    .dm-label-container {
+        display: block;
+        width: 50%;
+        margin: 20px 0;
+    }
+
+    .seq-btn {
+        flex-basis: 5%;
+    }
+
+    .track-volume-output {
+        text-align: center;
+        padding: 14px 2px;
+        margin: 1px 1px;
+        border: 1px solid black;
+        border-radius: 2px;
+        font-size: 12px;
+    }
+
+    .play-stop-btn {
+        padding: 0;
+    }
+
+
+    .reset-btn {
+        padding: 0;
+    }
 }
 
+/* iPhone 6, 7, 8 ----------- */
+@media only screen and (min-device-width: 667px) and (max-device-height: 375px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
+    /* Styles */
+
+    .dm-label-container {
+        display: block;
+        width: 50%;
+        margin: 32px 0;
+    }
+
+    .track-volume-output {
+        text-align: center;
+        padding: 16px 2px;
+        margin: 0px 1px;
+        border: 1px solid black;
+        border-radius: 2px;
+        font-size: 10px;
+    }
+
+    .track-volume {
+        text-align: center;
+        padding: 9px 16px;
+        margin: 6.5px 5px;
+    }
+
+    .play-stop-btn {
+        padding: 0;
+    }
+
+
+    .reset-btn {
+        padding: 0;
+    }
+
+    .seq-btn {
+        flex-basis: 5%;
+    }
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2) {
+
+    /* Styles */
+    .seq-length-slider {
+        display: none;
+    }
+
+    .seq-length-output {
+        display: none;
+    }
+
+    .dm-label-container {
+        display: block;
+        width: 50%;
+        margin: 22px 0;
+    }
+
+    .seq-btn {
+        flex-basis: 5%;
+    }
+
+    .track-volume-output {
+        text-align: center;
+        padding: 14px 2px;
+        margin: 1px 1px;
+        border: 1px solid black;
+        border-radius: 2px;
+        font-size: 12px;
+
+    }
+
+    .track-volume {
+        text-align: center;
+        padding: 8px 16px;
+        margin: 6.5px 5px;
+    }
+
+    .play-stop-btn {
+        padding: 0;
+    }
+
+
+    .reset-btn {
+        padding: 0;
+    }
+}
+
+
+
+/* Samsung Galaxy S5 ----------- */
+@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3) {
+    /* Styles */
+
+    .dm-label-container {
+        display: block;
+        width: 50%;
+        margin: 32px 0;
+    }
+
+    .track-volume-output {
+        text-align: center;
+        padding: 16px 2px;
+        margin: 0px 1px;
+        border: 1px solid black;
+        border-radius: 2px;
+        font-size: 10px;
+    }
+
+    .track-volume {
+        text-align: center;
+        padding: 9px 16px;
+        margin: 6.5px 5px;
+    }
+
+    .play-stop-btn {
+        padding: 0;
+    }
+
+
+    .reset-btn {
+        padding: 0;
+    }
+
+    .seq-btn {
+        flex-basis: 5%;
+    }
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3) {
+
+
+    .seq-length-slider {
+        display: none;
+    }
+
+    .seq-length-output {
+        display: none;
+    }
+
+    .dm-label-container {
+        display: block;
+        width: 50%;
+        margin: 20px 0;
+    }
+
+    .seq-btn {
+        flex-basis: 5%;
+    }
+
+    .track-volume-output {
+        text-align: center;
+        padding: 14px 2px;
+        margin: 1px 1px;
+        border: 1px solid black;
+        border-radius: 2px;
+        font-size: 12px;
+
+    }
+
+    .track-volume {
+        text-align: center;
+        padding: 8px 16px;
+        margin: 6.5px 5px;
+    }
+
+    .play-stop-btn {
+        padding: 0;
+    }
+
+
+    .reset-btn {
+        padding: 0;
+    }
+
+}
+
+
 /* iPads (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+@media only screen and (min-device-width : 760px) and (max-device-width : 1024px) {
 
     /* Styles */
     .dm-label-container {
@@ -290,11 +547,15 @@ body {
 
     .track-volume-output {
         text-align: center;
-        padding: 14px 2px;
+        padding: 15px 2px;
         margin: 1px 1px;
         border: 1px solid black;
         border-radius: 2px;
-        font-size: 10px;
+        font-size: 9px;
+    }
+
+    .seq-btn {
+        flex-basis: 4%;
     }
 
 }
@@ -316,42 +577,8 @@ body {
         border-radius: 2px;
         font-size: 10px;
     }
-}
 
-
-/* Samsung Galaxy S5 ----------- */
-@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3) {
-    /* Styles */
-
-    .dm-label-container {
-        display: block;
-        width: 15%;
+    .seq-btn {
+        flex-basis: 4%;
     }
-
-    .track-volume-output {
-        text-align: center;
-        padding: 15.5px 2px;
-        margin: 1px 1px;
-        border: 1px solid black;
-        border-radius: 2px;
-        font-size: 8px;
-    }
-
-}
-
-@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3) {
-    .dm-label-container {
-        display: block;
-        width: 50%;
-        margin-bottom: 50px;
-    }
-
-    .seq-length-slider {
-        display: none;
-    }
-
-    .seq-length-output {
-        display: none;
-    }
-
 }
