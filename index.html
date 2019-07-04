@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
     <title>Drum Sequencer</title>
   </head>
-  <body>
+  <body class="container">
     <div class="header">
       <h1>
         Drum Sequencer
@@ -23,21 +23,46 @@
 
       <div class="play-btn-container">
         <button class="play-stop-btn" id="start">
-          play
+          <span>play</span>
         </button>
+        <div class="play-btn-container">
+          <button class="reset-btn" id="reset">
+            <span>reset</span>
+          </button>
+        </div>
+      </div>
+      <div class="sequence-length">
+        <p class="sequence-instructions">
+          Setting the sequence length will reset the pattern.
+        </p>
+        <p class="sequence-instructions">
+          BPM is adjustable during playback.
+        </p>
+        <input
+          class="seq-length-slider"
+          type="range"
+          id="start"
+          name="seq-length"
+          value="16"
+          step="16"
+          min="16"
+          max="128"
+        />
+        <div class="seq-length-output">16 ticks</div>
+        <input
+          class="seq-tempo-slider"
+          type="range"
+          id="start"
+          name="seq-tempo"
+          value="120"
+          step="1"
+          min="30"
+          max="240"
+        />
+        <div class="seq-tempo-output">120 BPM</div>
       </div>
     </div>
     <div class="container">
-      <div class="dm-label-container">
-        <div class="track-name">kick</div>
-        <div class="track-name">clap</div>
-        <div class="track-name">snare</div>
-        <div class="track-name">hat</div>
-        <div class="track-name">shaker</div>
-        <div class="track-name">bongo</div>
-        <div class="track-name">conga</div>
-        <div class="track-name">perc</div>
-      </div>
       <div class="dm-label-container">
         <div class="track-volume">
           <input
@@ -141,7 +166,7 @@
     </div>
   </body>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js"></script>
-  <script src="libs/view.js"></script>
   <script src="libs/drum-machine.js"></script>
-  <script src="dj.js"></script>
+  <script src="libs/view.js"></script>
+  <script src="libs/initSeq.js"></script>
 </html>

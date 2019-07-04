@@ -1,9 +1,22 @@
+dm.setTempo(120, 4);
+
+// DOM element references
+
 let dmDiv = document.querySelector(".dm");
 let element = document.createElement("div");
-
 const start = document.querySelector("#start");
-const volumeSliders = document.querySelectorAll("input");
+const reset = document.querySelector("#reset");
+const volumeSliders = document.querySelectorAll(".vol-slider");
 const volumeOutputContainer = document.querySelector(".volume-output");
+const seqLengthSlider = document.querySelector(".seq-length-slider");
+const seqLengthOutput = document.querySelector(".seq-length-output");
+const seqTempoSlider = document.querySelector(".seq-tempo-slider");
+const seqTempoOutput = document.querySelector(".seq-tempo-output");
+
+// DRUM SEQUENCER UI LOGIC
+/**************************/
+
+// start the drum sequence
 
 start.addEventListener("click", function() {
   if (!dm.isPlaying) {
@@ -17,6 +30,44 @@ start.addEventListener("click", function() {
   }
 });
 
+reset.addEventListener("mousedown", function() {
+  this.classList.toggle("reset-btn-flash-yellow", true);
+});
+
+// reset state to defaults;
+
+reset.addEventListener("mouseup", function() {
+  stopSeqAndReset(16);
+  this.classList.toggle("reset-btn-flash-yellow", false);
+  seqLengthSlider.value = 16;
+  seqLengthOutput.innerText = "16 ticks";
+  dm.setTempo(120, 4);
+  seqTempoSlider.value = 120;
+  seqTempoOutput.innerText = "120 BPM";
+});
+
+/*
+  when changing the sequence length
+  stop playing to prevent weird bug
+  then calls the stopSeqAndReset function
+   which in turn changes the engines
+   sequence length
+*/
+
+seqLengthSlider.addEventListener("input", function(e) {
+  stopSeqAndReset(e.target.value);
+  seqLengthOutput.innerText = e.target.value + " ticks";
+});
+
+seqTempoSlider.addEventListener("input", function(e) {
+  restartSeqAfterTempoChange(e.target.value);
+  seqTempoOutput.innerText = e.target.value + " BPM";
+});
+
+/* builds out the volume sliders and
+  respective volume level output
+*/
+
 volumeSliders.forEach(slider => {
   let output = createNewElement(
     volumeOutputContainer,
@@ -26,11 +77,13 @@ volumeSliders.forEach(slider => {
     null,
     "track-volume-output"
   );
-  output.innerText = "0.50";
+  output.innerText = slider.name + " v : 0.50";
   slider.addEventListener("input", function(e) {
-    output.innerText = e.target.value;
+    output.innerText = slider.name + " v : " + e.target.value;
   });
 });
+
+// grabs volume level from UI and sets the level in the sequencer engine
 
 function getVolumeSettingsAndSetVolumeState(dmState) {
   volumeSliders.forEach(slider => {
@@ -39,6 +92,8 @@ function getVolumeSettingsAndSetVolumeState(dmState) {
     }
   });
 }
+
+// helper function to create dom elements dynamically
 
 function createNewElement(
   parentEl,
@@ -56,6 +111,11 @@ function createNewElement(
   }
   return childEl;
 }
+
+/* sets up a event handler on each sequence btn to enable the user
+  to turn on/off individual drum sounds in the engine and reflects that state
+  in the UI
+*/
 
 function addBtnHandler(el, currentState, drumName) {
   if (currentState && drumName) {
@@ -75,6 +135,12 @@ function addBtnHandler(el, currentState, drumName) {
   }
 }
 
+/*
+when sequencer is instantiated this function
+will build out the UI for the drum machine
+sequencer that the user interacts with.
+*/
+
 function spawnSeqBtns(sequence = []) {
   Object.keys(sequence[0]).forEach((key, i) => {
     if (key !== "id") {
@@ -83,7 +149,7 @@ function spawnSeqBtns(sequence = []) {
         "div",
         null,
         null,
-        addBtnHandler,
+        null,
         "seq-container",
         "seq-row" + i
       );
@@ -105,9 +171,14 @@ function spawnSeqBtns(sequence = []) {
   });
 }
 
+/* this function is consumed by the start method
+ of the drum machine engine Turns a light indicator
+ on and off quickly as the playhead loops
+*/
+
 function playHeadPosition(index) {
   document.querySelector(".seq" + index).classList.add("seq-playhead");
   setTimeout(() => {
     document.querySelector(".seq" + index).classList.remove("seq-playhead");
-  }, 120);
+  }, 50);
 }

@@ -1,10 +1,14 @@
 * {
     font-family: 'Orbitron', sans-serif;
+    padding: 0;
+    margin: 0;
+    border: none;
 }
 
 h1 {
     text-align: center;
     color: rgba(255, 255, 255, 0.8);
+    margin: 20px 0;
 }
 
 .header {
@@ -28,28 +32,78 @@ h1 {
     width: 10%;
 }
 
-.track-name {
-    text-align: center;
-    padding: 10px 10px;
-    margin: 4px 5px;
-    border: 1px solid black;
-    border-radius: 30px;
-}
 
 .track-volume {
     text-align: center;
-    padding: 8px 10px;
-    margin: 3px 5px;
-    border: 1px solid black;
-    border-radius: 30px;
+    padding: 8px 16px;
+    margin: 6.5px 5px;
 }
 
 .track-volume-output {
     text-align: center;
-    padding: 10px 10px;
-    margin: 4px 5px;
+    padding: 13.5px 2px;
+    margin: 1px 16px;
     border: 1px solid black;
-    border-radius: 30px;
+    border-radius: 2px;
+    font-size: 12px;
+}
+
+.seq-length-slider {
+    display: block;
+    margin: 0 auto;
+    -webkit-appearance: none;
+    width: 56%;
+    height: 15px;
+    background: rgba(28, 6, 53, 0.2);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 20px;
+}
+
+.seq-length-slider:hover {
+    cursor: pointer;
+}
+
+.sequence-instructions {
+    color: whitesmoke;
+    text-align: center;
+    margin: 16px 0;
+}
+
+.sequence-length {
+    margin: 0 auto;
+}
+
+.seq-tempo-slider {
+    display: block;
+    margin: 0 auto;
+    -webkit-appearance: none;
+    width: 100%;
+    height: 15px;
+    background: rgba(28, 6, 53, 0.2);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    border-radius: 20px;
+}
+
+.seq-tempo-slider:hover {
+    cursor: pointer;
+}
+
+.seq-length-output {
+    margin: 1em 0;
+    text-align: center;
+    color: whitesmoke;
+}
+
+.seq-tempo-output {
+    margin: 1em 0;
+    text-align: center;
+    color: whitesmoke;
 }
 
 .vol-slider {
@@ -64,11 +118,19 @@ h1 {
     border-radius: 20px;
 }
 
+.vol-slider:hover {
+    cursor: pointer;
+}
+
 .seq-btn {
     flex-basis: 2%;
     background: rgb(68, 68, 63);
     border: 1px solid gray;
-    border-radius: 100%;
+    border-radius: 20%;
+}
+
+.seq-btn:hover {
+    cursor: pointer;
 }
 
 .seq-playhead {
@@ -83,27 +145,52 @@ h1 {
 }
 
 .play-stop-btn {
-    background: rgb(93, 141, 93);
+    width: 24%;
+    display: block;
+    margin: 16px auto;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(93, 141, 93, 0.3);
     padding: 0 50px;
     height: 50px;
     border: none;
-    border-radius: 20px;
+    border-radius: 4px;
+}
+
+.play-stop-btn:hover {
+    cursor: pointer;
+}
+
+.reset-btn {
+    width: 24%;
+    display: block;
+    margin: 0 auto;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 0, 0, 0.3);
+    padding: 0 50px;
+    height: 50px;
+    border: none;
+    border-radius: 4px;
+}
+
+.reset-btn:hover {
+    cursor: pointer;
+}
+
+.reset-btn-flash-yellow {
+    background: rgba(242, 255, 0, 0.836)
 }
 
 .play-stop-btn-red {
-    background: rgb(228, 31, 31);
+    background: rgba(228, 31, 31, 0.3);
 }
 
 .play-btn-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+    display: block;
     padding-bottom: 1em;
 }
 
 .container {
     max-width: 90%;
-    box-shadow: #222;
     margin: 0 auto;
 }
 
@@ -157,4 +244,114 @@ body {
     100% {
         background-position: 0% 50%
     }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 150px) and (max-device-width : 480px) {
+
+    /* Styles */
+    .dm-label-container {
+        display: block;
+        width: 50%;
+    }
+
+    .seq-length-slider {
+        display: none;
+    }
+
+    .seq-length-output {
+        display: none;
+    }
+}
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+
+    /* Styles */
+    .dm-label-container {
+        display: block;
+        width: 20%;
+    }
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+    /* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+
+    /* Styles */
+    .dm-label-container {
+        display: block;
+        width: 13%;
+    }
+
+    .track-volume-output {
+        text-align: center;
+        padding: 14px 2px;
+        margin: 1px 1px;
+        border: 1px solid black;
+        border-radius: 2px;
+        font-size: 10px;
+    }
+
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    /* Styles */
+
+    .dm-label-container {
+        display: block;
+        width: 15%;
+    }
+
+    .track-volume-output {
+        text-align: center;
+        padding: 14px 2px;
+        margin: 1px 1px;
+        border: 1px solid black;
+        border-radius: 2px;
+        font-size: 10px;
+    }
+}
+
+
+/* Samsung Galaxy S5 ----------- */
+@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3) {
+    /* Styles */
+
+    .dm-label-container {
+        display: block;
+        width: 15%;
+    }
+
+    .track-volume-output {
+        text-align: center;
+        padding: 15.5px 2px;
+        margin: 1px 1px;
+        border: 1px solid black;
+        border-radius: 2px;
+        font-size: 8px;
+    }
+
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3) {
+    .dm-label-container {
+        display: block;
+        width: 50%;
+        margin-bottom: 50px;
+    }
+
+    .seq-length-slider {
+        display: none;
+    }
+
+    .seq-length-output {
+        display: none;
+    }
+
 }

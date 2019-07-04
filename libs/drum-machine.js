@@ -1,3 +1,10 @@
+// DRUM SEQUENCER ENGINE
+/************************************************************************
+  This serves as the engine for the sequnce and handles all state changes
+  in the sequence loop.  Howler is used to fire the one hit samples and
+  the engine handles the rest.
+*************************************************************************/
+
 // feed howler sound lib with sounds from the server
 
 const kick = new Howl({
@@ -57,9 +64,10 @@ const harmony = new Howl({
   ]
 });
 
-// For each tick in a sequence this object will be checked
-// to determine what instruments need
-// to be triggered for the current tick.
+/* For each tick in a sequence this object will be checked
+   to determine what instruments need
+   to be triggered for the current tick.
+*/
 
 function DrumMachineState(id) {
   this.id = id;
@@ -112,7 +120,7 @@ function DrumMachineState(id) {
     play: () => harmony.play()
   };
 }
-// used by drum machine to retrieve samples set to on = true or not to play by on = false;
+// used by drum machine to retrieve samples set to on = true or not to play on = false;
 // if sample on = true then play the sample using howler
 
 DrumMachineState.prototype.getState = function(drum) {
@@ -125,6 +133,7 @@ DrumMachineState.prototype.setState = function(drum, on = true, volume) {
 };
 
 // dependency inject the drum machine state into sequencer
+
 function Sequencer(length) {
   this.drumMachineState = DrumMachineState;
   this.length = length;
@@ -133,7 +142,12 @@ function Sequencer(length) {
 
 // use this to initialize the sequence with state.
 // each use there after will reset the sequence
-Sequencer.prototype.initSeq = function() {
+
+Sequencer.prototype.initSeq = function(ticks) {
+  if (ticks) {
+    this.length = ticks;
+  }
+
   this.sequence = [];
   for (let i = 0; i < this.length; i += 1) {
     this.sequence.push(new this.drumMachineState(i + 1));
@@ -141,6 +155,8 @@ Sequencer.prototype.initSeq = function() {
   spawnSeqBtns(this.sequence);
   return this.sequence;
 };
+
+// not used currently. Not sure where to use it yet
 
 function calculateTicks(bars) {
   let tickMultiples = [];
@@ -156,12 +172,17 @@ function calculateTicks(bars) {
   }
 }
 
-// drum machine player
+/*
+drum machine player (transport)
+This singleton object consumes the Senquencer and drumMachineState class
+*/
+
 const dm = {
   isPlaying: false,
   playingSeq: null,
   playHead: 0,
   tempo: 800,
+  // calculate bpm to milliseconds for setInterval second arg
   setTempo: function(tempo, ticksPerBeat = 1) {
     let ms;
     switch (ticksPerBeat) {
@@ -179,6 +200,11 @@ const dm = {
     }
     this.tempo = ms;
   },
+  /* start the sequence and loop the play head
+  setInterval keeps the tempo and allows
+  the sounds to be triggered at the playHead index
+  */
+
   start: function start(initializedSequence) {
     if (!this.isPlaying) {
       this.playingSeq = setInterval(() => {
@@ -186,26 +212,25 @@ const dm = {
         this.triggerSounds(initializedSequence[this.playHead]);
         playHeadPosition(this.playHead);
         this.playHead++;
-        if (this.playHead === initializedSequence.length) {
+        if (this.playHead >= initializedSequence.length) {
           this.playHead = 0;
         }
       }, this.tempo);
     }
   },
-  stop: function stop(m) {
-    return new Promise(resolve => {
-      if (m === undefined) {
-        clearInterval(this.playingSeq);
-        this.isPlaying = false;
-        return resolve();
-      }
-      setTimeout(() => {
-        clearInterval(this.playingSeq);
-        this.isPlaying = false;
-        return resolve();
-      }, m);
-    });
+
+  /*
+    stop the sequence and clear the interval
+  */
+  stop: function stop() {
+    this.playHead = 0;
+    clearInterval(this.playingSeq);
+    this.isPlaying = false;
   },
+  /*
+    runs through the drum state object and plays all the sounds
+    at the given playhead index that are set to boolean = true;
+  */
   triggerSounds: function triggerSounds(dmState) {
     for (let drum in dmState) {
       getVolumeSettingsAndSetVolumeState(dmState);
