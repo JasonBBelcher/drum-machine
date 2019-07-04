@@ -2,6 +2,9 @@
 
 ![Drum Sequencer screenshot](./assets/images/dm_screenshot.png)
 
+ [live app link](https://drum-machine-v01-ncuiiricjx.now.sh/)
+
+
 written with Vanilla.js & Howler.js
 
 ## <center>Install Instructions</center>
