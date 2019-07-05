@@ -16,13 +16,16 @@ const seqTempoOutput = document.querySelector(".seq-tempo-output");
 // DRUM SEQUENCER UI LOGIC
 /**************************/
 
+// singleton view object to contain all methods that deal with rendering.
+const view = {};
+
 // start the drum sequence
 
 start.addEventListener("click", function() {
   if (!dm.isPlaying) {
     this.classList.toggle("play-stop-btn-red", true);
     this.textContent = "stop";
-    dm.start(seq);
+    dm.start(transport.seq);
   } else {
     this.textContent = "play";
     this.classList.toggle("play-stop-btn-red", false);
@@ -55,7 +58,7 @@ reset.addEventListener("mouseup", function() {
 */
 
 seqLengthSlider.addEventListener("input", function(e) {
-  stopSeqAndReset(e.target.value);
+  transport.stopSeqAndReset(e.target.value);
   seqLengthOutput.innerText = e.target.value + " ticks";
 });
 
@@ -64,17 +67,36 @@ seqTempoSlider.addEventListener("input", function(e) {
   seqTempoOutput.innerText = e.target.value + " BPM";
 });
 
+// helper function to create dom elements dynamically
+
+view.createNewElement = function(
+  parentEl,
+  childEl,
+  currentState,
+  drumName,
+
+  ...classList
+) {
+  childEl = document.createElement(childEl);
+  childEl.classList.add(...classList);
+  parentEl.appendChild(childEl);
+  if (currentState && drumName) {
+    this.addBtnHandler(childEl, currentState, drumName);
+  }
+  return childEl;
+};
+
 /* builds out the volume sliders and
   respective volume level output
 */
 
 volumeSliders.forEach(slider => {
-  let output = createNewElement(
+  let output = view.createNewElement(
     volumeOutputContainer,
     "div",
     null,
     null,
-    null,
+
     "track-volume-output"
   );
   output.innerText = slider.name + " v : 0.50";
@@ -85,39 +107,20 @@ volumeSliders.forEach(slider => {
 
 // grabs volume level from UI and sets the level in the sequencer engine
 
-function getVolumeSettingsAndSetVolumeState(dmState) {
+view.getVolumeSettingsAndSetVolumeState = function(dmState) {
   volumeSliders.forEach(slider => {
     if (dmState[slider.name]) {
       dmState[slider.name].volume(slider.value);
     }
   });
-}
-
-// helper function to create dom elements dynamically
-
-function createNewElement(
-  parentEl,
-  childEl,
-  currentState,
-  drumName,
-  cb,
-  ...classList
-) {
-  childEl = document.createElement(childEl);
-  childEl.classList.add(...classList);
-  parentEl.appendChild(childEl);
-  if (cb && currentState && drumName) {
-    cb(childEl, currentState, drumName);
-  }
-  return childEl;
-}
+};
 
 /* sets up a event handler on each sequence btn to enable the user
   to turn on/off individual drum sounds in the engine and reflects that state
   in the UI
 */
 
-function addBtnHandler(el, currentState, drumName) {
+view.addBtnHandler = function(el, currentState, drumName) {
   if (currentState && drumName) {
     el.addEventListener("click", function() {
       let clicked = false;
@@ -133,7 +136,7 @@ function addBtnHandler(el, currentState, drumName) {
       }
     });
   }
-}
+};
 
 /*
 when sequencer is instantiated this function
@@ -141,13 +144,13 @@ will build out the UI for the drum machine
 sequencer that the user interacts with.
 */
 
-function spawnSeqBtns(sequence = []) {
+view.spawnSeqBtns = function(sequence = []) {
+  self = this;
   Object.keys(sequence[0]).forEach((key, i) => {
     if (key !== "id") {
-      createNewElement(
+      self.createNewElement(
         dmDiv,
         "div",
-        null,
         null,
         null,
         "seq-container",
@@ -156,12 +159,11 @@ function spawnSeqBtns(sequence = []) {
     }
     sequence.forEach((dmState, j) => {
       if (dmState[key].name === key) {
-        createNewElement(
+        this.createNewElement(
           document.querySelector(".seq-row" + i),
           "div",
           dmState,
           dmState[key],
-          addBtnHandler,
 
           "seq-btn",
           "seq" + j
@@ -169,16 +171,16 @@ function spawnSeqBtns(sequence = []) {
       }
     });
   });
-}
+};
 
 /* this function is consumed by the start method
  of the drum machine engine and turns a light indicator
  on and off quickly as the playhead loops
 */
 
-function playHeadPosition(index) {
+view.playHeadPosition = function(index) {
   document.querySelector(".seq" + index).classList.add("seq-playhead");
   setTimeout(() => {
     document.querySelector(".seq" + index).classList.remove("seq-playhead");
   }, 50);
-}
+};

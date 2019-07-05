@@ -160,7 +160,7 @@ Sequencer.prototype.initSeq = function(ticks) {
   for (let i = 0; i < this.length; i += 1) {
     this.sequence.push(new this.drumMachineState(i + 1));
   }
-  spawnSeqBtns(this.sequence);
+  view.spawnSeqBtns(this.sequence);
   return this.sequence;
 };
 
@@ -218,7 +218,7 @@ const dm = {
       this.playingSeq = setInterval(() => {
         this.isPlaying = true;
         this.triggerSounds(initializedSequence[this.playHead]);
-        playHeadPosition(this.playHead);
+        view.playHeadPosition(this.playHead);
         this.playHead++;
         if (this.playHead >= initializedSequence.length) {
           this.playHead = 0;
@@ -241,7 +241,7 @@ const dm = {
   */
   triggerSounds: function triggerSounds(dmState) {
     for (let drum in dmState) {
-      getVolumeSettingsAndSetVolumeState(dmState);
+      view.getVolumeSettingsAndSetVolumeState(dmState);
       if (dmState.hasOwnProperty(drum)) {
         if (dmState[drum].on) {
           dmState.getState(drum).play();
