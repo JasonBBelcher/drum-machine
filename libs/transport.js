@@ -58,7 +58,8 @@ const transport = {
 
     view.spawnSeqBtns(this.seq);
     view.loadSeqBtnViewState(this.seq);
-    return this.seq;
+    seqLengthOutput.innerText = this.seq.length + "steps";
+    seqLengthSlider.value = this.seq.length;
   },
 
   // calculate bpm to milliseconds for setInterval second arg

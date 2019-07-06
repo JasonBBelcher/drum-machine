@@ -42,7 +42,7 @@ reset.addEventListener("mouseup", function() {
   transport.stopSeqAndReset(16);
   this.classList.toggle("reset-btn-flash-yellow", false);
   seqLengthSlider.value = 16;
-  seqLengthOutput.innerText = "16 ticks";
+  seqLengthOutput.innerText = "16 steps";
   transport.setTempo(120, 4);
   seqTempoSlider.value = 120;
   seqTempoOutput.innerText = "120 BPM";
@@ -58,7 +58,7 @@ reset.addEventListener("mouseup", function() {
 
 seqLengthSlider.addEventListener("input", function(e) {
   transport.stopSeqAndReset(e.target.value);
-  seqLengthOutput.innerText = e.target.value + " ticks";
+  seqLengthOutput.innerText = e.target.value + " steps";
 });
 
 seqTempoSlider.addEventListener("input", function(e) {
@@ -116,6 +116,7 @@ view.getVolumeSettingsAndSetVolumeState = function(dmState) {
   });
 };
 
+// load volumes after loading localStorage sequence
 view.loadVolumeSettings = function(dmState) {
   volumeSliders.forEach((slider) => {
     if (dmState[slider.name]) {
@@ -192,7 +193,8 @@ view.spawnSeqBtns = function(sequence = []) {
           dmState[key],
 
           "seq-btn",
-          "seq" + i + "-" + j
+          "seq-col" + j,
+          "seq" + i
         );
       }
     });
@@ -205,12 +207,12 @@ view.spawnSeqBtns = function(sequence = []) {
 */
 
 view.playHeadPosition = function(index) {
-  document
-    .querySelector(".seq" + 1 + "-" + index)
-    .classList.add("seq-playhead");
+  document.querySelectorAll(".seq-col" + index).forEach((seqBtn) => {
+    seqBtn.classList.add("seq-playhead");
+  });
   setTimeout(() => {
-    document
-      .querySelector(".seq" + 1 + "-" + index)
-      .classList.remove("seq-playhead");
-  }, 50);
+    document.querySelectorAll(".seq-col" + index).forEach((seqBtn) => {
+      seqBtn.classList.remove("seq-playhead");
+    });
+  }, transport.tempo);
 };
