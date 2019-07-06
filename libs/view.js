@@ -1,5 +1,3 @@
-dm.setTempo(120, 4);
-
 // DOM element references
 
 let dmDiv = document.querySelector(".dm");
@@ -16,20 +14,21 @@ const seqTempoOutput = document.querySelector(".seq-tempo-output");
 // DRUM SEQUENCER UI LOGIC
 /**************************/
 
-// singleton view object to contain all methods that deal with rendering.
+// view object to contain all methods that deal with rendering.
+
 const view = {};
 
 // start the drum sequence
 
 start.addEventListener("click", function() {
-  if (!dm.isPlaying) {
+  if (!transport.isPlaying) {
     this.classList.toggle("play-stop-btn-red", true);
     this.textContent = "stop";
-    dm.start(transport.seq);
+    transport.start(transport.seq);
   } else {
     this.textContent = "play";
     this.classList.toggle("play-stop-btn-red", false);
-    dm.stop();
+    transport.stop();
   }
 });
 
@@ -40,11 +39,11 @@ reset.addEventListener("mousedown", function() {
 // reset state to defaults;
 
 reset.addEventListener("mouseup", function() {
-  stopSeqAndReset(16);
+  transport.stopSeqAndReset(16);
   this.classList.toggle("reset-btn-flash-yellow", false);
   seqLengthSlider.value = 16;
   seqLengthOutput.innerText = "16 ticks";
-  dm.setTempo(120, 4);
+  transport.setTempo(120, 4);
   seqTempoSlider.value = 120;
   seqTempoOutput.innerText = "120 BPM";
 });
@@ -63,7 +62,7 @@ seqLengthSlider.addEventListener("input", function(e) {
 });
 
 seqTempoSlider.addEventListener("input", function(e) {
-  restartSeqAfterTempoChange(e.target.value);
+  transport.restartSeqAfterTempoChange(e.target.value);
   seqTempoOutput.innerText = e.target.value + " BPM";
 });
 
