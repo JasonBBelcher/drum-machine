@@ -89,7 +89,7 @@ view.createNewElement = function(
   respective volume level output
 */
 
-volumeSliders.forEach(slider => {
+volumeSliders.forEach((slider) => {
   let output = view.createNewElement(
     volumeOutputContainer,
     "div",
@@ -107,27 +107,36 @@ volumeSliders.forEach(slider => {
 // grabs volume level from UI and sets the level in the sequencer engine
 
 view.getVolumeSettingsAndSetVolumeState = function(dmState) {
-  volumeSliders.forEach(slider => {
+  volumeSliders.forEach((slider) => {
     if (dmState[slider.name]) {
-      dmState[slider.name].volume(slider.value);
+      dmState[slider.name].setVolume(slider.value);
+      // set slider value when loading from localStorage
+      slider.value = dmState[slider.name].volume;
+    }
+  });
+};
+
+view.loadVolumeSettings = function(dmState) {
+  volumeSliders.forEach((slider) => {
+    if (dmState[slider.name]) {
+      slider.value = dmState[slider.name].volume;
     }
   });
 };
 
 view.loadSeqBtnViewState = function(seq) {
-  console.log("seq: ", seq);
   seq.forEach((drumState, i) => {
     if (drumState) {
       for (let drum in drumState) {
         if (drumState.hasOwnProperty(drum)) {
           if (drumState[drum].on === true) {
-            console.log(".seq" + drumState[drum].id + "-" + i);
             document
               .querySelector(".seq" + drumState[drum].id + "-" + i)
               .classList.add("btn-on");
           }
         }
       }
+      view.loadVolumeSettings(drumState);
     }
   });
 };

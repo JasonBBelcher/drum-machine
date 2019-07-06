@@ -83,65 +83,96 @@ function DrumMachineState(id) {
     id: 1,
     on: false,
     name: "kick",
-    volume: volume => (kick._volume = volume),
+    volume: "",
+    setVolume: function(v) {
+      kick._volume = v;
+      this.volume = v;
+    },
     play: () => kick.play()
   };
   this.clap = {
     id: 2,
     on: false,
     name: "clap",
-    volume: volume => (clap._volume = volume),
+    volume: "",
+    setVolume: function(v) {
+      clap._volume = v;
+      this.volume = v;
+    },
     play: () => clap.play()
   };
   this.snare = {
     id: 3,
     on: false,
     name: "snare",
-    volume: volume => (snare._volume = volume),
+    volume: "",
+    setVolume: function(v) {
+      snare._volume = v;
+      this.volume = v;
+    },
     play: () => snare.play()
   };
   this.hat = {
     id: 4,
     on: false,
     name: "hat",
-    volume: volume => (hat._volume = volume),
+    volume: "",
+    setVolume: function(v) {
+      hat._volume = v;
+      this.volume = v;
+    },
     play: () => hat.play()
   };
   this.shaker = {
     id: 5,
     on: false,
     name: "shaker",
-    volume: volume => (shaker._volume = volume),
+    setVolume: function(v) {
+      shaker._volume = v;
+      this.volume = v;
+    },
     play: () => shaker.play()
   };
   this.bongo1 = {
     id: 6,
     on: false,
     name: "bongo1",
-    volume: volume => (bongo1._volume = volume),
+    volume: "",
+    setVolume: function(v) {
+      bongo1._volume = v;
+      this.volume = v;
+    },
     play: () => bongo1.play()
   };
   this.congaz = {
     id: 7,
     on: false,
     name: "congaz",
-    volume: volume => (congaz._volume = volume),
+    volume: "",
+    setVolume: function(v) {
+      congaz._volume = v;
+      this.volume = v;
+    },
     play: () => congaz.play()
   };
   this.harmony = {
     id: 8,
     on: false,
     name: "harmony",
-    volume: volume => (harmony._volume = volume),
+    volume: "",
+    setVolume: function(v) {
+      harmony._volume = v;
+      this.volume = v;
+    },
     play: () => harmony.play()
   };
 }
 // used by drum machine to retrieve samples set to on = true or not to play on = false;
 // if sample on = true then play the sample using howler
 
-DrumMachineState.prototype.setState = function(drum, on = true, volume) {
+DrumMachineState.prototype.setState = function(drum, on = true, setVolume) {
   this[drum].on = on;
-  this[drum].volume(volume) || this[drum].volume(1);
+  this[drum].setVolume(setVolume) || this[drum].setVolume(1);
   this[drum].name = drum;
 };
 

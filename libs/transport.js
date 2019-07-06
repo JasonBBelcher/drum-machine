@@ -1,5 +1,6 @@
 JSONfn = {};
 
+// helper function to preserve functions on sequence objects
 JSONfn.stringify = function(obj) {
   return JSON.stringify(obj, function(key, value) {
     return typeof value === "function" ? value.toString() : value;
@@ -45,8 +46,6 @@ const transport = {
 
   saveSeq: function(seqName) {
     const sequence = { [seqName]: this.seq };
-    console.log(sequence);
-
     const currentlySaved = JSONfn.parse(localStorage.getItem("sequences"));
     const merged = Object.assign({}, currentlySaved, sequence);
     localStorage.setItem("sequences", JSONfn.stringify(merged));
@@ -112,7 +111,6 @@ const transport = {
     at the given playhead index that are set to boolean = true;
   */
   triggerSounds: function triggerSounds(dmState) {
-    console.log(dmState);
     for (let drum in dmState) {
       view.getVolumeSettingsAndSetVolumeState(dmState);
       if (dmState.hasOwnProperty(drum)) {
