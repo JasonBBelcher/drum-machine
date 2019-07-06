@@ -114,6 +114,24 @@ view.getVolumeSettingsAndSetVolumeState = function(dmState) {
   });
 };
 
+view.loadSeqBtnViewState = function(seq) {
+  console.log("seq: ", seq);
+  seq.forEach((drumState, i) => {
+    if (drumState) {
+      for (let drum in drumState) {
+        if (drumState.hasOwnProperty(drum)) {
+          if (drumState[drum].on === true) {
+            console.log(".seq" + drumState[drum].id + "-" + i);
+            document
+              .querySelector(".seq" + drumState[drum].id + "-" + i)
+              .classList.add("btn-on");
+          }
+        }
+      }
+    }
+  });
+};
+
 /* sets up a event handler on each sequence btn to enable the user
   to turn on/off individual drum sounds in the engine and reflects that state
   in the UI
@@ -124,11 +142,11 @@ view.addBtnHandler = function(el, currentState, drumName) {
     el.addEventListener("click", function() {
       let clicked = false;
       if (drumName.on === clicked) {
-        currentState.setState(drumName.name, true);
+        drumName.on = true;
         clicked = !clicked;
         el.classList.add("btn-on");
       } else if (!drumName.on === clicked) {
-        currentState.setState(drumName.name, false);
+        drumName.on = false;
         clicked = !clicked;
         el.classList.remove("btn-on");
         el.classList.add("seq-btn");
@@ -165,7 +183,7 @@ view.spawnSeqBtns = function(sequence = []) {
           dmState[key],
 
           "seq-btn",
-          "seq" + j
+          "seq" + i + "-" + j
         );
       }
     });
@@ -178,8 +196,12 @@ view.spawnSeqBtns = function(sequence = []) {
 */
 
 view.playHeadPosition = function(index) {
-  document.querySelector(".seq" + index).classList.add("seq-playhead");
+  document
+    .querySelector(".seq" + 1 + "-" + index)
+    .classList.add("seq-playhead");
   setTimeout(() => {
-    document.querySelector(".seq" + index).classList.remove("seq-playhead");
+    document
+      .querySelector(".seq" + 1 + "-" + index)
+      .classList.remove("seq-playhead");
   }, 50);
 };

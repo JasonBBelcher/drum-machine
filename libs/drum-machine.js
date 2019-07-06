@@ -80,50 +80,58 @@ const harmony = new Howl({
 function DrumMachineState(id) {
   this.id = id;
   this.kick = {
+    id: 1,
     on: false,
     name: "kick",
     volume: volume => (kick._volume = volume),
     play: () => kick.play()
   };
   this.clap = {
+    id: 2,
     on: false,
     name: "clap",
     volume: volume => (clap._volume = volume),
     play: () => clap.play()
   };
   this.snare = {
+    id: 3,
     on: false,
     name: "snare",
     volume: volume => (snare._volume = volume),
     play: () => snare.play()
   };
   this.hat = {
+    id: 4,
     on: false,
     name: "hat",
     volume: volume => (hat._volume = volume),
     play: () => hat.play()
   };
   this.shaker = {
+    id: 5,
     on: false,
     name: "shaker",
     volume: volume => (shaker._volume = volume),
     play: () => shaker.play()
   };
-  this.bongo = {
+  this.bongo1 = {
+    id: 6,
     on: false,
-    name: "bongo",
+    name: "bongo1",
     volume: volume => (bongo1._volume = volume),
     play: () => bongo1.play()
   };
-  this.conga = {
+  this.congaz = {
+    id: 7,
     on: false,
-    name: "conga",
+    name: "congaz",
     volume: volume => (congaz._volume = volume),
     play: () => congaz.play()
   };
-  this.perc = {
+  this.harmony = {
+    id: 8,
     on: false,
-    name: "perc",
+    name: "harmony",
     volume: volume => (harmony._volume = volume),
     play: () => harmony.play()
   };
@@ -131,9 +139,6 @@ function DrumMachineState(id) {
 // used by drum machine to retrieve samples set to on = true or not to play on = false;
 // if sample on = true then play the sample using howler
 
-DrumMachineState.prototype.getState = function(drum) {
-  return this[drum];
-};
 DrumMachineState.prototype.setState = function(drum, on = true, volume) {
   this[drum].on = on;
   this[drum].volume(volume) || this[drum].volume(1);
@@ -158,7 +163,7 @@ Sequencer.prototype.initSeq = function(ticks) {
 
   this.sequence = [];
   for (let i = 0; i < this.length; i += 1) {
-    this.sequence.push(new this.drumMachineState(i + 1));
+    this.sequence.push(new this.drumMachineState(i));
   }
   view.spawnSeqBtns(this.sequence);
   return this.sequence;

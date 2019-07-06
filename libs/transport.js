@@ -1,3 +1,18 @@
+JSONfn = {};
+
+JSONfn.stringify = function(obj) {
+  return JSON.stringify(obj, function(key, value) {
+    return typeof value === "function" ? value.toString() : value;
+  });
+};
+
+JSONfn.parse = function(str) {
+  return JSON.parse(str, function(key, value) {
+    if (typeof value != "string") return value;
+    return value.match(/=>|function/gi) ? eval("(" + value + ")") : value;
+  });
+};
+
 const transport = {
   sequencer: null,
   seq: [],
@@ -28,8 +43,27 @@ const transport = {
     }
   },
 
+  saveSeq: function(seqName) {
+    const sequence = { [seqName]: this.seq };
+    console.log(sequence);
+
+    const currentlySaved = JSONfn.parse(localStorage.getItem("sequences"));
+    const merged = Object.assign({}, currentlySaved, sequence);
+    localStorage.setItem("sequences", JSONfn.stringify(merged));
+  },
+
+  loadSeq: function(seqName) {
+    dmDiv.innerHTML = "";
+    const sequences = JSONfn.parse(localStorage.getItem("sequences"));
+    this.seq = sequences[seqName];
+
+    view.spawnSeqBtns(this.seq);
+    view.loadSeqBtnViewState(this.seq);
+    return this.seq;
+  },
+
   // calculate bpm to milliseconds for setInterval second arg
-  setTempo: function(tempo, ticksPerBeat = 1) {
+  setTempo: function(tempo, ticksPerBeat) {
     let ms;
     switch (ticksPerBeat) {
       case 1:
@@ -78,11 +112,12 @@ const transport = {
     at the given playhead index that are set to boolean = true;
   */
   triggerSounds: function triggerSounds(dmState) {
+    console.log(dmState);
     for (let drum in dmState) {
       view.getVolumeSettingsAndSetVolumeState(dmState);
       if (dmState.hasOwnProperty(drum)) {
         if (dmState[drum].on) {
-          dmState.getState(drum).play();
+          dmState[drum].play();
         }
       }
     }
