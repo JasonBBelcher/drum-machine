@@ -5,6 +5,7 @@ let element = document.createElement("div");
 const start = document.querySelector("#start");
 const reset = document.querySelector("#reset");
 const saveBtn = document.querySelector("#save");
+const deleteBtn = document.querySelector("#delete");
 const saveInput = document.querySelector("#input-save");
 const volumeSliders = document.querySelectorAll(".vol-slider");
 const volumeOutputContainer = document.querySelector(".volume-output");
@@ -23,7 +24,9 @@ const view = {};
 
 // start the drum sequence
 
-start.addEventListener("click", function() {
+start.addEventListener("click", clickStart);
+
+function clickStart() {
   if (!transport.isPlaying) {
     this.classList.toggle("play-stop-btn-red", true);
     this.textContent = "stop";
@@ -33,7 +36,7 @@ start.addEventListener("click", function() {
     this.classList.toggle("play-stop-btn-red", false);
     transport.stop();
   }
-});
+}
 
 reset.addEventListener("mousedown", function() {
   this.classList.toggle("reset-btn-flash-yellow", true);
@@ -199,6 +202,12 @@ view.spawnSeqBtns = function(sequence = []) {
       }
     });
   });
+  console.log(sequence.length);
+  for (let k = 0; k < sequence.length; k += 4) {
+    const seqCols = document.querySelectorAll(".col-seq" + k).forEach((btn) => {
+      btn.classList.add("seq-btn-quarter-beat");
+    });
+  }
 };
 
 view.createOptionsFromSavedSequences = function() {
@@ -226,6 +235,7 @@ view.createOptionsFromSavedSequences = function() {
     transport.stop();
 
     if (e.target.value !== "keep") {
+      saveInput.value = e.target.value;
       transport.loadSeq(e.target.value);
     }
     if (e.target.value === "keep") {
@@ -236,13 +246,38 @@ view.createOptionsFromSavedSequences = function() {
 
 // save state to localStorage
 
-saveBtn.addEventListener("click", function() {
+saveBtn.addEventListener("mousedown", function() {
+  this.classList.toggle("save-btn-flash-yellow", true);
+});
+
+saveBtn.addEventListener("mouseup", function() {
+  this.classList.toggle("save-btn-flash-yellow", false);
+  if (saveInput.value !== "") {
+    start.textContent = "play";
+    start.classList.toggle("play-stop-btn-red", false);
+    transport.stop();
+
+    transport.saveSeq(saveInput.value);
+    transport.initSeq(16);
+  }
+});
+
+deleteBtn.addEventListener("click", function() {
   start.textContent = "play";
   start.classList.toggle("play-stop-btn-red", false);
   transport.stop();
 
-  transport.saveSeq(saveInput.value);
-  transport.initSeq(16);
+  if (saveInput.value !== "") {
+    console.log(saveInput.value);
+    transport.deleteSeq(saveInput.value);
+    transport.initSeq(16);
+    document.querySelectorAll("option").forEach((option) => {
+      if (option.value === saveInput.value) {
+        saveInput.value = "";
+        option.remove();
+      }
+    });
+  }
 });
 
 /* this function is consumed by the start method

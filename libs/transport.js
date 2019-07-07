@@ -10,6 +10,7 @@ const transport = {
     this.sequencer = new Sequencer(ticks);
     this.seq = this.sequencer.initSeq();
     view.createOptionsFromSavedSequences();
+
     // console.log(JSON.parse(localStorage.getItem("sequences")));
   },
 
@@ -36,6 +37,16 @@ const transport = {
     const merged = Object.assign({}, sequences, sequence);
     const stringedBeats = JSONfn.stringify(merged);
     // console.log(stringedBeats);
+    localStorage.setItem("sequences", JSONfn.stringify(merged));
+  },
+
+  deleteSeq: function(seqName) {
+    console.log("from delete method");
+    const sequence = { [seqName]: this.sequencer.initSeq() };
+    const sequences = JSONfn.parse(localStorage.getItem("sequences"));
+
+    const merged = Object.assign({}, sequences, sequence);
+    console.log("merged: ", merged);
     localStorage.setItem("sequences", JSONfn.stringify(merged));
   },
 
