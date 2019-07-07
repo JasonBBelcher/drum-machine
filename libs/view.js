@@ -4,12 +4,15 @@ let dmDiv = document.querySelector(".dm");
 let element = document.createElement("div");
 const start = document.querySelector("#start");
 const reset = document.querySelector("#reset");
+const saveBtn = document.querySelector("#save");
+const saveInput = document.querySelector("#input-save");
 const volumeSliders = document.querySelectorAll(".vol-slider");
 const volumeOutputContainer = document.querySelector(".volume-output");
 const seqLengthSlider = document.querySelector(".seq-length-slider");
 const seqLengthOutput = document.querySelector(".seq-length-output");
 const seqTempoSlider = document.querySelector(".seq-tempo-slider");
 const seqTempoOutput = document.querySelector(".seq-tempo-output");
+const savedSequenceSelector = document.querySelector(".saved-sequences");
 
 // DRUM SEQUENCER UI LOGIC
 /**************************/
@@ -73,7 +76,6 @@ view.createNewElement = function(
   childEl,
   currentState,
   drumName,
-
   ...classList
 ) {
   childEl = document.createElement(childEl);
@@ -172,10 +174,9 @@ sequencer that the user interacts with.
 */
 
 view.spawnSeqBtns = function(sequence = []) {
-  self = this;
   Object.keys(sequence[0]).forEach((key, i) => {
     if (key !== "id") {
-      self.createNewElement(
+      this.createNewElement(
         dmDiv,
         "div",
         null,
@@ -191,15 +192,58 @@ view.spawnSeqBtns = function(sequence = []) {
           "div",
           dmState,
           dmState[key],
-
           "seq-btn",
-          "seq-col" + j,
-          "seq" + i
+          "col-seq" + j,
+          "seq" + i + "-" + j
         );
       }
     });
   });
 };
+
+view.createOptionsFromSavedSequences = function() {
+  document.querySelectorAll("option").forEach((option) => {
+    if (option.value !== "keep") option.remove();
+  });
+
+  savedSequenceSelector.removeEventListener("change", load);
+  const sequences = JSONfn.parse(localStorage.getItem("sequences"));
+  Object.keys(sequences).forEach((k) => {
+    let option = this.createNewElement(
+      savedSequenceSelector,
+      "option",
+      null,
+      null
+    );
+    option.text = k;
+    option.value = k;
+  });
+  savedSequenceSelector.addEventListener("change", load);
+
+  function load(e) {
+    start.textContent = "play";
+    start.classList.toggle("play-stop-btn-red", false);
+    transport.stop();
+
+    if (e.target.value !== "keep") {
+      transport.loadSeq(e.target.value);
+    }
+    if (e.target.value === "keep") {
+      transport.initSeq(16);
+    }
+  }
+};
+
+// save state to localStorage
+
+saveBtn.addEventListener("click", function() {
+  start.textContent = "play";
+  start.classList.toggle("play-stop-btn-red", false);
+  transport.stop();
+
+  transport.saveSeq(saveInput.value);
+  transport.initSeq(16);
+});
 
 /* this function is consumed by the start method
  of the drum machine engine and turns a light indicator
@@ -207,11 +251,11 @@ view.spawnSeqBtns = function(sequence = []) {
 */
 
 view.playHeadPosition = function(index) {
-  document.querySelectorAll(".seq-col" + index).forEach((seqBtn) => {
+  document.querySelectorAll(".col-seq" + index).forEach((seqBtn) => {
     seqBtn.classList.add("seq-playhead");
   });
   setTimeout(() => {
-    document.querySelectorAll(".seq-col" + index).forEach((seqBtn) => {
+    document.querySelectorAll(".col-seq" + index).forEach((seqBtn) => {
       seqBtn.classList.remove("seq-playhead");
     });
   }, transport.tempo);

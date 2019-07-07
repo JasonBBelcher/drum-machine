@@ -30,6 +30,26 @@
             <span>reset</span>
           </button>
         </div>
+        <div class="play-btn-container">
+          <button class="save-btn" id="save">
+            <span>save</span>
+          </button>
+        </div>
+        <div class="play-btn-container">
+          <div class="">
+            <div style="text-align: center;">
+              <select class="saved-sequences">
+                <option value="keep">--pick a drum pattern</option>
+              </select>
+              <input
+                id="input-save"
+                type="text"
+                value=""
+                placeholder="name that beat!"
+              />
+            </div>
+          </div>
+        </div>
       </div>
       <div class="sequence-length">
         <p class="sequence-instructions">
@@ -168,5 +188,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.1.2/howler.js"></script>
   <script src="libs/drum-machine.js"></script>
   <script src="libs/view.js"></script>
+  <script src="drumPatterns.js"></script>
   <script src="libs/transport.js"></script>
 </html>

@@ -1,19 +1,3 @@
-JSONfn = {};
-
-// helper function to preserve functions on sequence objects
-JSONfn.stringify = function(obj) {
-  return JSON.stringify(obj, function(key, value) {
-    return typeof value === "function" ? value.toString() : value;
-  });
-};
-
-JSONfn.parse = function(str) {
-  return JSON.parse(str, function(key, value) {
-    if (typeof value != "string") return value;
-    return value.match(/=>|function/gi) ? eval("(" + value + ")") : value;
-  });
-};
-
 const transport = {
   sequencer: null,
   seq: [],
@@ -25,6 +9,8 @@ const transport = {
     dmDiv.innerHTML = "";
     this.sequencer = new Sequencer(ticks);
     this.seq = this.sequencer.initSeq();
+    view.createOptionsFromSavedSequences();
+    // console.log(JSON.parse(localStorage.getItem("sequences")));
   },
 
   stopSeqAndReset: function stopSeqAndReset(ticks) {
@@ -46,20 +32,22 @@ const transport = {
 
   saveSeq: function(seqName) {
     const sequence = { [seqName]: this.seq };
-    const currentlySaved = JSONfn.parse(localStorage.getItem("sequences"));
-    const merged = Object.assign({}, currentlySaved, sequence);
+    const sequences = JSONfn.parse(localStorage.getItem("sequences"));
+    const merged = Object.assign({}, sequences, sequence);
+    const stringedBeats = JSONfn.stringify(merged);
+    // console.log(stringedBeats);
     localStorage.setItem("sequences", JSONfn.stringify(merged));
   },
 
   loadSeq: function(seqName) {
     dmDiv.innerHTML = "";
+
     const sequences = JSONfn.parse(localStorage.getItem("sequences"));
     this.seq = sequences[seqName];
-
     view.spawnSeqBtns(this.seq);
-    view.loadSeqBtnViewState(this.seq);
-    seqLengthOutput.innerText = this.seq.length + "steps";
+    seqLengthOutput.innerText = this.seq.length + " steps";
     seqLengthSlider.value = this.seq.length;
+    view.loadSeqBtnViewState(this.seq);
   },
 
   // calculate bpm to milliseconds for setInterval second arg
