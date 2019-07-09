@@ -2,7 +2,7 @@
 
 ![Drum Sequencer screenshot](./assets/images/dm_screenshot.png)
 
- [live app link](https://drum-machine-v01-csvdczaioq.now.sh/)
+ [https://drumsequencer.jasonbelcher.dev](https://drumsequencer.jasonbelcher.dev/)
 
 
 written with Vanilla.js & Howler.js
