@@ -1,14 +1,12 @@
 const examplePatterns = {
-  basichouse: [
-    {
+  basichouse: [{
       id: 0,
       kick: {
         id: 1,
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -16,8 +14,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -25,8 +22,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -34,16 +30,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -52,8 +46,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -61,8 +54,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -70,8 +62,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -82,8 +73,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -91,8 +81,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -100,8 +89,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -109,16 +97,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -127,8 +113,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -136,8 +121,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -145,8 +129,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -157,8 +140,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -166,8 +148,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -175,8 +156,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -184,16 +164,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -202,8 +180,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -211,8 +188,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -220,8 +196,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -232,8 +207,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -241,8 +215,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -250,8 +223,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -259,16 +231,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -277,8 +247,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -286,8 +255,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -295,8 +263,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -307,8 +274,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -316,8 +282,7 @@ const examplePatterns = {
         on: true,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -325,8 +290,7 @@ const examplePatterns = {
         on: true,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -334,16 +298,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -352,8 +314,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -361,8 +322,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -370,8 +330,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -382,8 +341,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -391,8 +349,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -400,8 +357,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -409,16 +365,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -427,8 +381,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -436,8 +389,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -445,8 +397,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -457,8 +408,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -466,8 +416,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -475,8 +424,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -484,16 +432,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -502,8 +448,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -511,8 +456,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -520,8 +464,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -532,8 +475,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -541,8 +483,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -550,8 +491,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -559,16 +499,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -577,8 +515,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -586,8 +523,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -595,8 +531,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -607,8 +542,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -616,8 +550,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -625,8 +558,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -634,16 +566,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -652,8 +582,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -661,8 +590,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -670,8 +598,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -682,8 +609,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -691,8 +617,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -700,8 +625,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -709,16 +633,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -727,8 +649,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -736,8 +657,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -745,8 +665,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -757,8 +676,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -766,8 +684,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -775,8 +692,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -784,16 +700,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -802,8 +716,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -811,8 +724,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -820,8 +732,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -832,8 +743,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -841,8 +751,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -850,8 +759,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -859,16 +767,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -877,8 +783,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -886,8 +791,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -895,8 +799,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -907,8 +810,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -916,8 +818,7 @@ const examplePatterns = {
         on: true,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -925,8 +826,7 @@ const examplePatterns = {
         on: true,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -934,16 +834,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -952,8 +850,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -961,8 +858,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -970,8 +866,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -982,8 +877,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -991,8 +885,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1000,8 +893,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1009,16 +901,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -1027,8 +917,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -1036,8 +925,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -1045,8 +933,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -1057,8 +944,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -1066,8 +952,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1075,8 +960,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1084,16 +968,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -1102,8 +984,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -1111,8 +992,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -1120,8 +1000,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -1132,8 +1011,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -1141,8 +1019,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1150,8 +1027,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1159,16 +1035,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -1177,8 +1051,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -1186,8 +1059,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -1195,22 +1067,19 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     }
   ],
-  bongozhouse: [
-    {
+  bongozhouse: [{
       id: 0,
       kick: {
         id: 1,
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -1218,8 +1087,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1227,8 +1095,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1236,16 +1103,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -1254,8 +1119,7 @@ const examplePatterns = {
         on: true,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -1263,8 +1127,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -1272,8 +1135,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -1284,8 +1146,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -1293,8 +1154,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1302,8 +1162,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1311,16 +1170,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -1329,8 +1186,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -1338,8 +1194,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -1347,8 +1202,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -1359,8 +1213,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -1368,8 +1221,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1377,8 +1229,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1386,16 +1237,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -1404,8 +1253,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -1413,8 +1261,7 @@ const examplePatterns = {
         on: true,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -1422,8 +1269,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -1434,8 +1280,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -1443,8 +1288,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1452,8 +1296,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1461,16 +1304,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -1479,8 +1320,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -1488,8 +1328,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -1497,8 +1336,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -1509,8 +1347,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -1518,8 +1355,7 @@ const examplePatterns = {
         on: true,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1527,8 +1363,7 @@ const examplePatterns = {
         on: true,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1536,16 +1371,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -1554,8 +1387,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -1563,8 +1395,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -1572,8 +1403,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -1584,8 +1414,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -1593,8 +1422,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1602,8 +1430,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1611,16 +1438,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -1629,8 +1454,7 @@ const examplePatterns = {
         on: true,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -1638,8 +1462,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -1647,8 +1470,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -1659,8 +1481,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -1668,8 +1489,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1677,8 +1497,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1686,16 +1505,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -1704,8 +1521,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -1713,8 +1529,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -1722,8 +1537,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -1734,8 +1548,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -1743,8 +1556,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1752,8 +1564,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1761,16 +1572,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -1779,8 +1588,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -1788,8 +1596,7 @@ const examplePatterns = {
         on: true,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -1797,8 +1604,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -1809,8 +1615,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -1818,8 +1623,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1827,8 +1631,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1836,16 +1639,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -1854,8 +1655,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -1863,8 +1663,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -1872,8 +1671,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -1884,8 +1682,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -1893,8 +1690,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1902,8 +1698,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1911,16 +1706,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -1929,8 +1722,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -1938,8 +1730,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -1947,8 +1738,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -1959,8 +1749,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -1968,8 +1757,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -1977,8 +1765,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -1986,16 +1773,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -2004,8 +1789,7 @@ const examplePatterns = {
         on: true,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2013,8 +1797,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2022,8 +1805,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -2034,8 +1816,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -2043,8 +1824,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -2052,8 +1832,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -2061,16 +1840,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -2079,8 +1856,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2088,8 +1864,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2097,8 +1872,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -2109,8 +1883,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -2118,8 +1891,7 @@ const examplePatterns = {
         on: true,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -2127,8 +1899,7 @@ const examplePatterns = {
         on: true,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -2136,16 +1907,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -2154,8 +1923,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2163,8 +1931,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2172,8 +1939,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -2184,8 +1950,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -2193,8 +1958,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -2202,8 +1966,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -2211,16 +1974,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -2229,8 +1990,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2238,8 +1998,7 @@ const examplePatterns = {
         on: true,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2247,8 +2006,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -2259,8 +2017,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -2268,8 +2025,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -2277,8 +2033,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -2286,16 +2041,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -2304,8 +2057,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2313,8 +2065,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2322,8 +2073,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -2334,8 +2084,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -2343,8 +2092,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.25",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -2352,8 +2100,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.23",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -2361,16 +2108,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.19",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.5"
       },
@@ -2379,8 +2124,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.17",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2388,8 +2132,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2397,22 +2140,19 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     }
   ],
-  houseyBreaks: [
-    {
+  houseyBreaks: [{
       id: 0,
       kick: {
         id: 1,
         on: true,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -2420,8 +2160,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -2429,8 +2168,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -2438,16 +2176,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -2456,8 +2192,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2465,8 +2200,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2474,8 +2208,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -2486,8 +2219,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -2495,8 +2227,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -2504,8 +2235,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -2513,16 +2243,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -2531,8 +2259,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2540,8 +2267,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2549,8 +2275,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -2561,8 +2286,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -2570,8 +2294,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -2579,8 +2302,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -2588,16 +2310,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -2606,8 +2326,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2615,8 +2334,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2624,8 +2342,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -2636,8 +2353,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -2645,8 +2361,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -2654,8 +2369,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -2663,16 +2377,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -2681,8 +2393,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2690,8 +2401,7 @@ const examplePatterns = {
         on: true,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2699,8 +2409,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -2711,8 +2420,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -2720,8 +2428,7 @@ const examplePatterns = {
         on: true,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -2729,8 +2436,7 @@ const examplePatterns = {
         on: true,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -2738,16 +2444,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -2756,8 +2460,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2765,8 +2468,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2774,8 +2476,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -2786,8 +2487,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -2795,8 +2495,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -2804,8 +2503,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -2813,16 +2511,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -2831,8 +2527,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2840,8 +2535,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2849,8 +2543,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -2861,8 +2554,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -2870,8 +2562,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -2879,8 +2570,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -2888,16 +2578,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -2906,8 +2594,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2915,8 +2602,7 @@ const examplePatterns = {
         on: true,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2924,8 +2610,7 @@ const examplePatterns = {
         on: true,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -2936,8 +2621,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -2945,8 +2629,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -2954,8 +2637,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -2963,16 +2645,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -2981,8 +2661,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -2990,8 +2669,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -2999,8 +2677,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -3011,8 +2688,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3020,8 +2696,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -3029,8 +2704,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -3038,16 +2712,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -3056,8 +2728,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -3065,8 +2736,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -3074,8 +2744,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -3086,8 +2755,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3095,8 +2763,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -3104,8 +2771,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -3113,16 +2779,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -3131,8 +2795,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -3140,8 +2803,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -3149,8 +2811,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -3161,8 +2822,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3170,8 +2830,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -3179,8 +2838,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -3188,16 +2846,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -3206,8 +2862,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -3215,8 +2870,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -3224,8 +2878,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -3236,8 +2889,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3245,8 +2897,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -3254,8 +2905,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -3263,16 +2913,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -3281,8 +2929,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -3290,8 +2937,7 @@ const examplePatterns = {
         on: true,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -3299,8 +2945,7 @@ const examplePatterns = {
         on: true,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -3311,8 +2956,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3320,8 +2964,7 @@ const examplePatterns = {
         on: true,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -3329,8 +2972,7 @@ const examplePatterns = {
         on: true,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -3338,16 +2980,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -3356,8 +2996,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -3365,8 +3004,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -3374,8 +3012,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -3386,8 +3023,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3395,8 +3031,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -3404,8 +3039,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -3413,16 +3047,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -3431,8 +3063,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -3440,8 +3071,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -3449,8 +3079,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -3461,8 +3090,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3470,8 +3098,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -3479,8 +3106,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -3488,16 +3114,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -3506,8 +3130,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -3515,8 +3138,7 @@ const examplePatterns = {
         on: true,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -3524,8 +3146,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -3536,8 +3157,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.73",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3545,8 +3165,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.67",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -3554,8 +3173,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.42",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -3563,16 +3181,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.11"
       },
@@ -3581,8 +3197,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -3590,8 +3205,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.2",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -3599,22 +3213,19 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     }
   ],
-  "32stephouse": [
-    {
+  "32stephouse": [{
       id: 0,
       kick: {
         id: 1,
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3622,8 +3233,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -3631,8 +3241,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -3640,16 +3249,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -3658,8 +3265,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -3667,8 +3273,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -3676,8 +3281,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -3688,8 +3292,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3697,8 +3300,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -3706,8 +3308,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -3715,16 +3316,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -3733,8 +3332,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -3742,8 +3340,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -3751,8 +3348,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -3763,8 +3359,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3772,8 +3367,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -3781,8 +3375,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -3790,16 +3383,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -3808,8 +3399,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -3817,8 +3407,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -3826,8 +3415,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -3838,8 +3426,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3847,8 +3434,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -3856,8 +3442,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -3865,16 +3450,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -3883,8 +3466,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -3892,8 +3474,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -3901,8 +3482,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -3913,8 +3493,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3922,8 +3501,7 @@ const examplePatterns = {
         on: true,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -3931,8 +3509,7 @@ const examplePatterns = {
         on: true,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -3940,16 +3517,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -3958,8 +3533,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -3967,8 +3541,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -3976,8 +3549,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -3988,8 +3560,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -3997,8 +3568,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4006,8 +3576,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4015,16 +3584,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -4033,8 +3600,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -4042,8 +3608,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -4051,8 +3616,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -4063,8 +3627,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -4072,8 +3635,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4081,8 +3643,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4090,16 +3651,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -4108,8 +3667,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -4117,8 +3675,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -4126,8 +3683,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -4138,8 +3694,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -4147,8 +3702,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4156,8 +3710,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4165,16 +3718,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -4183,8 +3734,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -4192,8 +3742,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -4201,8 +3750,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -4213,8 +3761,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -4222,8 +3769,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4231,8 +3777,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4240,16 +3785,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -4258,8 +3801,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -4267,8 +3809,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -4276,8 +3817,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -4288,8 +3828,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -4297,8 +3836,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4306,8 +3844,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4315,16 +3852,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -4333,8 +3868,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -4342,8 +3876,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -4351,8 +3884,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -4363,8 +3895,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -4372,8 +3903,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4381,8 +3911,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4390,16 +3919,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -4408,8 +3935,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -4417,8 +3943,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -4426,8 +3951,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -4438,8 +3962,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -4447,8 +3970,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4456,8 +3978,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4465,16 +3986,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -4483,8 +4002,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -4492,8 +4010,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -4501,8 +4018,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -4513,8 +4029,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -4522,8 +4037,7 @@ const examplePatterns = {
         on: true,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4531,8 +4045,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4540,16 +4053,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -4558,8 +4069,7 @@ const examplePatterns = {
         on: true,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -4567,8 +4077,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -4576,8 +4085,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -4588,8 +4096,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -4597,8 +4104,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4606,8 +4112,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4615,16 +4120,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -4633,8 +4136,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -4642,8 +4144,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -4651,8 +4152,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -4663,8 +4163,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -4672,8 +4171,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4681,8 +4179,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4690,16 +4187,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -4708,8 +4203,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -4717,8 +4211,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -4726,8 +4219,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -4738,8 +4230,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -4747,8 +4238,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4756,8 +4246,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4765,16 +4254,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -4783,8 +4270,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -4792,8 +4278,7 @@ const examplePatterns = {
         on: true,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -4801,8 +4286,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -4813,8 +4297,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -4822,8 +4305,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4831,8 +4313,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4840,16 +4321,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -4858,8 +4337,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -4867,8 +4345,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -4876,8 +4353,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -4888,8 +4364,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -4897,8 +4372,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4906,8 +4380,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4915,16 +4388,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -4933,8 +4404,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -4942,8 +4412,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -4951,8 +4420,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -4963,8 +4431,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -4972,8 +4439,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -4981,8 +4447,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -4990,16 +4455,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5008,8 +4471,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5017,8 +4479,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -5026,8 +4487,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -5038,8 +4498,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -5047,8 +4506,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -5056,8 +4514,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -5065,16 +4522,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5083,8 +4538,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5092,8 +4546,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -5101,8 +4554,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -5113,8 +4565,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -5122,8 +4573,7 @@ const examplePatterns = {
         on: true,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -5131,8 +4581,7 @@ const examplePatterns = {
         on: true,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -5140,16 +4589,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5158,8 +4605,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5167,8 +4613,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -5176,8 +4621,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -5188,8 +4632,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -5197,8 +4640,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -5206,8 +4648,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -5215,16 +4656,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5233,8 +4672,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5242,8 +4680,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -5251,8 +4688,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -5263,8 +4699,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -5272,8 +4707,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -5281,8 +4715,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -5290,16 +4723,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5308,8 +4739,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5317,8 +4747,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -5326,8 +4755,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -5338,8 +4766,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -5347,8 +4774,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -5356,8 +4782,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -5365,16 +4790,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5383,8 +4806,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5392,8 +4814,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -5401,8 +4822,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -5413,8 +4833,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -5422,8 +4841,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -5431,8 +4849,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -5440,16 +4857,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5458,8 +4873,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5467,8 +4881,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -5476,8 +4889,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -5488,8 +4900,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -5497,8 +4908,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -5506,8 +4916,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -5515,16 +4924,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5533,8 +4940,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5542,8 +4948,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -5551,8 +4956,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -5563,8 +4967,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -5572,8 +4975,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -5581,8 +4983,7 @@ const examplePatterns = {
         on: true,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -5590,16 +4991,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5608,8 +5007,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5617,8 +5015,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -5626,8 +5023,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -5638,8 +5034,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -5647,8 +5042,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -5656,8 +5050,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -5665,16 +5058,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5683,8 +5074,7 @@ const examplePatterns = {
         on: true,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5692,8 +5082,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -5701,8 +5090,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -5713,8 +5101,7 @@ const examplePatterns = {
         on: true,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -5722,8 +5109,7 @@ const examplePatterns = {
         on: true,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -5731,8 +5117,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -5740,16 +5125,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5758,8 +5141,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5767,8 +5149,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -5776,8 +5157,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -5788,8 +5168,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -5797,8 +5176,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -5806,8 +5184,7 @@ const examplePatterns = {
         on: true,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -5815,16 +5192,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5833,8 +5208,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5842,8 +5216,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -5851,8 +5224,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -5863,8 +5235,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -5872,8 +5243,7 @@ const examplePatterns = {
         on: false,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -5881,8 +5251,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -5890,16 +5259,14 @@ const examplePatterns = {
         on: true,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: true,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5908,8 +5275,7 @@ const examplePatterns = {
         on: true,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5917,8 +5283,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -5926,8 +5291,7 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     },
@@ -5938,8 +5302,7 @@ const examplePatterns = {
         on: false,
         name: "kick",
         volume: "0.5",
-        setVolume:
-          "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      kick._volume = v;\n      this.volume = v;\n    }",
         play: "() => kick.play()"
       },
       clap: {
@@ -5947,8 +5310,7 @@ const examplePatterns = {
         on: true,
         name: "clap",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      clap._volume = v;\n      this.volume = v;\n    }",
         play: "() => clap.play()"
       },
       snare: {
@@ -5956,8 +5318,7 @@ const examplePatterns = {
         on: false,
         name: "snare",
         volume: "0.11",
-        setVolume:
-          "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      snare._volume = v;\n      this.volume = v;\n    }",
         play: "() => snare.play()"
       },
       hat: {
@@ -5965,16 +5326,14 @@ const examplePatterns = {
         on: false,
         name: "hat",
         volume: "0.14",
-        setVolume:
-          "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      hat._volume = v;\n      this.volume = v;\n    }",
         play: "() => hat.play()"
       },
       shaker: {
         id: 5,
         on: false,
         name: "shaker",
-        setVolume:
-          "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      shaker._volume = v;\n      this.volume = v;\n    }",
         play: "() => shaker.play()",
         volume: "0.04"
       },
@@ -5983,8 +5342,7 @@ const examplePatterns = {
         on: false,
         name: "bongo1",
         volume: "0.07",
-        setVolume:
-          "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      bongo1._volume = v;\n      this.volume = v;\n    }",
         play: "() => bongo1.play()"
       },
       congaz: {
@@ -5992,8 +5350,7 @@ const examplePatterns = {
         on: false,
         name: "congaz",
         volume: "0.06",
-        setVolume:
-          "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      congaz._volume = v;\n      this.volume = v;\n    }",
         play: "() => congaz.play()"
       },
       harmony: {
@@ -6001,13 +5358,12 @@ const examplePatterns = {
         on: false,
         name: "harmony",
         volume: "0.21",
-        setVolume:
-          "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
+        setVolume: "function(v) {\n      harmony._volume = v;\n      this.volume = v;\n    }",
         play: "() => harmony.play()"
       }
     }
   ]
 };
-console.log(examplePatterns);
+
 
 localStorage.setItem("sequences", JSONfn.stringify(examplePatterns));
