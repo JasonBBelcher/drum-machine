@@ -38,13 +38,13 @@ function clickStart() {
   }
 }
 
-reset.addEventListener("mousedown", function() {
+reset.addEventListener("mousedown", function () {
   this.classList.toggle("reset-btn-flash-yellow", true);
 });
 
 // reset state to defaults;
 
-reset.addEventListener("mouseup", function() {
+reset.addEventListener("mouseup", function () {
   transport.stopSeqAndReset(16);
   this.classList.toggle("reset-btn-flash-yellow", false);
   seqLengthSlider.value = 16;
@@ -62,19 +62,19 @@ reset.addEventListener("mouseup", function() {
    sequence length
 */
 
-seqLengthSlider.addEventListener("input", function(e) {
+seqLengthSlider.addEventListener("input", function (e) {
   transport.stopSeqAndReset(e.target.value);
   seqLengthOutput.innerText = e.target.value + " steps";
 });
 
-seqTempoSlider.addEventListener("input", function(e) {
+seqTempoSlider.addEventListener("input", function (e) {
   transport.restartSeqAfterTempoChange(e.target.value);
   seqTempoOutput.innerText = e.target.value + " BPM";
 });
 
 // helper function to create dom elements dynamically
 
-view.createNewElement = function(
+view.createNewElement = function (
   parentEl,
   childEl,
   currentState,
@@ -104,14 +104,14 @@ volumeSliders.forEach((slider) => {
     "track-volume-output"
   );
   output.innerText = slider.name + " v : 0.50";
-  slider.addEventListener("input", function(e) {
+  slider.addEventListener("input", function (e) {
     output.innerText = slider.name + " v : " + e.target.value;
   });
 });
 
 // grabs volume level from UI and sets the level in the sequencer engine
 
-view.getVolumeSettingsAndSetVolumeState = function(dmState) {
+view.getVolumeSettingsAndSetVolumeState = function (dmState) {
   volumeSliders.forEach((slider) => {
     if (dmState[slider.name]) {
       dmState[slider.name].setVolume(slider.value);
@@ -122,7 +122,7 @@ view.getVolumeSettingsAndSetVolumeState = function(dmState) {
 };
 
 // load volumes after loading localStorage sequence
-view.loadVolumeSettings = function(dmState) {
+view.loadVolumeSettings = function (dmState) {
   volumeSliders.forEach((slider) => {
     if (dmState[slider.name]) {
       slider.value = dmState[slider.name].volume;
@@ -130,7 +130,7 @@ view.loadVolumeSettings = function(dmState) {
   });
 };
 
-view.loadSeqBtnViewState = function(seq) {
+view.loadSeqBtnViewState = function (seq) {
   seq.forEach((drumState, i) => {
     if (drumState) {
       for (let drum in drumState) {
@@ -152,9 +152,9 @@ view.loadSeqBtnViewState = function(seq) {
   in the UI
 */
 
-view.addBtnHandler = function(el, currentState, drumName) {
+view.addBtnHandler = function (el, currentState, drumName) {
   if (currentState && drumName) {
-    el.addEventListener("click", function() {
+    el.addEventListener("click", function () {
       let clicked = false;
       if (drumName.on === clicked) {
         drumName.on = true;
@@ -176,7 +176,7 @@ will build out the UI for the drum machine
 sequencer that the user interacts with.
 */
 
-view.spawnSeqBtns = function(sequence = []) {
+view.spawnSeqBtns = function (sequence = []) {
   Object.keys(sequence[0]).forEach((key, i) => {
     if (key !== "id") {
       this.createNewElement(
@@ -202,7 +202,7 @@ view.spawnSeqBtns = function(sequence = []) {
       }
     });
   });
-  console.log(sequence.length);
+
   for (let k = 0; k < sequence.length; k += 4) {
     const seqCols = document.querySelectorAll(".col-seq" + k).forEach((btn) => {
       btn.classList.add("seq-btn-quarter-beat");
@@ -210,7 +210,7 @@ view.spawnSeqBtns = function(sequence = []) {
   }
 };
 
-view.createOptionsFromSavedSequences = function() {
+view.createOptionsFromSavedSequences = function () {
   document.querySelectorAll("option").forEach((option) => {
     if (option.value !== "keep") option.remove();
   });
@@ -246,11 +246,11 @@ view.createOptionsFromSavedSequences = function() {
 
 // save state to localStorage
 
-saveBtn.addEventListener("mousedown", function() {
+saveBtn.addEventListener("mousedown", function () {
   this.classList.toggle("save-btn-flash-yellow", true);
 });
 
-saveBtn.addEventListener("mouseup", function() {
+saveBtn.addEventListener("mouseup", function () {
   this.classList.toggle("save-btn-flash-yellow", false);
   if (saveInput.value !== "") {
     start.textContent = "play";
@@ -262,13 +262,12 @@ saveBtn.addEventListener("mouseup", function() {
   }
 });
 
-deleteBtn.addEventListener("click", function() {
+deleteBtn.addEventListener("click", function () {
   start.textContent = "play";
   start.classList.toggle("play-stop-btn-red", false);
   transport.stop();
 
   if (saveInput.value !== "") {
-    console.log(saveInput.value);
     transport.deleteSeq(saveInput.value);
     transport.initSeq(16);
     document.querySelectorAll("option").forEach((option) => {
@@ -285,7 +284,7 @@ deleteBtn.addEventListener("click", function() {
  on and off quickly as the playhead loops
 */
 
-view.playHeadPosition = function(index) {
+view.playHeadPosition = function (index) {
   document.querySelectorAll(".col-seq" + index).forEach((seqBtn) => {
     seqBtn.classList.add("seq-playhead");
   });

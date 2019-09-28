@@ -1,25 +1,18 @@
 JSONfn = {};
 
 // helper function to preserve functions on sequence objects
-JSONfn.stringify = function(obj) {
-  return JSON.stringify(obj, function(key, value) {
+JSONfn.stringify = function (obj) {
+  return JSON.stringify(obj, function (key, value) {
     return typeof value === "function" ? value.toString() : value;
   });
 };
 
-JSONfn.parse = function(str) {
-  return JSON.parse(str, function(key, value) {
+JSONfn.parse = function (str) {
+  return JSON.parse(str, function (key, value) {
     if (typeof value != "string") return value;
     return value.match(/=>|function/gi) ? eval("(" + value + ")") : value;
   });
 };
-
-// DRUM SEQUENCER ENGINE
-/************************************************************************
-  This serves as the engine for the sequnce and handles all state changes
-  in the sequence loop.  Howler is used to fire the one hit samples and
-  the engine handles the rest.
-*************************************************************************/
 
 // feed howler sound lib with sounds from the server
 
@@ -100,7 +93,7 @@ function DrumMachineState(id) {
     on: false,
     name: "kick",
     volume: "",
-    setVolume: function(v) {
+    setVolume: function (v) {
       kick._volume = v;
       this.volume = v;
     },
@@ -111,7 +104,7 @@ function DrumMachineState(id) {
     on: false,
     name: "clap",
     volume: "",
-    setVolume: function(v) {
+    setVolume: function (v) {
       clap._volume = v;
       this.volume = v;
     },
@@ -122,7 +115,7 @@ function DrumMachineState(id) {
     on: false,
     name: "snare",
     volume: "",
-    setVolume: function(v) {
+    setVolume: function (v) {
       snare._volume = v;
       this.volume = v;
     },
@@ -133,7 +126,7 @@ function DrumMachineState(id) {
     on: false,
     name: "hat",
     volume: "",
-    setVolume: function(v) {
+    setVolume: function (v) {
       hat._volume = v;
       this.volume = v;
     },
@@ -143,7 +136,7 @@ function DrumMachineState(id) {
     id: 5,
     on: false,
     name: "shaker",
-    setVolume: function(v) {
+    setVolume: function (v) {
       shaker._volume = v;
       this.volume = v;
     },
@@ -154,7 +147,7 @@ function DrumMachineState(id) {
     on: false,
     name: "bongo1",
     volume: "",
-    setVolume: function(v) {
+    setVolume: function (v) {
       bongo1._volume = v;
       this.volume = v;
     },
@@ -165,7 +158,7 @@ function DrumMachineState(id) {
     on: false,
     name: "congaz",
     volume: "",
-    setVolume: function(v) {
+    setVolume: function (v) {
       congaz._volume = v;
       this.volume = v;
     },
@@ -176,7 +169,7 @@ function DrumMachineState(id) {
     on: false,
     name: "harmony",
     volume: "",
-    setVolume: function(v) {
+    setVolume: function (v) {
       harmony._volume = v;
       this.volume = v;
     },
@@ -186,7 +179,7 @@ function DrumMachineState(id) {
 // used by drum machine to retrieve samples set to on = true or not to play on = false;
 // if sample on = true then play the sample using howler
 
-DrumMachineState.prototype.setState = function(drum, on = true, setVolume) {
+DrumMachineState.prototype.setState = function (drum, on = true, setVolume) {
   this[drum].on = on;
   this[drum].setVolume(setVolume) || this[drum].setVolume(1);
   this[drum].name = drum;
@@ -203,7 +196,7 @@ function Sequencer(length) {
 // use this to initialize the sequence with state.
 // each use there after will reset the sequence
 
-Sequencer.prototype.initSeq = function(ticks) {
+Sequencer.prototype.initSeq = function (ticks) {
   if (ticks) {
     this.length = ticks;
   }

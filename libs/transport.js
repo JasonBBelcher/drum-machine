@@ -5,13 +5,13 @@ const transport = {
   playingSeq: null,
   playHead: 0,
   tempo: 800,
-  initSeq: function(ticks) {
+  initSeq: function (ticks) {
     dmDiv.innerHTML = "";
     this.sequencer = new Sequencer(ticks);
     this.seq = this.sequencer.initSeq();
     view.createOptionsFromSavedSequences();
 
-    // console.log(JSON.parse(localStorage.getItem("sequences")));
+
   },
 
   stopSeqAndReset: function stopSeqAndReset(ticks) {
@@ -23,7 +23,7 @@ const transport = {
     start.classList.toggle("play-stop-btn-red", false);
   },
 
-  restartSeqAfterTempoChange: function(value) {
+  restartSeqAfterTempoChange: function (value) {
     transport.setTempo(value, 4);
     if (transport.isPlaying) {
       transport.stop();
@@ -31,26 +31,30 @@ const transport = {
     }
   },
 
-  saveSeq: function(seqName) {
-    const sequence = { [seqName]: this.seq };
+  saveSeq: function (seqName) {
+    const sequence = {
+      [seqName]: this.seq
+    };
     const sequences = JSONfn.parse(localStorage.getItem("sequences"));
     const merged = Object.assign({}, sequences, sequence);
     const stringedBeats = JSONfn.stringify(merged);
-    // console.log(stringedBeats);
+
     localStorage.setItem("sequences", JSONfn.stringify(merged));
   },
 
-  deleteSeq: function(seqName) {
-    console.log("from delete method");
-    const sequence = { [seqName]: this.sequencer.initSeq() };
+  deleteSeq: function (seqName) {
+
+    const sequence = {
+      [seqName]: this.sequencer.initSeq()
+    };
     const sequences = JSONfn.parse(localStorage.getItem("sequences"));
 
     const merged = Object.assign({}, sequences, sequence);
-    console.log("merged: ", merged);
+
     localStorage.setItem("sequences", JSONfn.stringify(merged));
   },
 
-  loadSeq: function(seqName) {
+  loadSeq: function (seqName) {
     dmDiv.innerHTML = "";
 
     const sequences = JSONfn.parse(localStorage.getItem("sequences"));
@@ -62,7 +66,7 @@ const transport = {
   },
 
   // calculate bpm to milliseconds for setInterval second arg
-  setTempo: function(tempo, ticksPerBeat) {
+  setTempo: function (tempo, ticksPerBeat) {
     let ms;
     switch (ticksPerBeat) {
       case 1:

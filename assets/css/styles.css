@@ -11,8 +11,12 @@ h1 {
     margin: 20px 0;
 }
 
-.header {
-    margin-bottom: 12vh;
+.mb-2 {
+    margin-bottom: 8px;
+}
+
+.mt-5 {
+    margin-top: 32px;
 }
 
 .seq-container {
@@ -46,14 +50,13 @@ h1 {
     border: 1px solid black;
     border-radius: 2px;
     font-size: 8px;
+
 }
 
 .seq-length-slider {
-    display: block;
-    margin: 0 auto;
     -webkit-appearance: none;
-    width: 56%;
-    height: 15px;
+    width: 100%;
+    height: 16px;
     background: rgba(28, 6, 53, 0.2);
     outline: none;
     opacity: 0.7;
@@ -67,23 +70,17 @@ h1 {
 }
 
 .sequence-instructions {
-
+    font-size: 12px;
     color: rgba(245, 245, 245, 0.5);
-    text-align: center;
-    margin: 16px 0;
+    text-align: left;
+    margin: 8px 0;
 
-}
-
-.sequence-length {
-    margin: 0 auto;
 }
 
 .seq-tempo-slider {
-    display: block;
-    margin: 0 auto;
     -webkit-appearance: none;
     width: 100%;
-    height: 15px;
+    height: 16px;
     background: rgba(28, 6, 53, 0.2);
     outline: none;
     opacity: 0.7;
@@ -97,13 +94,13 @@ h1 {
 }
 
 .seq-length-output {
-    margin: 1em 0;
+    margin: 2px 0;
     text-align: center;
     color: whitesmoke;
 }
 
 .seq-tempo-output {
-    margin: 1em 0;
+    margin: 2px 0;
     text-align: center;
     color: whitesmoke;
 }
@@ -155,13 +152,10 @@ h1 {
 
 .play-stop-btn {
     width: 100%;
-
-    display: block;
-    margin: 16px 0;
+    margin: 2px 0;
     color: rgba(255, 255, 255, 0.9);
-    background: rgba(93, 141, 93, 0.3);
-    padding: 0 50px;
-    height: 50px;
+    background: rgba(93, 141, 93, 0.8);
+    height: 32px;
     border: none;
     border-radius: 4px;
 }
@@ -171,13 +165,11 @@ h1 {
 }
 
 .reset-btn {
-    width: 24%;
-    display: block;
-    margin: 0 auto;
+    width: 100%;
+    margin: 2px 0;
     color: rgba(255, 255, 255, 0.9);
     background: rgba(255, 0, 0, 0.5);
-    padding: 0 50px;
-    height: 50px;
+    height: 32px;
     border: none;
     border-radius: 4px;
 }
@@ -191,13 +183,11 @@ h1 {
 }
 
 .save-btn {
-    width: 24%;
-    display: block;
-    margin: 0 auto;
+    width: 100%;
+    margin: 2px 0;
     color: rgba(255, 255, 255, 0.598);
     background: rgba(16, 241, 34, 0.721);
-    padding: 0 50px;
-    height: 50px;
+    height: 32px;
     border: none;
     border-radius: 4px;
 }
@@ -211,13 +201,11 @@ h1 {
 }
 
 .delete-btn {
-    width: 24%;
-    display: block;
-    margin: 0 auto;
+    width: 100%;
+    margin: 2px 0;
     color: rgba(255, 255, 255, 0.9);
     background: rgba(255, 0, 0, 0.3);
-    padding: 0 50px;
-    height: 50px;
+    height: 32px;
     border: none;
     border-radius: 4px;
 }
@@ -234,17 +222,6 @@ h1 {
     background: rgba(228, 31, 31, 0.3);
 }
 
-.play-btn-container {
-    display: block;
-    padding-bottom: 1em;
-}
-
-
-
-.container {
-    max-width: 95%;
-    margin: 0 auto;
-}
 
 
 .animated-body {
@@ -298,337 +275,29 @@ h1 {
     }
 }
 
-/* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 150px) and (max-device-width : 480px) {
-
-    /* Styles */
-
-    .sequence-instructions {
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 850px) {
+    .vol-slider {
         display: none;
     }
 
-    .play-stop-btn {
-        padding: 0;
-    }
-
-
-    .reset-btn {
-        padding: 0;
-    }
-
-    .dm-label-container {
-        display: block;
-        width: 50%;
-        margin: 32px 0;
-    }
 
     .track-volume-output {
-        text-align: center;
-        padding: 14px 2px;
-        margin: 1px 1px;
-        border: 1px solid black;
-        border-radius: 2px;
-        font-size: 12px;
-    }
-
-    .seq-length-slider {
         display: none;
-    }
-
-    .seq-length-output {
-        display: none;
-    }
-
-    .seq-btn {
-        flex-basis: 5%;
-    }
-}
-
-
-
-/* iPhone 5 ----------- */
-@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
-
-    /* Styles */
-    .dm-label-container {
-        display: block;
-        width: 50%;
-        margin: 32px 0;
-    }
-
-    .track-volume-output {
-        text-align: center;
-        padding: 14px 2px;
-        margin: 1px 1px;
-        border: 1px solid black;
-        border-radius: 2px;
-        font-size: 12px;
-    }
-
-    .seq-btn {
-        flex-basis: 5%;
-    }
-
-    .play-stop-btn {
-        padding: 0;
-    }
-
-    .reset-btn {
-        padding: 0;
-    }
-}
-
-@media only screen and (min-device-width: 320px) and (max-device-height: 568px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2) {
-
-    /* Styles */
-    .dm-label-container {
-        display: block;
-        width: 50%;
-        margin: 20px 0;
-    }
-
-    .seq-btn {
-        flex-basis: 5%;
-    }
-
-    .track-volume-output {
-        text-align: center;
-        padding: 14px 2px;
-        margin: 1px 1px;
-        border: 1px solid black;
-        border-radius: 2px;
-        font-size: 12px;
-    }
-
-    .play-stop-btn {
-        padding: 0;
-    }
-
-
-    .reset-btn {
-        padding: 0;
-    }
-}
-
-/* iPhone 6, 7, 8 ----------- */
-@media only screen and (min-device-width: 667px) and (max-device-height: 375px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 2) {
-    /* Styles */
-
-    .dm-label-container {
-        display: block;
-        width: 50%;
-        margin: 32px 0;
-    }
-
-    .track-volume-output {
-        text-align: center;
-        padding: 16px 2px;
-        margin: 0px 1px;
-        border: 1px solid black;
-        border-radius: 2px;
-        font-size: 10px;
-    }
-
-    .track-volume {
-        text-align: center;
-        padding: 9px 16px;
-        margin: 6.5px 5px;
-    }
-
-    .play-stop-btn {
-        padding: 0;
-    }
-
-
-    .reset-btn {
-        padding: 0;
-    }
-
-    .seq-btn {
-        flex-basis: 5%;
-    }
-}
-
-@media only screen and (min-device-width: 375px) and (max-device-height: 667px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 2) {
-
-    /* Styles */
-    .seq-length-slider {
-        display: none;
-    }
-
-    .seq-length-output {
-        display: none;
-    }
-
-    .dm-label-container {
-        display: block;
-        width: 50%;
-        margin: 22px 0;
-    }
-
-    .seq-btn {
-        flex-basis: 5%;
-    }
-
-    .track-volume-output {
-        text-align: center;
-        padding: 14px 2px;
-        margin: 1px 1px;
-        border: 1px solid black;
-        border-radius: 2px;
-        font-size: 12px;
 
     }
 
     .track-volume {
-        text-align: center;
-        padding: 8px 16px;
-        margin: 6.5px 5px;
-    }
-
-    .play-stop-btn {
+        margin: 0;
         padding: 0;
     }
 
-
-    .reset-btn {
-        padding: 0;
-    }
 }
 
-
-
-/* Samsung Galaxy S5 ----------- */
-@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3) {
-    /* Styles */
-
-    .dm-label-container {
-        display: block;
-        width: 50%;
-        margin: 32px 0;
-    }
+@media only screen and (max-width : 1024px) {
 
     .track-volume-output {
-        text-align: center;
-        padding: 16px 2px;
-        margin: 0px 1px;
-        border: 1px solid black;
-        border-radius: 2px;
-        font-size: 10px;
-    }
-
-    .track-volume {
-        text-align: center;
-        padding: 9px 16px;
-        margin: 6.5px 5px;
-    }
-
-    .play-stop-btn {
-        padding: 0;
-    }
-
-
-    .reset-btn {
-        padding: 0;
-    }
-
-    .seq-btn {
-        flex-basis: 5%;
-    }
-}
-
-@media only screen and (min-device-width: 360px) and (max-device-height: 640px) and (orientation : portrait) and (-webkit-device-pixel-ratio: 3) {
-
-
-    .seq-length-slider {
         display: none;
     }
 
-    .seq-length-output {
-        display: none;
-    }
-
-    .dm-label-container {
-        display: block;
-        width: 50%;
-        margin: 20px 0;
-    }
-
-    .seq-btn {
-        flex-basis: 5%;
-    }
-
-    .track-volume-output {
-        text-align: center;
-        padding: 14px 2px;
-        margin: 1px 1px;
-        border: 1px solid black;
-        border-radius: 2px;
-        font-size: 12px;
-
-    }
-
-    .track-volume {
-        text-align: center;
-        padding: 8px 16px;
-        margin: 6.5px 5px;
-    }
-
-    .play-stop-btn {
-        padding: 0;
-    }
-
-
-    .reset-btn {
-        padding: 0;
-    }
-
-}
-
-
-/* iPads (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 760px) and (max-device-width : 1024px) {
-
-    /* Styles */
-    .dm-label-container {
-        display: block;
-        width: 13%;
-    }
-
-    .track-volume-output {
-        text-align: center;
-        padding: 15px 2px;
-        margin: 1px 1px;
-        border: 1px solid black;
-        border-radius: 2px;
-        font-size: 9px;
-    }
-
-    .seq-btn {
-        flex-basis: 4%;
-    }
-
-}
-
-/* iPads (landscape) ----------- */
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
-    /* Styles */
-
-    .dm-label-container {
-        display: block;
-        width: 15%;
-    }
-
-    .track-volume-output {
-        text-align: center;
-        padding: 14px 2px;
-        margin: 1px 1px;
-        border: 1px solid black;
-        border-radius: 2px;
-        font-size: 10px;
-    }
-
-    .seq-btn {
-        flex-basis: 4%;
-    }
 }
