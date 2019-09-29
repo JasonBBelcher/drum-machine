@@ -13,10 +13,10 @@ git clone git@github.com:JasonBBelcher/drum-machine.git
 
 npm i
 
-// starts browser-sync for development
+// starts parcel dev server for development
 npm run start:dev
 
-// starts prod http-server
+// builds parcel bundle then makes it live with  http-server
 
 npm start
 
