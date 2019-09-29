@@ -4,16 +4,17 @@
   "description": "",
   "main": "drum-machine.js",
   "scripts": {
-    "start": "./node_modules/http-server/bin/http-server --cors='Access-Control-Allow-Origin: *' -o",
-    "start:dev": "browser-sync start --server --files 'assets/css/*.css' 'libs/*.js' 'index.html'",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run build; ./node_modules/http-server/bin/http-server ./dist  --cors='Access-Control-Allow-Origin: *'",
+    "start:dev": "./node_modules/parcel/bin/cli.js ./src/index.html",
+    "build": "./node_modules/parcel/bin/cli.js build ./src/index.html"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "howler": "^2.1.2",
     "http-server": "^0.11.1"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.7"
+    "parcel": "^1.12.3"
   }
 }
