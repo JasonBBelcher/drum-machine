@@ -1,9 +1,8 @@
-# <center>Drum Sequencer</center> 
+# <center>Drum Sequencer</center>
 
-![Drum Sequencer screenshot](./assets/images/dm_screenshot.png)
+![Drum Sequencer screenshot](./src/assets/images/dm_screenshot.png)
 
- [https://drumsequencer.jasonbelcher.dev](https://drumsequencer.jasonbelcher.dev/)
-
+[https://drumsequencer.jasonbelcher.dev](https://drumsequencer.jasonbelcher.dev/)
 
 written with Vanilla.js & Howler.js
 
@@ -22,6 +21,3 @@ npm run start:dev
 npm start
 
 ```
-
-
-
