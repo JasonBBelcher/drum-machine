@@ -2,18 +2,6 @@ const {
   Howl
 } = require('howler');
 
-
-const kickwave = require('../samples/bd_kick/bd_909dwsd.wav');
-const clapwave = require('../samples/clap/clp_analogue.wav');
-const snarewave = require('../samples/snare/snr_answer8bit.wav');
-const hatwave = require('../samples/hats/hat_analog.wav');
-const shakerwave = require('../samples/shaker_tambourine/shaker_quicky.wav');
-const bongowave = require('../samples/percussion/prc_bongodrm.wav');
-const congawave = require('../samples/percussion/prc_congaz.wav');
-const harmonywave = require('../samples/percussion/prc_harmony.wav');
-
-
-
 JSONfn = {};
 
 // helper function to preserve functions on sequence objects
@@ -29,6 +17,18 @@ JSONfn.parse = function (str) {
     return value.match(/=>|function/gi) ? eval("(" + value + ")") : value;
   });
 };
+
+
+const kickwave = require('../samples/bd_kick/bd_909dwsd.wav');
+const clapwave = require('../samples/clap/clp_analogue.wav');
+const snarewave = require('../samples/snare/snr_answer8bit.wav');
+const hatwave = require('../samples/hats/hat_analog.wav');
+const shakerwave = require('../samples/shaker_tambourine/shaker_quicky.wav');
+const bongowave = require('../samples/percussion/prc_bongodrm.wav');
+const congawave = require('../samples/percussion/prc_congaz.wav');
+const harmonywave = require('../samples/percussion/prc_harmony.wav');
+
+
 
 
 // DOM element references

@@ -1,3 +1,20 @@
+JSONfn = {};
+
+// helper function to preserve functions on sequence objects
+JSONfn.stringify = function (obj) {
+  return JSON.stringify(obj, function (key, value) {
+    return typeof value === "function" ? value.toString() : value;
+  });
+};
+
+JSONfn.parse = function (str) {
+  return JSON.parse(str, function (key, value) {
+    if (typeof value != "string") return value;
+    return value.match(/=>|function/gi) ? eval("(" + value + ")") : value;
+  });
+};
+
+
 const examplePatterns = {
   basichouse: [{
       id: 0,
