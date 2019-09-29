@@ -4,9 +4,9 @@
   "description": "",
   "main": "drum-machine.js",
   "scripts": {
-    "start": "npm run build; ./node_modules/http-server/bin/http-server ./dist  --cors='Access-Control-Allow-Origin: *'",
+    "start": "npm run prod:build; ./node_modules/http-server/bin/http-server ./dist  --cors='Access-Control-Allow-Origin: *'",
     "start:dev": "./node_modules/parcel/bin/cli.js ./src/index.html",
-    "build": "./node_modules/parcel/bin/cli.js build ./src/index.html"
+    "prod:build": "./node_modules/parcel/bin/cli.js build ./src/index.html"
   },
   "author": "",
   "license": "ISC",
