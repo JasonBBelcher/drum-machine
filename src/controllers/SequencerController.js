@@ -9,11 +9,12 @@ import { SequenceModel } from '../models/SequenceModel.js';
 import { SequencerView, ControlsView, VolumeControlsView } from '../views/SequencerView.js';
 import { AudioEngine } from '../libs/audio-engine.js';
 import { AudioScheduler } from '../libs/audio-scheduler.js';
+import { DrumPlayer } from '../libs/audio-player.js';
 
 export class SequencerController {
   constructor(config) {
     // Configuration
-    this.sounds = config.sounds; // Howler.js sound objects
+    this.audioPlayer = config.audioPlayer; // DrumPlayer instance (replaces Howler)
     this.sequencerContainer = config.sequencerContainer;
     this.controlsElements = config.controlsElements;
     this.volumeSliders = config.volumeSliders;
@@ -66,9 +67,9 @@ export class SequencerController {
     // Update view
     this.sequencerView.updateDrumButton(stepIndex, drumName, !wasOn);
 
-    // Play preview sound
-    if (!wasOn && this.sounds[drumName]) {
-      this.sounds[drumName].play();
+    // Play preview sound with Web Audio API
+    if (!wasOn && this.audioPlayer.hasDrum(drumName)) {
+      this.audioPlayer.playDrum(drumName);
     }
   }
 
@@ -177,9 +178,9 @@ export class SequencerController {
   handleVolumeChange({ drumName, volume }) {
     this.model.setDrumVolume(drumName, volume);
 
-    // Update Howler volume if sound exists
-    if (this.sounds[drumName]) {
-      this.sounds[drumName].volume(volume);
+    // Update audio player volume
+    if (this.audioPlayer.hasDrum(drumName)) {
+      this.audioPlayer.setDrumVolume(drumName, volume);
     }
   }
 
@@ -189,12 +190,11 @@ export class SequencerController {
   handleSchedulerStep(stepIndex, time) {
     const step = this.model.steps[stepIndex];
     
-    // Trigger all active drums for this step
+    // Trigger all active drums for this step with precise timing
     Object.entries(step.drums).forEach(([drumName, drumState]) => {
-      if (drumState.on && this.sounds[drumName]) {
-        // TODO: In Phase 3, use Web Audio API scheduling with time parameter
-        // For now, use Howler immediate playback
-        this.sounds[drumName].play();
+      if (drumState.on && this.audioPlayer.hasDrum(drumName)) {
+        // Use Web Audio API with scheduled time for perfect sync
+        this.audioPlayer.playDrum(drumName, time);
       }
     });
   }
@@ -283,6 +283,11 @@ export class SequencerController {
    */
   destroy() {
     this.stop();
+    
+    if (this.audioPlayer) {
+      this.audioPlayer.stopAll();
+      this.audioPlayer.clearAll();
+    }
     
     if (this.scheduler) {
       this.scheduler = null;
