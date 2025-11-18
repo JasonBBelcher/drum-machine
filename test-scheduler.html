@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Scheduler Test</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #1a1a1a;
+      color: #0f0;
+    }
+
+    h1 {
+      border-bottom: 2px solid #0f0;
+      padding-bottom: 10px;
+    }
+
+    .test-section {
+      background: #000;
+      border: 1px solid #0f0;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 5px;
+    }
+
+    button {
+      background: #0f0;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-family: 'Courier New', monospace;
+      cursor: pointer;
+      margin: 5px;
+      border-radius: 3px;
+    }
+
+    button:hover {
+      background: #0c0;
+    }
+
+    button:active {
+      background: #090;
+    }
+
+    button.playing {
+      background: #f00;
+      color: #fff;
+    }
+
+    #log {
+      background: #000;
+      border: 1px solid #333;
+      padding: 10px;
+      max-height: 300px;
+      overflow-y: auto;
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    .log-entry {
+      margin: 2px 0;
+    }
+
+    .log-success { color: #0f0; }
+    .log-error { color: #f00; }
+    .log-warning { color: #ff0; }
+    .log-info { color: #0ff; }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .metric {
+      background: #111;
+      padding: 10px;
+      border: 1px solid #333;
+      border-radius: 3px;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      color: #888;
+    }
+
+    .metric-value {
+      font-size: 20px;
+      color: #0f0;
+      font-weight: bold;
+    }
+
+    .visual-steps {
+      display: flex;
+      gap: 5px;
+      margin-top: 15px;
+    }
+
+    .step {
+      flex: 1;
+      height: 40px;
+      background: #222;
+      border: 1px solid #333;
+      transition: background 0.05s;
+    }
+
+    .step.active {
+      background: #0f0;
+      border-color: #0f0;
+      box-shadow: 0 0 10px #0f0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎵 AudioScheduler Test Suite</h1>
+  
+  <div class="test-section">
+    <h2>Test 1: Basic Playback</h2>
+    <p>Tests the AudioScheduler with a simple 16-step metronome</p>
+    <button id="test1-start">Start Test</button>
+    <button id="test1-stop">Stop</button>
+    
+    <div class="visual-steps" id="steps">
+      <!-- Will be filled by JS -->
+    </div>
+    
+    <div class="metrics">
+      <div class="metric">
+        <div class="metric-label">Tempo (BPM)</div>
+        <div class="metric-value" id="tempo-display">120</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Current Step</div>
+        <div class="metric-value" id="step-display">0</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Avg Drift (ms)</div>
+        <div class="metric-value" id="drift-display">0.00</div>
+      </div>
+      <div class="metric">
+        <div class="metric-label">Audio Latency</div>
+        <div class="metric-value" id="latency-display">--</div>
+      </div>
+    </div>
+    
+    <div style="margin-top: 15px;">
+      <label for="tempo-slider">Tempo: <span id="tempo-value">120</span> BPM</label><br>
+      <input type="range" id="tempo-slider" min="60" max="200" value="120" style="width: 100%;">
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>Test 2: Timing Accuracy</h2>
+    <p>Measures timing drift over 30 seconds</p>
+    <button id="test2-start">Run Timing Test</button>
+    <button id="test2-stop">Stop Test</button>
+  </div>
+
+  <div class="test-section">
+    <h2>System Log</h2>
+    <button id="clear-log">Clear Log</button>
+    <div id="log"></div>
+  </div>
+
+  <script type="module">
+    import { audioEngine } from './src/libs/audio-engine.js';
+    import { AudioScheduler } from './src/libs/audio-scheduler.js';
+
+    // Logger
+    const log = {
+      success: (msg) => addLog(msg, 'success'),
+      error: (msg) => addLog(msg, 'error'),
+      warning: (msg) => addLog(msg, 'warning'),
+      info: (msg) => addLog(msg, 'info')
+    };
+
+    function addLog(message, type = 'info') {
+      const logDiv = document.getElementById('log');
+      const entry = document.createElement('div');
+      entry.className = `log-entry log-${type}`;
+      entry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+      logDiv.appendChild(entry);
+      logDiv.scrollTop = logDiv.scrollHeight;
+    }
+
+    document.getElementById('clear-log').addEventListener('click', () => {
+      document.getElementById('log').innerHTML = '';
+    });
+
+    // Create visual steps
+    const stepsContainer = document.getElementById('steps');
+    for (let i = 0; i < 16; i++) {
+      const step = document.createElement('div');
+      step.className = 'step';
+      step.id = `step-${i}`;
+      stepsContainer.appendChild(step);
+    }
+
+    // Initialize audio
+    let scheduler = null;
+    let audioContext = null;
+    let oscillator = null;
+
+    // Test 1: Basic Playback
+    document.getElementById('test1-start').addEventListener('click', async () => {
+      try {
+        log.info('Initializing audio engine...');
+        audioContext = await audioEngine.initialize();
+        
+        const latency = audioEngine.getLatency();
+        document.getElementById('latency-display').textContent = `${latency.toFixed(1)}ms`;
+        log.success(`Audio initialized (${latency.toFixed(1)}ms latency)`);
+
+        if (!scheduler) {
+          scheduler = new AudioScheduler(audioContext);
+          
+          // Create a dummy 16-step sequence
+          const sequence = Array.from({ length: 16 }, (_, i) => ({ id: i }));
+          scheduler.setSequence(sequence);
+          
+          // Handle step triggers
+          scheduler.onStep((step, time) => {
+            // Play a beep (simple oscillator)
+            const osc = audioContext.createOscillator();
+            const gain = audioContext.createGain();
+            
+            // Higher pitch on beats 0, 4, 8, 12
+            osc.frequency.value = (step.id % 4 === 0) ? 880 : 440;
+            osc.connect(gain);
+            gain.connect(audioContext.destination);
+            
+            gain.gain.setValueAtTime(0.1, time);
+            gain.gain.exponentialRampToValueAtTime(0.01, time + 0.1);
+            
+            osc.start(time);
+            osc.stop(time + 0.1);
+          });
+          
+          // Handle UI updates
+          scheduler.onUIUpdate((stepNumber) => {
+            // Clear all steps
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            // Highlight current step
+            document.getElementById(`step-${stepNumber}`).classList.add('active');
+            document.getElementById('step-display').textContent = stepNumber;
+          });
+        }
+
+        scheduler.start();
+        log.success('Playback started');
+        document.getElementById('test1-start').classList.add('playing');
+      } catch (error) {
+        log.error(`Failed to start: ${error.message}`);
+      }
+    });
+
+    document.getElementById('test1-stop').addEventListener('click', () => {
+      if (scheduler) {
+        scheduler.stop();
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        log.info('Playback stopped');
+        document.getElementById('test1-start').classList.remove('playing');
+      }
+    });
+
+    // Tempo slider
+    document.getElementById('tempo-slider').addEventListener('input', (e) => {
+      const tempo = e.target.value;
+      document.getElementById('tempo-value').textContent = tempo;
+      document.getElementById('tempo-display').textContent = tempo;
+      
+      if (scheduler) {
+        scheduler.setTempo(parseInt(tempo));
+        log.info(`Tempo changed to ${tempo} BPM`);
+      }
+    });
+
+    // Test 2: Timing accuracy
+    let timingTest = null;
+    document.getElementById('test2-start').addEventListener('click', async () => {
+      if (!audioContext) {
+        audioContext = await audioEngine.initialize();
+      }
+
+      log.info('Starting 30-second timing accuracy test...');
+      
+      const testScheduler = new AudioScheduler(audioContext);
+      const sequence = Array.from({ length: 16 }, (_, i) => ({ id: i }));
+      testScheduler.setSequence(sequence);
+      
+      let stepCount = 0;
+      let totalDrift = 0;
+      const startTime = audioContext.currentTime;
+      
+      testScheduler.onStep((step, time) => {
+        stepCount++;
+        const elapsed = time - startTime;
+        const expectedTime = (stepCount * 60 / 120 / 4); // 120 BPM, 16th notes
+        const drift = (elapsed - expectedTime) * 1000;
+        totalDrift += Math.abs(drift);
+        
+        const avgDrift = totalDrift / stepCount;
+        document.getElementById('drift-display').textContent = avgDrift.toFixed(2);
+        
+        if (stepCount % 64 === 0) {
+          log.info(`Step ${stepCount}: Avg drift = ${avgDrift.toFixed(2)}ms`);
+        }
+      });
+      
+      testScheduler.start();
+      timingTest = testScheduler;
+      
+      // Stop after 30 seconds
+      setTimeout(() => {
+        testScheduler.stop();
+        const avgDrift = totalDrift / stepCount;
+        log.success(`Test complete! Average drift: ${avgDrift.toFixed(2)}ms over ${stepCount} steps`);
+        
+        if (avgDrift < 2) {
+          log.success('✅ EXCELLENT - Sample-accurate timing!');
+        } else if (avgDrift < 10) {
+          log.warning('⚠️  GOOD - Acceptable timing');
+        } else {
+          log.error('❌ POOR - Significant drift detected');
+        }
+      }, 30000);
+    });
+
+    document.getElementById('test2-stop').addEventListener('click', () => {
+      if (timingTest) {
+        timingTest.stop();
+        log.info('Timing test stopped');
+      }
+    });
+
+    // Initial log
+    log.info('Test suite ready. Click "Start Test" to begin.');
+  </script>
+</body>
+</html>

@@ -1,12 +1,14 @@
 {
   "name": "drum-machine-v0.1",
-  "version": "1.0.0",
-  "description": "",
+  "version": "2.0.0",
+  "description": "Web-based drum sequencer with sample-accurate timing",
   "main": "drum-machine.js",
+  "type": "module",
   "scripts": {
     "start": "./node_modules/http-server/bin/http-server ./dist  --cors='Access-Control-Allow-Origin: *'",
     "start:dev": "./node_modules/parcel/bin/cli.js ./src/index.html",
-    "prod:build": "./node_modules/parcel/bin/cli.js build ./src/index.html"
+    "prod:build": "./node_modules/parcel/bin/cli.js build ./src/index.html",
+    "test:timing": "echo 'Open browser console and run timing test from PHASE1_MIGRATION.md'"
   },
   "author": "",
   "license": "ISC",
