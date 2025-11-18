@@ -7,9 +7,11 @@
 
 import { SequenceModel } from '../models/SequenceModel.js';
 import { SequencerView, ControlsView, VolumeControlsView } from '../views/SequencerView.js';
+import { SampleControlsView } from '../views/SampleControlsView.js';
 import { AudioEngine } from '../libs/audio-engine.js';
 import { AudioScheduler } from '../libs/audio-scheduler.js';
 import { DrumPlayer } from '../libs/audio-player.js';
+import { SampleLoader } from '../utils/SampleLoader.js';
 
 export class SequencerController {
   constructor(config) {
@@ -19,6 +21,7 @@ export class SequencerController {
     this.controlsElements = config.controlsElements;
     this.volumeSliders = config.volumeSliders;
     this.volumeOutputContainer = config.volumeOutputContainer;
+    this.sampleControlsContainer = config.sampleControlsContainer; // Phase 4
 
     // Create Model
     this.model = config.model || new SequenceModel();
@@ -27,6 +30,15 @@ export class SequencerController {
     this.sequencerView = new SequencerView(this.sequencerContainer);
     this.controlsView = new ControlsView(this.controlsElements);
     this.volumeView = new VolumeControlsView(this.volumeSliders, this.volumeOutputContainer);
+    
+    // Phase 4: Sample controls view
+    if (this.sampleControlsContainer) {
+      this.sampleControlsView = new SampleControlsView(
+        this.sampleControlsContainer,
+        this.model.getDrumNames()
+      );
+      this.sampleLoader = null; // Initialized when audio engine starts
+    }
 
     // Audio system
     this.audioEngine = null;
@@ -55,6 +67,14 @@ export class SequencerController {
 
     // Volume view events
     this.volumeView.on('volumeChange', this.handleVolumeChange.bind(this));
+
+    // Phase 4: Sample control events
+    if (this.sampleControlsView) {
+      this.sampleControlsView.on('sampleLoad', this.handleSampleLoad.bind(this));
+      this.sampleControlsView.on('pitchChange', this.handlePitchChange.bind(this));
+      this.sampleControlsView.on('detuneChange', this.handleDetuneChange.bind(this));
+      this.sampleControlsView.on('pitchReset', this.handlePitchReset.bind(this));
+    }
   }
 
   /**
@@ -232,6 +252,22 @@ export class SequencerController {
       const volume = this.model.getDrumVolume(drumName);
       this.volumeView.setVolume(drumName, volume);
     });
+
+    // Phase 4: Render sample controls and sync pitch data
+    if (this.sampleControlsView) {
+      this.sampleControlsView.render();
+      
+      this.model.getDrumNames().forEach(drumName => {
+        const pitch = this.model.getDrumPitch(drumName);
+        const detune = this.model.getDrumDetune(drumName);
+        this.sampleControlsView.setPitch(drumName, pitch);
+        this.sampleControlsView.setDetune(drumName, detune);
+        
+        // Sync audio player
+        this.audioPlayer.setDrumPitch(drumName, pitch);
+        this.audioPlayer.setDrumDetune(drumName, detune);
+      });
+    }
   }
 
   /**
@@ -279,6 +315,69 @@ export class SequencerController {
   }
 
   /**
+   * Handle custom sample load (Phase 4)
+   */
+  async handleSampleLoad({ drumName, file }) {
+    try {
+      // Initialize sample loader if needed
+      if (!this.sampleLoader) {
+        if (!this.audioEngine) {
+          this.audioEngine = AudioEngine;
+          await this.audioEngine.initialize();
+        }
+        this.sampleLoader = new SampleLoader(this.audioEngine.getContext());
+      }
+
+      // Load the file
+      const sampleData = await this.sampleLoader.loadFromFile(file);
+      
+      // Load into audio player
+      await this.audioPlayer.loadCustomSample(drumName, sampleData.buffer);
+      
+      // Update UI
+      this.sampleControlsView.showLoadedSample(drumName, file.name);
+      
+      // Play preview
+      this.audioPlayer.playDrum(drumName);
+      
+      console.log(`Loaded ${file.name} for ${drumName}`, {
+        duration: `${sampleData.duration.toFixed(2)}s`,
+        size: this.sampleLoader.formatFileSize(sampleData.size),
+        sampleRate: `${sampleData.sampleRate}Hz`,
+        channels: sampleData.channels
+      });
+    } catch (error) {
+      console.error('Failed to load sample:', error);
+      this.sampleControlsView.showError(drumName, error.message);
+    }
+  }
+
+  /**
+   * Handle pitch change (Phase 4)
+   */
+  handlePitchChange({ drumName, semitones }) {
+    this.model.setDrumPitch(drumName, semitones);
+    this.audioPlayer.setDrumPitch(drumName, semitones);
+  }
+
+  /**
+   * Handle detune change (Phase 4)
+   */
+  handleDetuneChange({ drumName, cents }) {
+    this.model.setDrumDetune(drumName, cents);
+    this.audioPlayer.setDrumDetune(drumName, cents);
+  }
+
+  /**
+   * Handle pitch reset (Phase 4)
+   */
+  handlePitchReset({ drumName }) {
+    this.model.setDrumPitch(drumName, 0);
+    this.model.setDrumDetune(drumName, 0);
+    this.audioPlayer.resetDrumPitch(drumName);
+  }
+
+  /**
    * Cleanup
    */
   destroy() {
@@ -299,5 +398,9 @@ export class SequencerController {
     }
 
     this.sequencerView.clear();
+    
+    if (this.sampleControlsView) {
+      this.sampleControlsView.clear();
+    }
   }
 }

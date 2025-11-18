@@ -86,6 +86,56 @@ export class SequenceModel {
   }
 
   /**
+   * Set pitch for a drum across all steps (Phase 4)
+   * @param {string} drumName - Drum name
+   * @param {number} semitones - Pitch shift in semitones (-12 to +12)
+   */
+  setDrumPitch(drumName, semitones) {
+    const clampedPitch = Math.max(-12, Math.min(12, semitones));
+    
+    this.steps.forEach(step => {
+      if (step.drums[drumName]) {
+        step.drums[drumName].pitch = clampedPitch;
+      }
+    });
+  }
+
+  /**
+   * Get pitch for a specific drum (Phase 4)
+   * @param {string} drumName - Drum name
+   * @returns {number} Pitch in semitones
+   */
+  getDrumPitch(drumName) {
+    const firstStep = this.steps[0];
+    return firstStep?.drums[drumName]?.pitch || 0;
+  }
+
+  /**
+   * Set detune for a drum across all steps (Phase 4)
+   * @param {string} drumName - Drum name
+   * @param {number} cents - Fine tune in cents (-100 to +100)
+   */
+  setDrumDetune(drumName, cents) {
+    const clampedDetune = Math.max(-100, Math.min(100, cents));
+    
+    this.steps.forEach(step => {
+      if (step.drums[drumName]) {
+        step.drums[drumName].detune = clampedDetune;
+      }
+    });
+  }
+
+  /**
+   * Get detune for a specific drum (Phase 4)
+   * @param {string} drumName - Drum name
+   * @returns {number} Detune in cents
+   */
+  getDrumDetune(drumName) {
+    const firstStep = this.steps[0];
+    return firstStep?.drums[drumName]?.detune || 0;
+  }
+
+  /**
    * Set tempo
    * @param {number} bpm - Beats per minute
    */
@@ -189,6 +239,9 @@ export class SequenceModel {
       Object.entries(stepData.drums).forEach(([drumName, drumData]) => {
         sequence.steps[i].drums[drumName].on = drumData.on;
         sequence.steps[i].drums[drumName].volume = drumData.volume;
+        // Phase 4: Load pitch data if present
+        sequence.steps[i].drums[drumName].pitch = drumData.pitch || 0;
+        sequence.steps[i].drums[drumName].detune = drumData.detune || 0;
       });
     });
 
@@ -231,5 +284,7 @@ class DrumState {
     this.name = name;
     this.on = false;
     this.volume = 0.5;
+    this.pitch = 0;      // Phase 4: Semitones (-12 to +12)
+    this.detune = 0;     // Phase 4: Cents (-100 to +100)
   }
 }

@@ -10,6 +10,8 @@ export class AudioPlayer {
     this.context = audioContext;
     this.buffers = new Map(); // AudioBuffer storage
     this.volumes = new Map(); // Volume per sound
+    this.pitchOffsets = new Map(); // Semitones per sound (Phase 4)
+    this.detuneOffsets = new Map(); // Cents per sound (Phase 4)
     this.activeSources = []; // Track playing sources for cleanup
   }
 
@@ -52,6 +54,10 @@ export class AudioPlayer {
     // Create source node
     const source = this.context.createBufferSource();
     source.buffer = buffer;
+
+    // Apply pitch control (Phase 4)
+    const totalDetune = this.getTotalDetune(name);
+    source.detune.value = totalDetune;
 
     // Create gain node for volume control
     const gainNode = this.context.createGain();
@@ -213,6 +219,58 @@ export class AudioPlayer {
   getActiveCount() {
     return this.activeSources.length;
   }
+
+  /**
+   * Set pitch offset in semitones (Phase 4)
+   * @param {string} name - Sound identifier
+   * @param {number} semitones - Pitch shift (-12 to +12)
+   */
+  setPitch(name, semitones) {
+    const clamped = Math.max(-12, Math.min(12, semitones));
+    this.pitchOffsets.set(name, clamped);
+  }
+
+  /**
+   * Set fine tuning in cents (Phase 4)
+   * @param {string} name - Sound identifier
+   * @param {number} cents - Fine tune (-100 to +100)
+   */
+  setDetune(name, cents) {
+    const clamped = Math.max(-100, Math.min(100, cents));
+    this.detuneOffsets.set(name, clamped);
+  }
+
+  /**
+   * Get total detune in cents (Phase 4)
+   * @param {string} name - Sound identifier
+   * @returns {number} Total cents offset
+   */
+  getTotalDetune(name) {
+    const semitones = this.pitchOffsets.get(name) || 0;
+    const cents = this.detuneOffsets.get(name) || 0;
+    return (semitones * 100) + cents;
+  }
+
+  /**
+   * Get pitch settings (Phase 4)
+   * @param {string} name - Sound identifier
+   * @returns {Object} {semitones, cents}
+   */
+  getPitchSettings(name) {
+    return {
+      semitones: this.pitchOffsets.get(name) || 0,
+      cents: this.detuneOffsets.get(name) || 0
+    };
+  }
+
+  /**
+   * Reset pitch to default (Phase 4)
+   * @param {string} name - Sound identifier
+   */
+  resetPitch(name) {
+    this.pitchOffsets.delete(name);
+    this.detuneOffsets.delete(name);
+  }
 }
 
 /**
@@ -297,5 +355,55 @@ export class DrumPlayer extends AudioPlayer {
   hasDrum(drumName) {
     const bufferName = this.drumMap.get(drumName) || drumName;
     return this.has(bufferName);
+  }
+
+  /**
+   * Load custom sample for a drum (Phase 4)
+   * @param {string} drumName - Drum name from sequencer
+   * @param {AudioBuffer} audioBuffer - Audio buffer to load
+   * @param {number} volume - Initial volume (0.0 - 1.0)
+   */
+  loadCustomSample(drumName, audioBuffer, volume = 1.0) {
+    this.loadBuffer(drumName, audioBuffer, volume);
+    this.mapDrum(drumName, drumName);
+  }
+
+  /**
+   * Set drum pitch in semitones (Phase 4)
+   * @param {string} drumName - Drum name from sequencer
+   * @param {number} semitones - Pitch shift (-12 to +12)
+   */
+  setDrumPitch(drumName, semitones) {
+    const bufferName = this.drumMap.get(drumName) || drumName;
+    this.setPitch(bufferName, semitones);
+  }
+
+  /**
+   * Set drum fine tuning in cents (Phase 4)
+   * @param {string} drumName - Drum name from sequencer
+   * @param {number} cents - Fine tune (-100 to +100)
+   */
+  setDrumDetune(drumName, cents) {
+    const bufferName = this.drumMap.get(drumName) || drumName;
+    this.setDetune(bufferName, cents);
+  }
+
+  /**
+   * Get drum pitch settings (Phase 4)
+   * @param {string} drumName - Drum name from sequencer
+   * @returns {Object} {semitones, cents}
+   */
+  getDrumPitch(drumName) {
+    const bufferName = this.drumMap.get(drumName) || drumName;
+    return this.getPitchSettings(bufferName);
+  }
+
+  /**
+   * Reset drum pitch to default (Phase 4)
+   * @param {string} drumName - Drum name from sequencer
+   */
+  resetDrumPitch(drumName) {
+    const bufferName = this.drumMap.get(drumName) || drumName;
+    this.resetPitch(bufferName);
   }
 }
