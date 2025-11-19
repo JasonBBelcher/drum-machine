@@ -131,7 +131,33 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (drumEffectsContainer) {
       const { DrumEffectsView } = await import('./views/DrumEffectsView.js');
       const drumNames = ['kick', 'clap', 'snare', 'hat', 'shaker', 'bongo1', 'congaz', 'harmony'];
-      new DrumEffectsView(drumEffectsContainer, drumPlayer, drumNames);
+      const drumEffectsView = new DrumEffectsView(drumEffectsContainer, drumPlayer, drumNames);
+      
+      // Wire up event handlers
+      drumEffectsView.on('drumFilterChange', ({ drumName, type, frequency, q }) => {
+        drumPlayer.enableDrumFilter(drumName, type, frequency, q);
+      });
+      
+      drumEffectsView.on('drumFilterDisable', ({ drumName }) => {
+        drumPlayer.disableDrumFilter(drumName);
+      });
+      
+      drumEffectsView.on('drumDelayChange', ({ drumName, time, feedback, wet }) => {
+        drumPlayer.enableDrumDelay(drumName, time, feedback, wet);
+      });
+      
+      drumEffectsView.on('drumDelayDisable', ({ drumName }) => {
+        drumPlayer.disableDrumDelay(drumName);
+      });
+      
+      drumEffectsView.on('drumReverbChange', ({ drumName, duration, wet }) => {
+        drumPlayer.enableDrumReverb(drumName, duration, wet);
+      });
+      
+      drumEffectsView.on('drumReverbDisable', ({ drumName }) => {
+        drumPlayer.disableDrumReverb(drumName);
+      });
+      
       console.log('✅ Per-track effects panel initialized');
     }
 

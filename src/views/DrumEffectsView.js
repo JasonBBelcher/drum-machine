@@ -1,18 +1,44 @@
 /**
  * DrumEffectsView - UI for per-drum effects controls
  * 
- * Provides collapsible effects panels for each drum with filter, delay, and reverb controls
+ * Provides collapsible effects panels for each drum with filter, delay, and reverb controls.
+ * Uses event-driven architecture - emits events for controller to handle.
  */
 
 export class DrumEffectsView {
   constructor(container, drumPlayer, drumNames) {
     this.container = container;
-    this.drumPlayer = drumPlayer;
+    this.drumPlayer = drumPlayer; // Keep for reading state only
     this.drumNames = drumNames;
     this.expandedDrums = new Set(); // Track which drums have expanded effects panels
+    this.eventListeners = new Map(); // Store event handlers
     
     this.render();
     this.attachEventListeners();
+  }
+
+  /**
+   * Register event listener for drum effect changes
+   * @param {string} eventName - Event name (e.g., 'drumFilterChange')
+   * @param {function} callback - Handler function
+   */
+  on(eventName, callback) {
+    if (!this.eventListeners.has(eventName)) {
+      this.eventListeners.set(eventName, []);
+    }
+    this.eventListeners.get(eventName).push(callback);
+  }
+
+  /**
+   * Emit event to registered listeners
+   * @param {string} eventName - Event name
+   * @param {object} data - Event data
+   */
+  emit(eventName, data) {
+    const listeners = this.eventListeners.get(eventName);
+    if (listeners) {
+      listeners.forEach(callback => callback(data));
+    }
   }
 
   render() {
@@ -325,7 +351,7 @@ export class DrumEffectsView {
       this.handleFilterChange(drumName);
     } else {
       controls.classList.add('disabled');
-      this.drumPlayer.disableDrumFilter(drumName);
+      this.emit('drumFilterDisable', { drumName });
     }
     
     this.updateFxIndicator(drumName);
@@ -338,7 +364,7 @@ export class DrumEffectsView {
     
     const enabled = this.container.querySelector(`.drum-filter-enabled[data-drum="${drumName}"]`).checked;
     if (enabled) {
-      this.drumPlayer.enableDrumFilter(drumName, type, frequency, q);
+      this.emit('drumFilterChange', { drumName, type, frequency, q });
     }
   }
 
@@ -351,7 +377,7 @@ export class DrumEffectsView {
       this.handleDelayChange(drumName);
     } else {
       controls.classList.add('disabled');
-      this.drumPlayer.disableDrumDelay(drumName);
+      this.emit('drumDelayDisable', { drumName });
     }
     
     this.updateFxIndicator(drumName);
@@ -364,7 +390,7 @@ export class DrumEffectsView {
     
     const enabled = this.container.querySelector(`.drum-delay-enabled[data-drum="${drumName}"]`).checked;
     if (enabled) {
-      this.drumPlayer.enableDrumDelay(drumName, time, feedback, wet);
+      this.emit('drumDelayChange', { drumName, time, feedback, wet });
     }
   }
 
@@ -377,7 +403,7 @@ export class DrumEffectsView {
       this.handleReverbChange(drumName);
     } else {
       controls.classList.add('disabled');
-      this.drumPlayer.disableDrumReverb(drumName);
+      this.emit('drumReverbDisable', { drumName });
     }
     
     this.updateFxIndicator(drumName);
@@ -389,7 +415,7 @@ export class DrumEffectsView {
     
     const enabled = this.container.querySelector(`.drum-reverb-enabled[data-drum="${drumName}"]`).checked;
     if (enabled) {
-      this.drumPlayer.enableDrumReverb(drumName, duration, wet);
+      this.emit('drumReverbChange', { drumName, duration, wet });
     }
   }
 
