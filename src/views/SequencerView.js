@@ -194,6 +194,7 @@ export class ControlsView {
     this.tempoOutput = elements.tempoOutput;
     this.lengthSlider = elements.lengthSlider;
     this.lengthOutput = elements.lengthOutput;
+    this.sequenceSelect = elements.sequenceSelect;
     
     this.setupEventListeners();
   }
@@ -221,6 +222,15 @@ export class ControlsView {
       this.updateLengthDisplay(e.target.value);
       this.emit('lengthChange', { length: parseInt(e.target.value) });
     });
+
+    if (this.sequenceSelect) {
+      this.sequenceSelect.addEventListener('change', (e) => {
+        const patternName = e.target.value;
+        if (patternName !== 'keep') {
+          this.emit('loadPattern', { name: patternName });
+        }
+      });
+    }
   }
 
   updateTempoDisplay(tempo) {
@@ -249,6 +259,21 @@ export class ControlsView {
   setLength(length) {
     this.lengthSlider.value = length;
     this.updateLengthDisplay(length);
+  }
+
+  updateSequenceSelect(patterns) {
+    if (!this.sequenceSelect) return;
+    
+    // Clear existing options except the first one
+    this.sequenceSelect.innerHTML = '<option value="keep">--pick a drum pattern</option>';
+    
+    // Add pattern options
+    patterns.forEach(name => {
+      const option = document.createElement('option');
+      option.value = name;
+      option.textContent = name;
+      this.sequenceSelect.appendChild(option);
+    });
   }
 
   // Event emitter pattern
