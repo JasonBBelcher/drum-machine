@@ -358,6 +358,22 @@ export class EffectsChain {
     
     this.activeChain = [];
   }
+
+  /**
+   * Get the input node for connecting sources
+   * @returns {GainNode}
+   */
+  getInput() {
+    return this.input;
+  }
+
+  /**
+   * Get the output node for connecting to destination
+   * @returns {GainNode}
+   */
+  getOutput() {
+    return this.output;
+  }
 }
 
 /**
