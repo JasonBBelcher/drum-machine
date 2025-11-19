@@ -68,10 +68,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       console.log('⚠️ Continuing without effects...');
     }
 
+    // Import EffectsChain for per-drum effects
+    const { EffectsChain } = await import('./libs/audio-effects.js');
+
     // Initialize DrumPlayer (route through master bus if available)
-    const drumPlayer = new DrumPlayer(audioContext, masterBusInput);
+    const drumPlayer = new DrumPlayer(audioContext, masterBusInput, EffectsChain);
     drumPlayer.loadBuffers(buffers, 0.5);
-    console.log('✅ DrumPlayer initialized');
+    console.log('✅ DrumPlayer initialized (with per-track effects support)');
 
     // Get DOM elements for controller configuration
     const sequencerContainer = document.querySelector('.dm');
