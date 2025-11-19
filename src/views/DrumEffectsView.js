@@ -12,6 +12,7 @@ export class DrumEffectsView {
     this.drumNames = drumNames;
     this.expandedDrums = new Set(); // Track which drums have expanded effects panels
     this.eventListeners = new Map(); // Store event handlers
+    this.listenersAttached = false; // Prevent duplicate event listener attachment
     
     this.render();
     this.attachEventListeners();
@@ -58,10 +59,12 @@ export class DrumEffectsView {
    * Refresh the view (called when pattern is loaded)
    */
   refresh() {
+    console.log('🔄 Refreshing DrumEffectsView UI');
     // Re-render all panels to reflect loaded effect states
     const list = this.container.querySelector('.drum-effects-list');
     if (list) {
       list.innerHTML = this.drumNames.map(drumName => this.renderDrumPanel(drumName)).join('');
+      // Event listeners use delegation on container, so they still work after re-render
     }
   }
 
@@ -238,6 +241,10 @@ export class DrumEffectsView {
   }
 
   attachEventListeners() {
+    // Prevent duplicate attachment
+    if (this.listenersAttached) return;
+    this.listenersAttached = true;
+    
     // Expand/collapse toggle
     this.container.addEventListener('click', (e) => {
       if (e.target.classList.contains('drum-fx-toggle')) {
