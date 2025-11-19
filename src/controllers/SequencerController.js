@@ -173,6 +173,7 @@ export class SequencerController {
     const storage = new StorageManager();
     
     const loadedModel = storage.load(name);
+    
     if (loadedModel) {
       const wasPlaying = this.isPlaying;
       if (wasPlaying) {
@@ -218,15 +219,8 @@ export class SequencerController {
     // Capture drum effects before saving
     this.captureDrumEffects();
     
-    // Debug: Check what's in the model before save
-    console.log('💾 Saving pattern with drumEffects:', JSON.stringify(this.model.drumEffects, null, 2));
-    
     // Save to storage
     storage.save(name, this.model);
-    
-    // Debug: Verify it was saved correctly
-    const loaded = storage.load(name);
-    console.log('✅ Loaded back to verify:', JSON.stringify(loaded.drumEffects, null, 2));
     
     // Update dropdown
     const patternList = storage.list();
@@ -430,7 +424,6 @@ export class SequencerController {
    */
   captureDrumEffects() {
     const drumsWithEffects = this.audioPlayer.getDrumsWithEffects();
-    console.log('🔍 Capturing drum effects, drums with effects:', drumsWithEffects);
     
     // Clear existing effects in model
     this.model.drumEffects = {};
@@ -438,21 +431,16 @@ export class SequencerController {
     // Save current effect states
     drumsWithEffects.forEach(drumName => {
       const effectStates = this.audioPlayer.getDrumEffectStates(drumName);
-      console.log(`  - ${drumName} effect states:`, effectStates);
       if (effectStates) {
         this.model.setDrumEffects(drumName, effectStates);
       }
     });
-    
-    console.log('✅ Model drumEffects after capture:', this.model.drumEffects);
   }
 
   /**
    * Restore drum effects from model to drumPlayer
    */
   restoreDrumEffects() {
-    console.log('🔄 Restoring drum effects from model:', this.model.drumEffects);
-    
     // Clear all existing drum effects first
     const existingDrums = this.audioPlayer.getDrumsWithEffects();
     existingDrums.forEach(drumName => {
@@ -461,9 +449,8 @@ export class SequencerController {
     
     // Restore effects from model
     Object.entries(this.model.drumEffects).forEach(([drumName, effectStates]) => {
-      console.log(`  - Restoring ${drumName}:`, effectStates);
-      // Restore filter
-      if (effectStates.filter && effectStates.filter.enabled) {
+      // Restore filter (state is non-null when enabled)
+      if (effectStates.filter) {
         this.audioPlayer.enableDrumFilter(
           drumName,
           effectStates.filter.type,
@@ -472,8 +459,8 @@ export class SequencerController {
         );
       }
       
-      // Restore delay
-      if (effectStates.delay && effectStates.delay.enabled) {
+      // Restore delay (state is non-null when enabled)
+      if (effectStates.delay) {
         this.audioPlayer.enableDrumDelay(
           drumName,
           effectStates.delay.time,
@@ -482,8 +469,8 @@ export class SequencerController {
         );
       }
       
-      // Restore reverb
-      if (effectStates.reverb && effectStates.reverb.enabled) {
+      // Restore reverb (state is non-null when enabled)
+      if (effectStates.reverb) {
         this.audioPlayer.enableDrumReverb(
           drumName,
           effectStates.reverb.duration,

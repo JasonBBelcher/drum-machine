@@ -59,7 +59,6 @@ export class DrumEffectsView {
    * Refresh the view (called when pattern is loaded)
    */
   refresh() {
-    console.log('🔄 Refreshing DrumEffectsView UI');
     // Re-render all panels to reflect loaded effect states
     const list = this.container.querySelector('.drum-effects-list');
     if (list) {
