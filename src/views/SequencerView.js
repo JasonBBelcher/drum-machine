@@ -190,6 +190,9 @@ export class ControlsView {
   constructor(elements) {
     this.playButton = elements.playButton;
     this.resetButton = elements.resetButton;
+    this.saveButton = elements.saveButton;
+    this.deleteButton = elements.deleteButton;
+    this.sequenceInput = elements.sequenceInput;
     this.tempoSlider = elements.tempoSlider;
     this.tempoOutput = elements.tempoOutput;
     this.lengthSlider = elements.lengthSlider;
@@ -213,6 +216,25 @@ export class ControlsView {
     this.resetButton.addEventListener('mouseup', () => {
       this.resetButton.classList.remove('reset-btn-flash-yellow');
       this.emit('reset');
+    });
+
+    this.saveButton.addEventListener('mousedown', () => {
+      this.saveButton.classList.add('save-btn-flash-yellow');
+    });
+
+    this.saveButton.addEventListener('mouseup', () => {
+      this.saveButton.classList.remove('save-btn-flash-yellow');
+      const name = this.sequenceInput.value.trim();
+      if (name !== '') {
+        this.emit('save', { name });
+      }
+    });
+
+    this.deleteButton.addEventListener('click', () => {
+      const name = this.sequenceInput.value.trim();
+      if (name !== '') {
+        this.emit('delete', { name });
+      }
     });
 
     this.tempoSlider.addEventListener('input', (e) => {

@@ -66,6 +66,8 @@ export class SequencerController {
     this.controlsView.on('lengthChange', this.handleLengthChange.bind(this));
     this.controlsView.on('swingChange', this.handleSwingChange.bind(this));
     this.controlsView.on('loadPattern', this.handleLoadPattern.bind(this));
+    this.controlsView.on('save', this.handleSave.bind(this));
+    this.controlsView.on('delete', this.handleDelete.bind(this));
 
     // Volume view events
     this.volumeView.on('volumeChange', this.handleVolumeChange.bind(this));
@@ -180,6 +182,14 @@ export class SequencerController {
       this.model = loadedModel;
       this.render();
       
+      // Restore per-drum effects from saved pattern
+      this.restoreDrumEffects();
+      
+      // Refresh drum effects UI to show loaded effects
+      if (this.drumEffectsView) {
+        this.drumEffectsView.refresh();
+      }
+      
       if (wasPlaying) {
         await this.start();
       }
@@ -187,6 +197,69 @@ export class SequencerController {
       console.log(`✓ Loaded pattern: ${name}`);
     } else {
       console.error(`Failed to load pattern: ${name}`);
+    }
+  }
+
+  /**
+   * Handle save pattern
+   */
+  async handleSave({ name }) {
+    const { StorageManager } = await import('../utils/StorageManager.js');
+    const storage = new StorageManager();
+    
+    const wasPlaying = this.isPlaying;
+    if (wasPlaying) {
+      this.stop();
+    }
+    
+    // Set pattern name
+    this.model.name = name;
+    
+    // Capture drum effects before saving
+    this.captureDrumEffects();
+    
+    // Save to storage
+    storage.save(name, this.model);
+    
+    // Update dropdown
+    const patternList = storage.list();
+    this.controlsView.updateSequenceSelect(patternList.map(p => p.name));
+    
+    console.log(`✓ Saved pattern: ${name}`);
+    
+    if (wasPlaying) {
+      await this.start();
+    }
+  }
+
+  /**
+   * Handle delete pattern
+   */
+  async handleDelete({ name }) {
+    const { StorageManager } = await import('../utils/StorageManager.js');
+    const storage = new StorageManager();
+    
+    const wasPlaying = this.isPlaying;
+    if (wasPlaying) {
+      this.stop();
+    }
+    
+    // Delete from storage
+    storage.delete(name);
+    
+    // Update dropdown
+    const patternList = storage.list();
+    this.controlsView.updateSequenceSelect(patternList.map(p => p.name));
+    
+    // Clear input
+    if (this.controlsView.sequenceInput) {
+      this.controlsView.sequenceInput.value = '';
+    }
+    
+    console.log(`✓ Deleted pattern: ${name}`);
+    
+    if (wasPlaying) {
+      await this.start();
     }
   }
 
