@@ -255,7 +255,9 @@ export class SequenceModel {
         drums: Object.entries(step.drums).reduce((acc, [name, drum]) => {
           acc[name] = {
             on: drum.on,
-            volume: drum.volume
+            volume: drum.volume,
+            pitch: drum.pitch || 0,      // Phase 4: Save pitch
+            detune: drum.detune || 0     // Phase 4: Save detune
           };
           return acc;
         }, {})
