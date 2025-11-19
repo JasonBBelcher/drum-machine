@@ -8,8 +8,8 @@
     "dev": "./node_modules/parcel/bin/cli.js ./src/index.html",
     "start": "./node_modules/http-server/bin/http-server ./dist  --cors='Access-Control-Allow-Origin: *'",
     "start:dev": "./node_modules/parcel/bin/cli.js ./src/index.html",
-    "build": "./node_modules/parcel/bin/cli.js build ./src/index.html",
-    "prod:build": "./node_modules/parcel/bin/cli.js build ./src/index.html",
+    "build": "npx parcel build src/index.html --public-url /js/drum-machine/",
+    "prod:build": "npx parcel build src/index.html --public-url /js/drum-machine/",
     "test:timing": "echo 'Open browser console and run timing test from PHASE1_MIGRATION.md'"
   },
   "author": "",

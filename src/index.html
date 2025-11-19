@@ -7,12 +7,36 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link href="https://fonts.googleapis.com/css?family=Orbitron&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://xalpheric.neocities.org/css/theme.css">
   <link rel="stylesheet" href="assets/css/flexboxgrid.min.css">
   <link rel="stylesheet" href="assets/css/styles.css" />
-  <title>Drum Sequencer</title>
+  <title>Drum Sequencer - Xalpheria</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 </head>
 
 <body class="container-fluid animated-body">
+  <header class="site-header">
+    <div class="header-content">
+      <!-- Hamburger Menu Button (Mobile Only) -->
+      <button class="hamburger-menu" aria-label="Toggle navigation menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      
+      <nav class="top-nav">
+        <a href="https://xalpheric.neocities.org/index.html" class="nav-link">Home</a>
+        <a href="https://xalpheric.neocities.org/musings.html" class="nav-link">Thoughts & Musings</a>
+        <a href="https://xalpheric.neocities.org/gallery.html" class="nav-link">Gallery</a>
+        <a href="https://xalpheric.neocities.org/projects.html" class="nav-link">Project Files</a>
+        <a href="https://xalpheric.neocities.org/drum-machine.html" class="nav-link active">Drum Machine</a>
+        <a href="https://xalpheric.neocities.org/collective.html" class="nav-link">Collective</a>
+        <a href="https://xalpheric.neocities.org/links.html" class="nav-link">Essential Links</a>
+      </nav>
+    </div>
+  </header>
+  
+  <main style="padding: 2rem 1rem;">
   <div class="row mb-2 mt-5">
     <div class="col-lg-3 col-md-2 col-md-offset-2 col-sm-12 col-xs-12">
       <h1>
@@ -92,6 +116,15 @@
     </div>
   </div>
 
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 Xalpheric. Licensed under Creative Commons BY-SA 4.0</p>
+    <p><a href="https://github.com/JasonBBelcher" target="_blank" rel="noopener">GitHub</a> | Built with Web Audio API</p>
+  </footer>
+
+  <!-- Main Scripts -->
+  <script src="https://xalpheric.neocities.org/js/main.js"></script>
 </body>
 
 <script type="module" src="app.js"></script>
