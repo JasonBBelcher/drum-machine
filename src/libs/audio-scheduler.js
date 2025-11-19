@@ -12,6 +12,7 @@ export class AudioScheduler {
     this.currentStep = 0;
     this.tempo = 120;
     this.sequenceLength = 16;
+    this.swing = 0;                   // Swing amount (0-75, typically)
     
     // Timing precision settings
     this.lookahead = 25.0;           // How frequently to call scheduling (ms)
@@ -38,6 +39,27 @@ export class AudioScheduler {
   }
 
   /**
+   * Calculate swing offset for a given step
+   * Swing delays even-numbered steps to create groove
+   * @param {number} stepNumber - Current step index
+   * @returns {number} Time offset in seconds
+   */
+  getSwingOffset(stepNumber) {
+    if (this.swing === 0) return 0;
+    
+    // Apply swing to even steps (0, 2, 4, 6, 8...)
+    // This creates the classic "swing" or "shuffle" feel
+    if (stepNumber % 2 === 0) {
+      const stepDuration = this.getStepDuration();
+      // Swing range: 0-75% converts to 0-0.33 delay multiplier
+      const swingAmount = (this.swing / 100) * 0.66;
+      return stepDuration * swingAmount;
+    }
+    
+    return 0;
+  }
+
+  /**
    * Advance to the next step in the sequence
    */
   nextNote() {
@@ -56,16 +78,21 @@ export class AudioScheduler {
    * @param {number} time - AudioContext time when this should play
    */
   scheduleNote(stepNumber, time) {
+    // Apply swing offset for groove
+    const swingOffset = this.getSwingOffset(stepNumber);
+    const adjustedTime = time + swingOffset;
+    
     // Trigger the step callback (plays the sounds)
-    if (this.onStepCallback && this.sequence[stepNumber]) {
-      this.onStepCallback(this.sequence[stepNumber], time);
+    // Check if sequence has this index (use !== undefined to handle step 0)
+    if (this.onStepCallback && this.sequence[stepNumber] !== undefined) {
+      this.onStepCallback(this.sequence[stepNumber], adjustedTime);
     }
     
     // Schedule UI update to sync with audio
     if (this.onUIUpdateCallback) {
       // Calculate delay until this step should be visually active
       const currentTime = this.audioContext.currentTime;
-      const delay = (time - currentTime) * 1000; // Convert to milliseconds
+      const delay = (adjustedTime - currentTime) * 1000; // Convert to milliseconds
       
       // Schedule UI update slightly before audio for better perceived sync
       const uiAdvance = 50; // ms
@@ -109,7 +136,8 @@ export class AudioScheduler {
     
     this.isPlaying = true;
     this.currentStep = 0;
-    this.nextNoteTime = this.audioContext.currentTime;
+    // Add small buffer to ensure first note isn't scheduled in the past
+    this.nextNoteTime = this.audioContext.currentTime + 0.005; // 5ms buffer
     this.scheduler(); // Start the scheduling loop
   }
 
@@ -132,6 +160,22 @@ export class AudioScheduler {
    */
   setTempo(bpm) {
     this.tempo = Math.max(40, Math.min(300, bpm)); // Clamp between 40-300 BPM
+  }
+
+  /**
+   * Set swing amount for groove
+   * @param {number} amount - Swing percentage (0-75, typically)
+   */
+  setSwing(amount) {
+    this.swing = Math.max(0, Math.min(75, amount)); // Clamp between 0-75%
+  }
+
+  /**
+   * Get current swing amount
+   * @returns {number} Swing percentage
+   */
+  getSwing() {
+    return this.swing;
   }
 
   /**

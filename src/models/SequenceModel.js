@@ -10,7 +10,9 @@ export class SequenceModel {
     this.length = length;
     this.steps = [];
     this.tempo = 120;
+    this.swing = 0;
     this.name = 'Untitled';
+    this.drumEffects = {}; // Per-drum effects settings
     this.initialize();
   }
 
@@ -144,6 +146,14 @@ export class SequenceModel {
   }
 
   /**
+   * Set swing amount
+   * @param {number} amount - Swing percentage (0-75)
+   */
+  setSwing(amount) {
+    this.swing = Math.max(0, Math.min(75, amount));
+  }
+
+  /**
    * Change sequence length
    * @param {number} newLength - New number of steps
    */
@@ -186,6 +196,32 @@ export class SequenceModel {
   }
 
   /**
+   * Set drum effect settings
+   * @param {string} drumName - Drum name
+   * @param {Object} effectStates - Effect states {filter, delay, reverb}
+   */
+  setDrumEffects(drumName, effectStates) {
+    this.drumEffects[drumName] = effectStates;
+  }
+
+  /**
+   * Get drum effect settings
+   * @param {string} drumName - Drum name
+   * @returns {Object|null} Effect states or null
+   */
+  getDrumEffects(drumName) {
+    return this.drumEffects[drumName] || null;
+  }
+
+  /**
+   * Clear drum effects
+   * @param {string} drumName - Drum name
+   */
+  clearDrumEffects(drumName) {
+    delete this.drumEffects[drumName];
+  }
+
+  /**
    * Validate step index
    * @param {number} index - Step index to check
    * @returns {boolean}
@@ -211,13 +247,17 @@ export class SequenceModel {
     return {
       name: this.name,
       tempo: this.tempo,
+      swing: this.swing,
       length: this.length,
+      drumEffects: this.drumEffects, // Save per-drum effects
       steps: this.steps.map(step => ({
         id: step.id,
         drums: Object.entries(step.drums).reduce((acc, [name, drum]) => {
           acc[name] = {
             on: drum.on,
-            volume: drum.volume
+            volume: drum.volume,
+            pitch: drum.pitch || 0,      // Phase 4: Save pitch
+            detune: drum.detune || 0     // Phase 4: Save detune
           };
           return acc;
         }, {})
@@ -234,6 +274,8 @@ export class SequenceModel {
     const sequence = new SequenceModel(data.length);
     sequence.name = data.name;
     sequence.tempo = data.tempo;
+    sequence.swing = data.swing || 0;
+    sequence.drumEffects = data.drumEffects || {}; // Load drum effects (backward compatible)
 
     data.steps.forEach((stepData, i) => {
       Object.entries(stepData.drums).forEach(([drumName, drumData]) => {

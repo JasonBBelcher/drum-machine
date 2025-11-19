@@ -6,13 +6,14 @@
  */
 
 export class AudioPlayer {
-  constructor(audioContext) {
+  constructor(audioContext, destination = null) {
     this.context = audioContext;
     this.buffers = new Map(); // AudioBuffer storage
     this.volumes = new Map(); // Volume per sound
     this.pitchOffsets = new Map(); // Semitones per sound (Phase 4)
     this.detuneOffsets = new Map(); // Cents per sound (Phase 4)
     this.activeSources = []; // Track playing sources for cleanup
+    this.destination = destination || audioContext.destination; // Support routing through effects
   }
 
   /**
@@ -64,9 +65,9 @@ export class AudioPlayer {
     const volume = options.volume !== undefined ? options.volume : this.volumes.get(name);
     gainNode.gain.value = volume;
 
-    // Connect: source -> gain -> destination
+    // Connect: source -> gain -> destination (or master bus)
     source.connect(gainNode);
-    gainNode.connect(this.context.destination);
+    gainNode.connect(this.destination);
 
     // Calculate start time
     const startTime = time === 0 ? this.context.currentTime : time;
@@ -279,9 +280,12 @@ export class AudioPlayer {
  * Extends AudioPlayer with drum-specific features.
  */
 export class DrumPlayer extends AudioPlayer {
-  constructor(audioContext) {
-    super(audioContext);
+  constructor(audioContext, destination = null, EffectsChainClass = null) {
+    super(audioContext, destination);
     this.drumMap = new Map(); // Map sequencer drum names to buffer names
+    this.drumEffects = new Map(); // Per-drum effects chains
+    this.EffectsChainClass = EffectsChainClass; // Class to instantiate for effects
+    this.masterDestination = destination; // Store master bus/output
   }
 
   /**
@@ -305,6 +309,43 @@ export class DrumPlayer extends AudioPlayer {
   }
 
   /**
+   * Create or get effect chain for a drum
+   * @param {string} drumName - Drum name from sequencer
+   * @returns {EffectsChain|null}
+   */
+  getDrumEffectChain(drumName) {
+    if (!this.EffectsChainClass) return null;
+    
+    if (!this.drumEffects.has(drumName)) {
+      const chain = new this.EffectsChainClass(this.context);
+      chain.connect(this.masterDestination);
+      this.drumEffects.set(drumName, chain);
+    }
+    
+    return this.drumEffects.get(drumName);
+  }
+
+  /**
+   * Check if drum has active effects
+   * @param {string} drumName - Drum name from sequencer
+   * @returns {boolean}
+   */
+  hasDrumEffects(drumName) {
+    return this.drumEffects.has(drumName);
+  }
+
+  /**
+   * Get the destination node for a specific drum
+   * Routes through drum's effect chain if it exists, otherwise master
+   * @param {string} drumName - Drum name from sequencer
+   * @returns {AudioNode}
+   */
+  getDrumDestination(drumName) {
+    const effectChain = this.drumEffects.get(drumName);
+    return effectChain ? effectChain.getInput() : this.masterDestination;
+  }
+
+  /**
    * Play drum by sequencer name
    * @param {string} drumName - Drum name from sequencer
    * @param {number} time - When to play
@@ -313,7 +354,17 @@ export class DrumPlayer extends AudioPlayer {
    */
   playDrum(drumName, time = 0, options = {}) {
     const bufferName = this.drumMap.get(drumName) || drumName;
-    return this.play(bufferName, time, options);
+    
+    // Override destination to route through per-drum effects if they exist
+    const originalDestination = this.destination;
+    this.destination = this.getDrumDestination(drumName);
+    
+    const source = this.play(bufferName, time, options);
+    
+    // Restore original destination
+    this.destination = originalDestination;
+    
+    return source;
   }
 
   /**
@@ -405,5 +456,165 @@ export class DrumPlayer extends AudioPlayer {
   resetDrumPitch(drumName) {
     const bufferName = this.drumMap.get(drumName) || drumName;
     this.resetPitch(bufferName);
+  }
+
+  // ===== Per-Track Effects Methods =====
+
+  /**
+   * Enable filter effect on a specific drum
+   * @param {string} drumName - Drum name from sequencer
+   * @param {string} type - Filter type (lowpass, highpass, bandpass, notch)
+   * @param {number} frequency - Frequency in Hz
+   * @param {number} q - Q/Resonance value
+   */
+  enableDrumFilter(drumName, type, frequency, q) {
+    const chain = this.getDrumEffectChain(drumName);
+    if (chain) chain.enableFilter(type, frequency, q);
+  }
+
+  /**
+   * Update filter settings for a drum
+   * @param {string} drumName - Drum name
+   * @param {Object} params - {type, frequency, q}
+   */
+  updateDrumFilter(drumName, params) {
+    const chain = this.drumEffects.get(drumName);
+    if (chain) chain.updateFilter(params);
+  }
+
+  /**
+   * Disable filter effect for a drum
+   * @param {string} drumName - Drum name
+   */
+  disableDrumFilter(drumName) {
+    const chain = this.drumEffects.get(drumName);
+    if (chain) chain.disableFilter();
+  }
+
+  /**
+   * Get filter state for a drum
+   * @param {string} drumName - Drum name
+   * @returns {Object|null}
+   */
+  getDrumFilterState(drumName) {
+    const chain = this.drumEffects.get(drumName);
+    return chain ? chain.getFilterState() : null;
+  }
+
+  /**
+   * Enable delay effect on a specific drum
+   * @param {string} drumName - Drum name
+   * @param {number} time - Delay time in seconds
+   * @param {number} feedback - Feedback amount (0-1)
+   * @param {number} wet - Wet/dry mix (0-1)
+   */
+  enableDrumDelay(drumName, time, feedback, wet) {
+    const chain = this.getDrumEffectChain(drumName);
+    if (chain) chain.enableDelay(time, feedback, wet);
+  }
+
+  /**
+   * Update delay settings for a drum
+   * @param {string} drumName - Drum name
+   * @param {Object} params - {time, feedback, wet}
+   */
+  updateDrumDelay(drumName, params) {
+    const chain = this.drumEffects.get(drumName);
+    if (chain) chain.updateDelay(params);
+  }
+
+  /**
+   * Disable delay effect for a drum
+   * @param {string} drumName - Drum name
+   */
+  disableDrumDelay(drumName) {
+    const chain = this.drumEffects.get(drumName);
+    if (chain) chain.disableDelay();
+  }
+
+  /**
+   * Get delay state for a drum
+   * @param {string} drumName - Drum name
+   * @returns {Object|null}
+   */
+  getDrumDelayState(drumName) {
+    const chain = this.drumEffects.get(drumName);
+    return chain ? chain.getDelayState() : null;
+  }
+
+  /**
+   * Enable reverb effect on a specific drum
+   * @param {string} drumName - Drum name
+   * @param {number} duration - Reverb duration in seconds
+   * @param {number} wet - Wet/dry mix (0-1)
+   */
+  enableDrumReverb(drumName, duration, wet) {
+    const chain = this.getDrumEffectChain(drumName);
+    if (chain) chain.enableReverb(duration, wet);
+  }
+
+  /**
+   * Update reverb settings for a drum
+   * @param {string} drumName - Drum name
+   * @param {Object} params - {duration, wet}
+   */
+  updateDrumReverb(drumName, params) {
+    const chain = this.drumEffects.get(drumName);
+    if (chain) chain.updateReverb(params);
+  }
+
+  /**
+   * Disable reverb effect for a drum
+   * @param {string} drumName - Drum name
+   */
+  disableDrumReverb(drumName) {
+    const chain = this.drumEffects.get(drumName);
+    if (chain) chain.disableReverb();
+  }
+
+  /**
+   * Get reverb state for a drum
+   * @param {string} drumName - Drum name
+   * @returns {Object|null}
+   */
+  getDrumReverbState(drumName) {
+    const chain = this.drumEffects.get(drumName);
+    return chain ? chain.getReverbState() : null;
+  }
+
+  /**
+   * Get all effect states for a drum
+   * @param {string} drumName - Drum name
+   * @returns {Object|null} {filter, delay, reverb}
+   */
+  getDrumEffectStates(drumName) {
+    const chain = this.drumEffects.get(drumName);
+    if (!chain) return null;
+    
+    return {
+      filter: chain.getFilterState(),
+      delay: chain.getDelayState(),
+      reverb: chain.getReverbState()
+    };
+  }
+
+  /**
+   * Remove all effects from a drum
+   * @param {string} drumName - Drum name
+   */
+  clearDrumEffects(drumName) {
+    const chain = this.drumEffects.get(drumName);
+    if (chain) {
+      chain.destroy();
+      this.drumEffects.delete(drumName);
+    }
+  }
+
+  /**
+   * Get list of drums with active effects
+   * @returns {string[]} Array of drum names
+   */
+  getDrumsWithEffects() {
+    return Array.from(this.drumEffects.keys());
   }
 }

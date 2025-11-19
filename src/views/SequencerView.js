@@ -190,10 +190,16 @@ export class ControlsView {
   constructor(elements) {
     this.playButton = elements.playButton;
     this.resetButton = elements.resetButton;
+    this.saveButton = elements.saveButton;
+    this.deleteButton = elements.deleteButton;
+    this.sequenceInput = elements.sequenceInput;
     this.tempoSlider = elements.tempoSlider;
     this.tempoOutput = elements.tempoOutput;
     this.lengthSlider = elements.lengthSlider;
     this.lengthOutput = elements.lengthOutput;
+    this.swingSlider = elements.swingSlider;
+    this.swingOutput = elements.swingOutput;
+    this.sequenceSelect = elements.sequenceSelect;
     
     this.setupEventListeners();
   }
@@ -212,6 +218,25 @@ export class ControlsView {
       this.emit('reset');
     });
 
+    this.saveButton.addEventListener('mousedown', () => {
+      this.saveButton.classList.add('save-btn-flash-yellow');
+    });
+
+    this.saveButton.addEventListener('mouseup', () => {
+      this.saveButton.classList.remove('save-btn-flash-yellow');
+      const name = this.sequenceInput.value.trim();
+      if (name !== '') {
+        this.emit('save', { name });
+      }
+    });
+
+    this.deleteButton.addEventListener('click', () => {
+      const name = this.sequenceInput.value.trim();
+      if (name !== '') {
+        this.emit('delete', { name });
+      }
+    });
+
     this.tempoSlider.addEventListener('input', (e) => {
       this.updateTempoDisplay(e.target.value);
       this.emit('tempoChange', { tempo: parseInt(e.target.value) });
@@ -221,6 +246,20 @@ export class ControlsView {
       this.updateLengthDisplay(e.target.value);
       this.emit('lengthChange', { length: parseInt(e.target.value) });
     });
+
+    this.swingSlider.addEventListener('input', (e) => {
+      this.updateSwingDisplay(e.target.value);
+      this.emit('swingChange', { swing: parseInt(e.target.value) });
+    });
+
+    if (this.sequenceSelect) {
+      this.sequenceSelect.addEventListener('change', (e) => {
+        const patternName = e.target.value;
+        if (patternName !== 'keep') {
+          this.emit('loadPattern', { name: patternName });
+        }
+      });
+    }
   }
 
   updateTempoDisplay(tempo) {
@@ -229,6 +268,10 @@ export class ControlsView {
 
   updateLengthDisplay(length) {
     this.lengthOutput.innerText = `${length} steps`;
+  }
+
+  updateSwingDisplay(swing) {
+    this.swingOutput.innerText = `${swing}% swing`;
   }
 
   setPlayButtonState(isPlaying) {
@@ -249,6 +292,26 @@ export class ControlsView {
   setLength(length) {
     this.lengthSlider.value = length;
     this.updateLengthDisplay(length);
+  }
+
+  setSwing(swing) {
+    this.swingSlider.value = swing;
+    this.updateSwingDisplay(swing);
+  }
+
+  updateSequenceSelect(patterns) {
+    if (!this.sequenceSelect) return;
+    
+    // Clear existing options except the first one
+    this.sequenceSelect.innerHTML = '<option value="keep">--pick a drum pattern</option>';
+    
+    // Add pattern options
+    patterns.forEach(name => {
+      const option = document.createElement('option');
+      option.value = name;
+      option.textContent = name;
+      this.sequenceSelect.appendChild(option);
+    });
   }
 
   // Event emitter pattern

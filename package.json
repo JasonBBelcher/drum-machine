@@ -2,21 +2,23 @@
   "name": "drum-machine-v0.1",
   "version": "2.1.0",
   "description": "Web-based drum sequencer with Web Audio API and MVC architecture",
-  "main": "drum-machine.js",
   "type": "module",
+  "source": "src/index.html",
   "scripts": {
     "dev": "./node_modules/parcel/bin/cli.js ./src/index.html",
     "start": "./node_modules/http-server/bin/http-server ./dist  --cors='Access-Control-Allow-Origin: *'",
     "start:dev": "./node_modules/parcel/bin/cli.js ./src/index.html",
-    "build": "./node_modules/parcel/bin/cli.js build ./src/index.html",
-    "prod:build": "./node_modules/parcel/bin/cli.js build ./src/index.html",
+    "build": "npx parcel build src/index.html --public-url /js/drum-machine/",
+    "prod:build": "npx parcel build src/index.html --public-url /js/drum-machine/",
     "test:timing": "echo 'Open browser console and run timing test from PHASE1_MIGRATION.md'"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "howler": "^2.2.4",
-    "http-server": "^0.11.1",
-    "parcel": "^1.12.3"
+    "http-server": "^0.11.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.1"
   }
 }

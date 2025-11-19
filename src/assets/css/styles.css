@@ -301,3 +301,471 @@ h1 {
     }
 
 }
+
+/* Phase 4: Sample Controls */
+.sample-controls-container {
+    background: #1a1a1a;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.drum-sample-control {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-bottom: 1px solid #333;
+    background: #222;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+}
+
+.drum-label {
+    font-weight: bold;
+    text-transform: uppercase;
+    min-width: 80px;
+    color: #fff;
+}
+
+.load-sample-btn {
+    padding: 0.5rem 1rem;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.load-sample-btn:hover {
+    background: #45a049;
+}
+
+.pitch-controls {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex: 1;
+}
+
+.pitch-control,
+.detune-control {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+}
+
+.pitch-control label,
+.detune-control label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+.pitch-slider,
+.detune-slider {
+    width: 100%;
+    height: 6px;
+    border-radius: 3px;
+    outline: none;
+    background: #333;
+    -webkit-appearance: none;
+}
+
+.pitch-slider::-webkit-slider-thumb,
+.detune-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+}
+
+.pitch-slider::-moz-range-thumb,
+.detune-slider::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #4CAF50;
+    cursor: pointer;
+    border: none;
+}
+
+.pitch-output,
+.detune-output {
+    font-family: monospace;
+    font-size: 0.9rem;
+    color: #4CAF50;
+    min-width: 60px;
+    text-align: right;
+}
+
+.reset-pitch-btn {
+    padding: 0.5rem;
+    background: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    min-width: 40px;
+    transition: background 0.2s;
+}
+
+.reset-pitch-btn:hover {
+    background: #f57c00;
+}
+
+.sample-file-input {
+    display: none;
+}
+
+/* Effects Panel Styles */
+.effects-panel {
+    background: rgba(28, 6, 53, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.effects-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+}
+
+.effects-header h3 {
+    color: rgba(255, 255, 255, 0.9);
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.effects-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
+
+.effects-toggle input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.effects-toggle span {
+    font-size: 1rem;
+}
+
+.effects-controls {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    transition: opacity 0.3s;
+}
+
+.effects-controls.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.effects-control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.effects-control-group label {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.effects-select {
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.effects-select:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.effects-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: rgba(28, 6, 53, 0.5);
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.effects-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #9C27B0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.effects-slider::-webkit-slider-thumb:hover {
+    background: #BA68C8;
+}
+
+.effects-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #9C27B0;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+}
+
+.effects-slider::-moz-range-thumb:hover {
+    background: #BA68C8;
+}
+
+.master-volume {
+    grid-column: 1 / -1;
+    margin-top: 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.master-volume label {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .effects-controls {
+        grid-template-columns: 1fr;
+    }
+    
+    .effects-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+}
+
+/* ===== Per-Track Drum Effects Styles ===== */
+.drum-effects-container {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+}
+
+.drum-effects-header {
+    margin-bottom: 1rem;
+}
+
+.drum-effects-header h3 {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.drum-effects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.drum-effect-panel {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.drum-effect-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+}
+
+.drum-name {
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.9);
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.fx-indicator {
+    color: #4CAF50;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.drum-fx-toggle {
+    background: rgba(156, 39, 176, 0.2);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(156, 39, 176, 0.5);
+    border-radius: 4px;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+}
+
+.drum-fx-toggle:hover {
+    background: rgba(156, 39, 176, 0.3);
+    border-color: rgba(156, 39, 176, 0.7);
+}
+
+.drum-effects-content {
+    padding: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.drum-effect-section {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.drum-effect-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.drum-effect-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.drum-effect-section-header h4 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+.drum-effect-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.drum-effect-toggle input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+}
+
+.drum-effect-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: opacity 0.2s;
+}
+
+.drum-effect-controls.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.drum-control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.drum-control-group label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.drum-control-group select {
+    background: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 0.4rem;
+    font-size: 0.85rem;
+}
+
+.drum-control-group input[type="range"] {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    -webkit-appearance: none;
+}
+
+.drum-control-group input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #9C27B0;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.drum-control-group input[type="range"]::-webkit-slider-thumb:hover {
+    background: #BA68C8;
+}
+
+.drum-control-group input[type="range"]::-moz-range-thumb {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #9C27B0;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+}
+
+.drum-control-group input[type="range"]::-moz-range-thumb:hover {
+    background: #BA68C8;
+}
+
+/* Compact mobile view */
+@media (max-width: 768px) {
+    .drum-effects-container {
+        padding: 1rem;
+    }
+    
+    .drum-effect-header {
+        padding: 0.5rem 0.75rem;
+    }
+    
+    .drum-effects-content {
+        padding: 0.75rem;
+    }
+    
+    .drum-name {
+        font-size: 0.85rem;
+    }
+}

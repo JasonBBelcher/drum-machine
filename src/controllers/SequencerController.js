@@ -41,7 +41,7 @@ export class SequencerController {
     }
 
     // Audio system
-    this.audioEngine = null;
+    this.audioEngine = config.audioEngine || null;
     this.scheduler = null;
     this.isPlaying = false;
 
@@ -64,6 +64,10 @@ export class SequencerController {
     this.controlsView.on('reset', this.handleReset.bind(this));
     this.controlsView.on('tempoChange', this.handleTempoChange.bind(this));
     this.controlsView.on('lengthChange', this.handleLengthChange.bind(this));
+    this.controlsView.on('swingChange', this.handleSwingChange.bind(this));
+    this.controlsView.on('loadPattern', this.handleLoadPattern.bind(this));
+    this.controlsView.on('save', this.handleSave.bind(this));
+    this.controlsView.on('delete', this.handleDelete.bind(this));
 
     // Volume view events
     this.volumeView.on('volumeChange', this.handleVolumeChange.bind(this));
@@ -109,25 +113,23 @@ export class SequencerController {
    */
   async start() {
     try {
-      // Initialize audio engine if needed
-      if (!this.audioEngine) {
-        this.audioEngine = AudioEngine;
-        await this.audioEngine.initialize();
-      }
+      // Get audio context from engine
+      const audioContext = this.audioEngine ? this.audioEngine.getContext() : AudioEngine.getContext();
 
       // Create scheduler if needed
       if (!this.scheduler) {
-        this.scheduler = new AudioScheduler(this.audioEngine.getContext());
+        this.scheduler = new AudioScheduler(audioContext);
         
-        // Set up callbacks
-        this.scheduler.onStep = this.handleSchedulerStep.bind(this);
-        this.scheduler.onUIUpdate = this.handleUIUpdate.bind(this);
+        // Set up callbacks using the proper methods
+        this.scheduler.onStep(this.handleSchedulerStep.bind(this));
+        this.scheduler.onUIUpdate(this.handleUIUpdate.bind(this));
       }
 
-      // Set sequence and tempo
+      // Set sequence, tempo, and swing
       const sequence = this.buildSequenceArray();
       this.scheduler.setSequence(sequence);
       this.scheduler.setTempo(this.model.tempo);
+      this.scheduler.setSwing(this.model.swing);
 
       // Start playback
       this.scheduler.start();
@@ -164,6 +166,105 @@ export class SequencerController {
   }
 
   /**
+   * Handle pattern load from dropdown
+   */
+  async handleLoadPattern({ name }) {
+    const { StorageManager } = await import('../utils/StorageManager.js');
+    const storage = new StorageManager();
+    
+    const loadedModel = storage.load(name);
+    
+    if (loadedModel) {
+      const wasPlaying = this.isPlaying;
+      if (wasPlaying) {
+        this.stop();
+      }
+      
+      this.model = loadedModel;
+      this.render();
+      
+      // Restore per-drum effects from saved pattern
+      this.restoreDrumEffects();
+      
+      // Refresh drum effects UI to show loaded effects
+      if (this.drumEffectsView) {
+        this.drumEffectsView.refresh();
+      }
+      
+      if (wasPlaying) {
+        await this.start();
+      }
+      
+      console.log(`✓ Loaded pattern: ${name}`);
+    } else {
+      console.error(`Failed to load pattern: ${name}`);
+    }
+  }
+
+  /**
+   * Handle save pattern
+   */
+  async handleSave({ name }) {
+    const { StorageManager } = await import('../utils/StorageManager.js');
+    const storage = new StorageManager();
+    
+    const wasPlaying = this.isPlaying;
+    if (wasPlaying) {
+      this.stop();
+    }
+    
+    // Set pattern name
+    this.model.name = name;
+    
+    // Capture drum effects before saving
+    this.captureDrumEffects();
+    
+    // Save to storage
+    storage.save(name, this.model);
+    
+    // Update dropdown
+    const patternList = storage.list();
+    this.controlsView.updateSequenceSelect(patternList.map(p => p.name));
+    
+    console.log(`✓ Saved pattern: ${name}`);
+    
+    if (wasPlaying) {
+      await this.start();
+    }
+  }
+
+  /**
+   * Handle delete pattern
+   */
+  async handleDelete({ name }) {
+    const { StorageManager } = await import('../utils/StorageManager.js');
+    const storage = new StorageManager();
+    
+    const wasPlaying = this.isPlaying;
+    if (wasPlaying) {
+      this.stop();
+    }
+    
+    // Delete from storage
+    storage.delete(name);
+    
+    // Update dropdown
+    const patternList = storage.list();
+    this.controlsView.updateSequenceSelect(patternList.map(p => p.name));
+    
+    // Clear input
+    if (this.controlsView.sequenceInput) {
+      this.controlsView.sequenceInput.value = '';
+    }
+    
+    console.log(`✓ Deleted pattern: ${name}`);
+    
+    if (wasPlaying) {
+      await this.start();
+    }
+  }
+
+  /**
    * Handle tempo change
    */
   handleTempoChange({ tempo }) {
@@ -171,6 +272,17 @@ export class SequencerController {
     
     if (this.scheduler && this.isPlaying) {
       this.scheduler.setTempo(tempo);
+    }
+  }
+
+  /**
+   * Handle swing change
+   */
+  handleSwingChange({ swing }) {
+    this.model.setSwing(swing);
+    
+    if (this.scheduler) {
+      this.scheduler.setSwing(swing);
     }
   }
 
@@ -212,7 +324,7 @@ export class SequencerController {
     
     // Trigger all active drums for this step with precise timing
     Object.entries(step.drums).forEach(([drumName, drumState]) => {
-      if (drumState.on && this.audioPlayer.hasDrum(drumName)) {
+      if (drumState.on && this.audioPlayer && this.audioPlayer.hasDrum(drumName)) {
         // Use Web Audio API with scheduled time for perfect sync
         this.audioPlayer.playDrum(drumName, time);
       }
@@ -246,6 +358,7 @@ export class SequencerController {
     this.sequencerView.render(this.model);
     this.controlsView.setTempo(this.model.tempo);
     this.controlsView.setLength(this.model.length);
+    this.controlsView.setSwing(this.model.swing);
     
     // Sync volume controls with model
     this.model.getDrumNames().forEach(drumName => {
@@ -282,6 +395,14 @@ export class SequencerController {
 
     this.model = SequenceModel.fromJSON(json);
     this.render();
+    
+    // Restore per-drum effects from saved pattern
+    this.restoreDrumEffects();
+    
+    // Refresh drum effects UI to show loaded effects
+    if (this.drumEffectsView) {
+      this.drumEffectsView.refresh();
+    }
 
     if (wasPlaying) {
       this.start();
@@ -290,9 +411,143 @@ export class SequencerController {
 
   /**
    * Save current sequence to JSON
+   * Captures current drum effects state before saving
    */
   saveSequence() {
+    // Capture current drum effects state
+    this.captureDrumEffects();
     return this.model.toJSON();
+  }
+
+  /**
+   * Capture current drum effects from drumPlayer into model
+   */
+  captureDrumEffects() {
+    const drumsWithEffects = this.audioPlayer.getDrumsWithEffects();
+    
+    // Clear existing effects in model
+    this.model.drumEffects = {};
+    
+    // Save current effect states
+    drumsWithEffects.forEach(drumName => {
+      const effectStates = this.audioPlayer.getDrumEffectStates(drumName);
+      if (effectStates) {
+        this.model.setDrumEffects(drumName, effectStates);
+      }
+    });
+  }
+
+  /**
+   * Restore drum effects from model to drumPlayer
+   */
+  restoreDrumEffects() {
+    // Clear all existing drum effects first
+    const existingDrums = this.audioPlayer.getDrumsWithEffects();
+    existingDrums.forEach(drumName => {
+      this.audioPlayer.clearDrumEffects(drumName);
+    });
+    
+    // Restore effects from model
+    Object.entries(this.model.drumEffects).forEach(([drumName, effectStates]) => {
+      // Restore filter (state is non-null when enabled)
+      if (effectStates.filter) {
+        this.audioPlayer.enableDrumFilter(
+          drumName,
+          effectStates.filter.type,
+          effectStates.filter.frequency,
+          effectStates.filter.q
+        );
+      }
+      
+      // Restore delay (state is non-null when enabled)
+      if (effectStates.delay) {
+        this.audioPlayer.enableDrumDelay(
+          drumName,
+          effectStates.delay.time,
+          effectStates.delay.feedback,
+          effectStates.delay.wet
+        );
+      }
+      
+      // Restore reverb (state is non-null when enabled)
+      if (effectStates.reverb) {
+        this.audioPlayer.enableDrumReverb(
+          drumName,
+          effectStates.reverb.duration,
+          effectStates.reverb.wet
+        );
+      }
+    });
+  }
+
+  /**
+   * Load default patterns into storage if none exist
+   */
+  async loadDefaultPatterns() {
+    const { StorageManager } = await import('../utils/StorageManager.js');
+    const storage = new StorageManager();
+    
+    // Check if any patterns exist
+    const existingPatterns = storage.list();
+    if (existingPatterns && existingPatterns.length > 0) {
+      console.log(`Found ${existingPatterns.length} existing patterns`);
+      // Update dropdown with existing patterns
+      this.controlsView.updateSequenceSelect(existingPatterns.map(p => p.name));
+      return; // Patterns already exist
+    }
+
+    // Save default patterns using the model's built-in methods
+    console.log('Creating default patterns...');
+    
+    // Basic house pattern
+    const basicHouse = new SequenceModel(16);
+    basicHouse.name = 'basic house';
+    basicHouse.tempo = 120;
+    basicHouse.setDrumState(0, 'kick', true);
+    basicHouse.setDrumState(2, 'hat', true);
+    basicHouse.setDrumState(4, 'kick', true);
+    basicHouse.setDrumState(4, 'clap', true);
+    basicHouse.setDrumState(4, 'snare', true);
+    basicHouse.setDrumState(6, 'hat', true);
+    basicHouse.setDrumState(8, 'kick', true);
+    basicHouse.setDrumState(10, 'hat', true);
+    basicHouse.setDrumState(12, 'kick', true);
+    basicHouse.setDrumState(12, 'clap', true);
+    basicHouse.setDrumState(12, 'snare', true);
+    basicHouse.setDrumState(14, 'hat', true);
+    storage.save('basic house', basicHouse);
+    console.log('  ✓ Loaded: basic house');
+    
+    // Bongoz house pattern
+    const bongozHouse = new SequenceModel(16);
+    bongozHouse.name = 'bongoz house';
+    bongozHouse.tempo = 120;
+    bongozHouse.setDrumState(0, 'kick', true);
+    bongozHouse.setDrumState(0, 'bongo1', true);
+    bongozHouse.setDrumState(2, 'hat', true);
+    bongozHouse.setDrumState(2, 'congaz', true);
+    bongozHouse.setDrumState(4, 'kick', true);
+    bongozHouse.setDrumState(4, 'clap', true);
+    bongozHouse.setDrumState(4, 'snare', true);
+    bongozHouse.setDrumState(5, 'bongo1', true);
+    bongozHouse.setDrumState(6, 'hat', true);
+    bongozHouse.setDrumState(7, 'congaz', true);
+    bongozHouse.setDrumState(8, 'kick', true);
+    bongozHouse.setDrumState(10, 'hat', true);
+    bongozHouse.setDrumState(10, 'bongo1', true);
+    bongozHouse.setDrumState(12, 'kick', true);
+    bongozHouse.setDrumState(12, 'clap', true);
+    bongozHouse.setDrumState(12, 'snare', true);
+    bongozHouse.setDrumState(14, 'hat', true);
+    // Set volumes
+    bongozHouse.setDrumVolume('bongo1', 0.17);
+    bongozHouse.setDrumVolume('congaz', 0.14);
+    storage.save('bongoz house', bongozHouse);
+    console.log('  ✓ Loaded: bongoz house');
+    
+    // Update dropdown with new patterns
+    const patternList = storage.list();
+    this.controlsView.updateSequenceSelect(patternList.map(p => p.name));
   }
 
   /**
