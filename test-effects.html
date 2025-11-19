@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Effects Test</title>
+</head>
+<body>
+  <h1>Master Bus Effects Test</h1>
+  <p>Open browser console and click anywhere to start audio.</p>
+  <p>Then try these commands:</p>
+  <pre>
+// Enable lowpass filter
+window.drumSequencer.masterBus.enableFilter('lowpass', 500, 1.5);
+
+// Update filter frequency
+window.drumSequencer.masterBus.updateFilter({ frequency: 1000 });
+
+// Disable filter
+window.drumSequencer.masterBus.disableFilter();
+
+// Try preset
+import { getFilterPreset } from './data/effect-presets.js';
+const preset = getFilterPreset('Warm');
+window.drumSequencer.masterBus.enableFilter(preset.type, preset.frequency, preset.q);
+
+// Adjust master volume
+window.drumSequencer.masterBus.setVolume(0.5);
+  </pre>
+  
+  <button id="test-filter" style="padding: 10px 20px; margin: 10px; font-size: 16px;">
+    Test Lowpass Filter (500Hz)
+  </button>
+  
+  <button id="test-off" style="padding: 10px 20px; margin: 10px; font-size: 16px;">
+    Turn Filter Off
+  </button>
+  
+  <button id="test-warm" style="padding: 10px 20px; margin: 10px; font-size: 16px;">
+    Apply "Warm" Preset
+  </button>
+
+  <script type="module">
+    import { getFilterPreset } from './data/effect-presets.js';
+    
+    // Wait for drum sequencer to initialize
+    const waitForInit = setInterval(() => {
+      if (window.drumSequencer && window.drumSequencer.masterBus) {
+        clearInterval(waitForInit);
+        
+        // Test filter button
+        document.getElementById('test-filter').addEventListener('click', () => {
+          window.drumSequencer.masterBus.enableFilter('lowpass', 500, 1.5);
+          console.log('✅ Lowpass filter enabled at 500Hz');
+        });
+        
+        // Turn off button
+        document.getElementById('test-off').addEventListener('click', () => {
+          window.drumSequencer.masterBus.disableFilter();
+          console.log('✅ Filter disabled');
+        });
+        
+        // Preset button
+        document.getElementById('test-warm').addEventListener('click', () => {
+          const preset = getFilterPreset('Warm');
+          window.drumSequencer.masterBus.enableFilter(preset.type, preset.frequency, preset.q);
+          console.log('✅ "Warm" preset applied:', preset);
+        });
+        
+        console.log('🎛️ Effects test ready!');
+        console.log('Master bus:', window.drumSequencer.masterBus);
+      }
+    }, 100);
+  </script>
+</body>
+</html>

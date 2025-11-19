@@ -6,13 +6,14 @@
  */
 
 export class AudioPlayer {
-  constructor(audioContext) {
+  constructor(audioContext, destination = null) {
     this.context = audioContext;
     this.buffers = new Map(); // AudioBuffer storage
     this.volumes = new Map(); // Volume per sound
     this.pitchOffsets = new Map(); // Semitones per sound (Phase 4)
     this.detuneOffsets = new Map(); // Cents per sound (Phase 4)
     this.activeSources = []; // Track playing sources for cleanup
+    this.destination = destination || audioContext.destination; // Support routing through effects
   }
 
   /**
@@ -64,9 +65,9 @@ export class AudioPlayer {
     const volume = options.volume !== undefined ? options.volume : this.volumes.get(name);
     gainNode.gain.value = volume;
 
-    // Connect: source -> gain -> destination
+    // Connect: source -> gain -> destination (or master bus)
     source.connect(gainNode);
-    gainNode.connect(this.context.destination);
+    gainNode.connect(this.destination);
 
     // Calculate start time
     const startTime = time === 0 ? this.context.currentTime : time;
@@ -279,8 +280,8 @@ export class AudioPlayer {
  * Extends AudioPlayer with drum-specific features.
  */
 export class DrumPlayer extends AudioPlayer {
-  constructor(audioContext) {
-    super(audioContext);
+  constructor(audioContext, destination = null) {
+    super(audioContext, destination);
     this.drumMap = new Map(); // Map sequencer drum names to buffer names
   }
 

@@ -237,7 +237,7 @@ export class SequencerController {
     
     // Trigger all active drums for this step with precise timing
     Object.entries(step.drums).forEach(([drumName, drumState]) => {
-      if (drumState.on && this.audioPlayer.hasDrum(drumName)) {
+      if (drumState.on && this.audioPlayer && this.audioPlayer.hasDrum(drumName)) {
         // Use Web Audio API with scheduled time for perfect sync
         this.audioPlayer.playDrum(drumName, time);
       }

@@ -8,6 +8,8 @@ import { DrumPlayer } from './libs/audio-player.js';
 import { AudioEngine } from './libs/audio-engine.js';
 import { AudioBufferLoader } from './libs/audio-buffer-loader.js';
 import { SequenceModel } from './models/SequenceModel.js';
+import { MasterBus } from './libs/audio-effects.js';
+import { EffectsView } from './views/EffectsView.js';
 
 // Sample file paths - using new URL for Parcel 2 compatibility
 const SAMPLE_PATHS = {
@@ -53,8 +55,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     const buffers = await bufferLoader.loadAll(SAMPLE_PATHS);
     console.log('✅ Audio samples loaded');
 
-    // Initialize DrumPlayer
-    const drumPlayer = new DrumPlayer(audioContext);
+    // Initialize Master Bus
+    let masterBus = null;
+    let masterBusInput = null;
+    try {
+      console.log('🔧 Creating Master Bus...');
+      masterBus = new MasterBus(audioContext);
+      masterBusInput = masterBus.getInput();
+      console.log('✅ Master bus initialized');
+    } catch (err) {
+      console.error('❌ Failed to create master bus:', err);
+      console.log('⚠️ Continuing without effects...');
+    }
+
+    // Initialize DrumPlayer (route through master bus if available)
+    const drumPlayer = new DrumPlayer(audioContext, masterBusInput);
     drumPlayer.loadBuffers(buffers, 0.5);
     console.log('✅ DrumPlayer initialized');
 
@@ -97,6 +112,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     console.log('✅ Drum Sequencer ready!');
 
+    // Initialize Effects View
+    if (masterBus) {
+      const effectsContainer = document.querySelector('.effects-container');
+      if (effectsContainer) {
+        new EffectsView(effectsContainer, masterBus);
+        console.log('✅ Effects panel initialized');
+      }
+    }
+
     // Load default patterns if none exist
     await controller.loadDefaultPatterns();
 
@@ -105,7 +129,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       window.drumSequencer = {
         controller,
         model,
-        drumPlayer
+        drumPlayer,
+        masterBus
       };
       console.log('🔧 Debug mode: Access via window.drumSequencer');
     }

@@ -57,7 +57,8 @@ export class AudioScheduler {
    */
   scheduleNote(stepNumber, time) {
     // Trigger the step callback (plays the sounds)
-    if (this.onStepCallback && this.sequence[stepNumber]) {
+    // Check if sequence has this index (use !== undefined to handle step 0)
+    if (this.onStepCallback && this.sequence[stepNumber] !== undefined) {
       this.onStepCallback(this.sequence[stepNumber], time);
     }
     
@@ -109,7 +110,8 @@ export class AudioScheduler {
     
     this.isPlaying = true;
     this.currentStep = 0;
-    this.nextNoteTime = this.audioContext.currentTime;
+    // Add small buffer to ensure first note isn't scheduled in the past
+    this.nextNoteTime = this.audioContext.currentTime + 0.005; // 5ms buffer
     this.scheduler(); // Start the scheduling loop
   }
 
