@@ -126,6 +126,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       }
     }
 
+    // Initialize Per-Track Effects View
+    const drumEffectsContainer = document.querySelector('.drum-effects-container-wrapper');
+    if (drumEffectsContainer) {
+      const { DrumEffectsView } = await import('./views/DrumEffectsView.js');
+      const drumNames = ['kick', 'clap', 'snare', 'hat', 'shaker', 'bongo1', 'congaz', 'harmony'];
+      new DrumEffectsView(drumEffectsContainer, drumPlayer, drumNames);
+      console.log('✅ Per-track effects panel initialized');
+    }
+
     // Load default patterns if none exist
     await controller.loadDefaultPatterns();
 
