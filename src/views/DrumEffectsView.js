@@ -54,6 +54,17 @@ export class DrumEffectsView {
     `;
   }
 
+  /**
+   * Refresh the view (called when pattern is loaded)
+   */
+  refresh() {
+    // Re-render all panels to reflect loaded effect states
+    const list = this.container.querySelector('.drum-effects-list');
+    if (list) {
+      list.innerHTML = this.drumNames.map(drumName => this.renderDrumPanel(drumName)).join('');
+    }
+  }
+
   renderDrumPanel(drumName) {
     const isExpanded = this.expandedDrums.has(drumName);
     const hasEffects = this.drumPlayer.hasDrumEffects(drumName);

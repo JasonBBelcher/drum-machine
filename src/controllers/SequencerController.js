@@ -321,6 +321,14 @@ export class SequencerController {
 
     this.model = SequenceModel.fromJSON(json);
     this.render();
+    
+    // Restore per-drum effects from saved pattern
+    this.restoreDrumEffects();
+    
+    // Refresh drum effects UI to show loaded effects
+    if (this.drumEffectsView) {
+      this.drumEffectsView.refresh();
+    }
 
     if (wasPlaying) {
       this.start();
@@ -329,9 +337,73 @@ export class SequencerController {
 
   /**
    * Save current sequence to JSON
+   * Captures current drum effects state before saving
    */
   saveSequence() {
+    // Capture current drum effects state
+    this.captureDrumEffects();
     return this.model.toJSON();
+  }
+
+  /**
+   * Capture current drum effects from drumPlayer into model
+   */
+  captureDrumEffects() {
+    const drumsWithEffects = this.audioPlayer.getDrumsWithEffects();
+    
+    // Clear existing effects in model
+    this.model.drumEffects = {};
+    
+    // Save current effect states
+    drumsWithEffects.forEach(drumName => {
+      const effectStates = this.audioPlayer.getDrumEffectStates(drumName);
+      if (effectStates) {
+        this.model.setDrumEffects(drumName, effectStates);
+      }
+    });
+  }
+
+  /**
+   * Restore drum effects from model to drumPlayer
+   */
+  restoreDrumEffects() {
+    // Clear all existing drum effects first
+    const existingDrums = this.audioPlayer.getDrumsWithEffects();
+    existingDrums.forEach(drumName => {
+      this.audioPlayer.clearDrumEffects(drumName);
+    });
+    
+    // Restore effects from model
+    Object.entries(this.model.drumEffects).forEach(([drumName, effectStates]) => {
+      // Restore filter
+      if (effectStates.filter && effectStates.filter.enabled) {
+        this.audioPlayer.enableDrumFilter(
+          drumName,
+          effectStates.filter.type,
+          effectStates.filter.frequency,
+          effectStates.filter.q
+        );
+      }
+      
+      // Restore delay
+      if (effectStates.delay && effectStates.delay.enabled) {
+        this.audioPlayer.enableDrumDelay(
+          drumName,
+          effectStates.delay.time,
+          effectStates.delay.feedback,
+          effectStates.delay.wet
+        );
+      }
+      
+      // Restore reverb
+      if (effectStates.reverb && effectStates.reverb.enabled) {
+        this.audioPlayer.enableDrumReverb(
+          drumName,
+          effectStates.reverb.duration,
+          effectStates.reverb.wet
+        );
+      }
+    });
   }
 
   /**

@@ -12,6 +12,7 @@ export class SequenceModel {
     this.tempo = 120;
     this.swing = 0;
     this.name = 'Untitled';
+    this.drumEffects = {}; // Per-drum effects settings
     this.initialize();
   }
 
@@ -195,6 +196,32 @@ export class SequenceModel {
   }
 
   /**
+   * Set drum effect settings
+   * @param {string} drumName - Drum name
+   * @param {Object} effectStates - Effect states {filter, delay, reverb}
+   */
+  setDrumEffects(drumName, effectStates) {
+    this.drumEffects[drumName] = effectStates;
+  }
+
+  /**
+   * Get drum effect settings
+   * @param {string} drumName - Drum name
+   * @returns {Object|null} Effect states or null
+   */
+  getDrumEffects(drumName) {
+    return this.drumEffects[drumName] || null;
+  }
+
+  /**
+   * Clear drum effects
+   * @param {string} drumName - Drum name
+   */
+  clearDrumEffects(drumName) {
+    delete this.drumEffects[drumName];
+  }
+
+  /**
    * Validate step index
    * @param {number} index - Step index to check
    * @returns {boolean}
@@ -222,6 +249,7 @@ export class SequenceModel {
       tempo: this.tempo,
       swing: this.swing,
       length: this.length,
+      drumEffects: this.drumEffects, // Save per-drum effects
       steps: this.steps.map(step => ({
         id: step.id,
         drums: Object.entries(step.drums).reduce((acc, [name, drum]) => {
@@ -245,6 +273,7 @@ export class SequenceModel {
     sequence.name = data.name;
     sequence.tempo = data.tempo;
     sequence.swing = data.swing || 0;
+    sequence.drumEffects = data.drumEffects || {}; // Load drum effects (backward compatible)
 
     data.steps.forEach((stepData, i) => {
       Object.entries(stepData.drums).forEach(([drumName, drumData]) => {

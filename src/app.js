@@ -128,10 +128,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Initialize Per-Track Effects View
     const drumEffectsContainer = document.querySelector('.drum-effects-container-wrapper');
+    let drumEffectsView = null;
     if (drumEffectsContainer) {
       const { DrumEffectsView } = await import('./views/DrumEffectsView.js');
       const drumNames = ['kick', 'clap', 'snare', 'hat', 'shaker', 'bongo1', 'congaz', 'harmony'];
-      const drumEffectsView = new DrumEffectsView(drumEffectsContainer, drumPlayer, drumNames);
+      drumEffectsView = new DrumEffectsView(drumEffectsContainer, drumPlayer, drumNames);
       
       // Wire up event handlers
       drumEffectsView.on('drumFilterChange', ({ drumName, type, frequency, q }) => {
@@ -157,6 +158,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       drumEffectsView.on('drumReverbDisable', ({ drumName }) => {
         drumPlayer.disableDrumReverb(drumName);
       });
+      
+      // Pass drumEffectsView to controller for pattern loading
+      controller.drumEffectsView = drumEffectsView;
       
       console.log('✅ Per-track effects panel initialized');
     }
