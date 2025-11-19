@@ -10,6 +10,7 @@ export class SequenceModel {
     this.length = length;
     this.steps = [];
     this.tempo = 120;
+    this.swing = 0;
     this.name = 'Untitled';
     this.initialize();
   }
@@ -144,6 +145,14 @@ export class SequenceModel {
   }
 
   /**
+   * Set swing amount
+   * @param {number} amount - Swing percentage (0-75)
+   */
+  setSwing(amount) {
+    this.swing = Math.max(0, Math.min(75, amount));
+  }
+
+  /**
    * Change sequence length
    * @param {number} newLength - New number of steps
    */
@@ -211,6 +220,7 @@ export class SequenceModel {
     return {
       name: this.name,
       tempo: this.tempo,
+      swing: this.swing,
       length: this.length,
       steps: this.steps.map(step => ({
         id: step.id,
@@ -234,6 +244,7 @@ export class SequenceModel {
     const sequence = new SequenceModel(data.length);
     sequence.name = data.name;
     sequence.tempo = data.tempo;
+    sequence.swing = data.swing || 0;
 
     data.steps.forEach((stepData, i) => {
       Object.entries(stepData.drums).forEach(([drumName, drumData]) => {

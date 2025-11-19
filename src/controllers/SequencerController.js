@@ -64,6 +64,7 @@ export class SequencerController {
     this.controlsView.on('reset', this.handleReset.bind(this));
     this.controlsView.on('tempoChange', this.handleTempoChange.bind(this));
     this.controlsView.on('lengthChange', this.handleLengthChange.bind(this));
+    this.controlsView.on('swingChange', this.handleSwingChange.bind(this));
     this.controlsView.on('loadPattern', this.handleLoadPattern.bind(this));
 
     // Volume view events
@@ -122,10 +123,11 @@ export class SequencerController {
         this.scheduler.onUIUpdate(this.handleUIUpdate.bind(this));
       }
 
-      // Set sequence and tempo
+      // Set sequence, tempo, and swing
       const sequence = this.buildSequenceArray();
       this.scheduler.setSequence(sequence);
       this.scheduler.setTempo(this.model.tempo);
+      this.scheduler.setSwing(this.model.swing);
 
       // Start playback
       this.scheduler.start();
@@ -196,6 +198,17 @@ export class SequencerController {
     
     if (this.scheduler && this.isPlaying) {
       this.scheduler.setTempo(tempo);
+    }
+  }
+
+  /**
+   * Handle swing change
+   */
+  handleSwingChange({ swing }) {
+    this.model.setSwing(swing);
+    
+    if (this.scheduler) {
+      this.scheduler.setSwing(swing);
     }
   }
 
@@ -271,6 +284,7 @@ export class SequencerController {
     this.sequencerView.render(this.model);
     this.controlsView.setTempo(this.model.tempo);
     this.controlsView.setLength(this.model.length);
+    this.controlsView.setSwing(this.model.swing);
     
     // Sync volume controls with model
     this.model.getDrumNames().forEach(drumName => {

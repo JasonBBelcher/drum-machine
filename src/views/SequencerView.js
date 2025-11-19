@@ -194,6 +194,8 @@ export class ControlsView {
     this.tempoOutput = elements.tempoOutput;
     this.lengthSlider = elements.lengthSlider;
     this.lengthOutput = elements.lengthOutput;
+    this.swingSlider = elements.swingSlider;
+    this.swingOutput = elements.swingOutput;
     this.sequenceSelect = elements.sequenceSelect;
     
     this.setupEventListeners();
@@ -223,6 +225,11 @@ export class ControlsView {
       this.emit('lengthChange', { length: parseInt(e.target.value) });
     });
 
+    this.swingSlider.addEventListener('input', (e) => {
+      this.updateSwingDisplay(e.target.value);
+      this.emit('swingChange', { swing: parseInt(e.target.value) });
+    });
+
     if (this.sequenceSelect) {
       this.sequenceSelect.addEventListener('change', (e) => {
         const patternName = e.target.value;
@@ -239,6 +246,10 @@ export class ControlsView {
 
   updateLengthDisplay(length) {
     this.lengthOutput.innerText = `${length} steps`;
+  }
+
+  updateSwingDisplay(swing) {
+    this.swingOutput.innerText = `${swing}% swing`;
   }
 
   setPlayButtonState(isPlaying) {
@@ -259,6 +270,11 @@ export class ControlsView {
   setLength(length) {
     this.lengthSlider.value = length;
     this.updateLengthDisplay(length);
+  }
+
+  setSwing(swing) {
+    this.swingSlider.value = swing;
+    this.updateSwingDisplay(swing);
   }
 
   updateSequenceSelect(patterns) {

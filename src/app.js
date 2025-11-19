@@ -87,7 +87,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       tempoSlider: document.querySelector('.seq-tempo-slider'),
       tempoOutput: document.querySelector('.seq-tempo-output'),
       lengthSlider: document.querySelector('.seq-length-slider'),
-      lengthOutput: document.querySelector('.seq-length-output')
+      lengthOutput: document.querySelector('.seq-length-output'),
+      swingSlider: document.querySelector('.seq-swing-slider'),
+      swingOutput: document.querySelector('.seq-swing-output')
     };
 
     const volumeSliders = document.querySelectorAll('.vol-slider');
