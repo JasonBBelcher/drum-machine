@@ -99,6 +99,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     
     // Phase 4: Sample controls container (if it exists)
     const sampleControlsContainer = document.querySelector('.sample-controls-container');
+    
+    // Phase 6: Song view container
+    const songViewContainer = document.getElementById('song-view');
 
     // Create model
     const model = new SequenceModel();
@@ -112,7 +115,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       controlsElements: controlsElements,
       volumeSliders: volumeSliders,
       volumeOutputContainer: volumeOutputContainer,
-      sampleControlsContainer: sampleControlsContainer
+      sampleControlsContainer: sampleControlsContainer,
+      songViewContainer: songViewContainer
     });
 
     console.log('✅ Drum Sequencer ready!');
@@ -167,6 +171,30 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // Load default patterns if none exist
     await controller.loadDefaultPatterns();
+
+    // Phase 6: Set up tab switching
+    const modeTabs = document.querySelectorAll('.mode-tab');
+    const patternView = document.getElementById('pattern-view');
+    const songView = document.getElementById('song-view');
+
+    modeTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const mode = tab.dataset.mode;
+        
+        // Update tab active states
+        modeTabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        
+        // Show/hide views
+        if (mode === 'pattern') {
+          patternView.style.display = 'block';
+          songView.style.display = 'none';
+        } else if (mode === 'song') {
+          patternView.style.display = 'none';
+          songView.style.display = 'block';
+        }
+      });
+    });
 
     // Expose for debugging (optional)
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {

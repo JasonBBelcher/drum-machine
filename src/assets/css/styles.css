@@ -769,3 +769,484 @@ h1 {
         font-size: 0.85rem;
     }
 }
+
+/* ===== Phase 6: Song Mode Styles ===== */
+
+/* Mode Tabs */
+.mode-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    justify-content: center;
+}
+
+.mode-tab {
+    padding: 0.75rem 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.mode-tab:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.mode-tab.active {
+    background: rgba(93, 141, 93, 0.8);
+    color: rgba(255, 255, 255, 1);
+    border-color: rgba(132, 255, 0, 0.6);
+    box-shadow: 0 2px 8px rgba(132, 255, 0, 0.4);
+}
+
+/* Song View Layout */
+.song-view-wrapper {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+}
+
+.song-controls-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.song-management h3,
+.song-playback h3,
+.pattern-chain-section h3 {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+/* Song Management */
+.song-input-group,
+.song-load-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.song-name-input,
+.song-select {
+    flex: 1;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.song-name-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.btn-song-new,
+.btn-song-save,
+.btn-song-load,
+.btn-song-delete {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    transition: all 0.2s;
+}
+
+.btn-song-new {
+    background: rgba(66, 165, 245, 0.7);
+    color: white;
+}
+
+.btn-song-new:hover {
+    background: rgba(66, 165, 245, 0.9);
+}
+
+.btn-song-save {
+    background: rgba(16, 241, 34, 0.7);
+    color: white;
+}
+
+.btn-song-save:hover {
+    background: rgba(16, 241, 34, 0.9);
+}
+
+.btn-song-load {
+    background: rgba(255, 193, 7, 0.7);
+    color: white;
+}
+
+.btn-song-load:hover {
+    background: rgba(255, 193, 7, 0.9);
+}
+
+.btn-song-delete {
+    background: rgba(255, 0, 0, 0.5);
+    color: white;
+}
+
+.btn-song-delete:hover {
+    background: rgba(255, 0, 0, 0.7);
+}
+
+/* Playback Controls */
+.playback-controls,
+.playback-navigation {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.btn-song-play,
+.btn-song-stop,
+.btn-song-pause,
+.btn-song-resume,
+.btn-song-skip-prev,
+.btn-song-skip-next {
+    flex: 1;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    color: white;
+    transition: all 0.2s;
+}
+
+.btn-song-play {
+    background: rgba(93, 141, 93, 0.8);
+}
+
+.btn-song-play:hover:not(:disabled) {
+    background: rgba(93, 141, 93, 1);
+}
+
+.btn-song-stop {
+    background: rgba(228, 31, 31, 0.6);
+}
+
+.btn-song-stop:hover:not(:disabled) {
+    background: rgba(228, 31, 31, 0.8);
+}
+
+.btn-song-pause {
+    background: rgba(255, 152, 0, 0.6);
+}
+
+.btn-song-pause:hover:not(:disabled) {
+    background: rgba(255, 152, 0, 0.8);
+}
+
+.btn-song-resume {
+    background: rgba(76, 175, 80, 0.6);
+}
+
+.btn-song-resume:hover:not(:disabled) {
+    background: rgba(76, 175, 80, 0.8);
+}
+
+.btn-song-skip-prev,
+.btn-song-skip-next {
+    background: rgba(156, 39, 176, 0.6);
+}
+
+.btn-song-skip-prev:hover:not(:disabled),
+.btn-song-skip-next:hover:not(:disabled) {
+    background: rgba(156, 39, 176, 0.8);
+}
+
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Playback Mode */
+.playback-mode {
+    margin-bottom: 1rem;
+}
+
+.playback-mode label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+}
+
+.song-loop-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+/* Song Status */
+.song-status {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 0.75rem;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+}
+
+.current-pattern-display,
+.song-progress-display {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin: 0.25rem 0;
+}
+
+.current-pattern-name,
+.song-progress {
+    color: rgba(132, 255, 0, 0.9);
+    font-weight: bold;
+}
+
+/* Pattern Chain Section */
+.pattern-chain-section {
+    margin-top: 2rem;
+}
+
+.pattern-add-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.pattern-select {
+    flex: 2;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+}
+
+.pattern-repeat-input {
+    width: 80px;
+    padding: 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+}
+
+.btn-pattern-add {
+    padding: 0.5rem 1.5rem;
+    background: rgba(76, 175, 80, 0.7);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    transition: all 0.2s;
+}
+
+.btn-pattern-add:hover {
+    background: rgba(76, 175, 80, 0.9);
+}
+
+/* Pattern Chain List */
+.pattern-chain-list {
+    max-height: 500px;
+    overflow-y: auto;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    padding: 0.5rem;
+}
+
+.empty-chain-message {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    padding: 2rem;
+    font-style: italic;
+}
+
+/* Chain Item */
+.chain-item {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.chain-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.chain-item-active {
+    background: rgba(93, 141, 93, 0.3);
+    border-color: rgba(132, 255, 0, 0.6);
+    box-shadow: 0 0 10px rgba(132, 255, 0, 0.3);
+}
+
+.chain-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.chain-item-number {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    font-weight: bold;
+    min-width: 40px;
+}
+
+.chain-item-pattern {
+    flex: 1;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.chain-item-controls {
+    display: flex;
+    gap: 0.25rem;
+}
+
+.btn-chain-up,
+.btn-chain-down,
+.btn-chain-remove {
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-chain-up,
+.btn-chain-down {
+    background: rgba(156, 39, 176, 0.6);
+    color: white;
+}
+
+.btn-chain-up:hover:not(:disabled),
+.btn-chain-down:hover:not(:disabled) {
+    background: rgba(156, 39, 176, 0.8);
+}
+
+.btn-chain-remove {
+    background: rgba(255, 0, 0, 0.5);
+    color: white;
+}
+
+.btn-chain-remove:hover {
+    background: rgba(255, 0, 0, 0.7);
+}
+
+.chain-item-details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chain-item-details label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+.chain-repeat-input {
+    width: 60px;
+    padding: 0.25rem 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+}
+
+.chain-progress {
+    color: rgba(132, 255, 0, 0.8);
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+/* Messages */
+.song-error-message,
+.song-success-message {
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    animation: slideDown 0.3s ease;
+}
+
+.song-error-message {
+    background: rgba(244, 67, 54, 0.9);
+    color: white;
+    border-left: 4px solid #D32F2F;
+}
+
+.song-success-message {
+    background: rgba(76, 175, 80, 0.9);
+    color: white;
+    border-left: 4px solid #388E3C;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .song-controls-section {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .mode-tab {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .song-view-wrapper {
+        padding: 1rem;
+    }
+    
+    .pattern-add-controls {
+        flex-wrap: wrap;
+    }
+    
+    .pattern-select {
+        flex: 1 1 100%;
+    }
+    
+    .playback-controls,
+    .playback-navigation {
+        flex-direction: column;
+    }
+}
+}

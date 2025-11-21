@@ -37,6 +37,16 @@
   </header>
   
   <main style="padding: 2rem 1rem;">
+  <!-- Mode Selection Tabs -->
+  <div class="row mb-2">
+    <div class="col-lg-12">
+      <div class="mode-tabs">
+        <button class="mode-tab active" data-mode="pattern">Pattern Mode</button>
+        <button class="mode-tab" data-mode="song">Song Mode</button>
+      </div>
+    </div>
+  </div>
+
   <div class="row mb-2 mt-5">
     <div class="col-lg-3 col-md-2 col-md-offset-2 col-sm-12 col-xs-12">
       <h1>
@@ -81,34 +91,42 @@
     </div>
   </div>
 
-  <div class="dm-label-container">
-    <div class="track-volume">
-      <input class="vol-slider" type="range" name="kick" value="0.50" min="0" step="0.01" max="1" />
+  <!-- Pattern Mode View -->
+  <div class="mode-view" id="pattern-view">
+    <div class="dm-label-container">
+      <div class="track-volume">
+        <input class="vol-slider" type="range" name="kick" value="0.50" min="0" step="0.01" max="1" />
+      </div>
+      <div class="track-volume">
+        <input class="vol-slider" type="range" name="clap" value="0.50" step="0.01" min="0" max="1" />
+      </div>
+      <div class="track-volume">
+        <input class="vol-slider" type="range" name="snare" value="0.50" step="0.01" min="0" max="1" />
+      </div>
+      <div class="track-volume">
+        <input class="vol-slider" type="range" name="hat" value="0.50" step="0.01" min="0" max="1" />
+      </div>
+      <div class="track-volume">
+        <input class="vol-slider" type="range" name="shaker" value="0.50" step="0.01" min="0" max="1" />
+      </div>
+      <div class="track-volume">
+        <input class="vol-slider" type="range" name="bongo1" value="0.50" step="0.01" min="0" max="1" />
+      </div>
+      <div class="track-volume">
+        <input class="vol-slider" type="range" name="congaz" value="0.50" step="0.01" min="0" max="1" />
+      </div>
+      <div class="track-volume">
+        <input class="vol-slider" type="range" name="harmony" value="0.50" step="0.01" min="0" max="1" />
+      </div>
     </div>
-    <div class="track-volume">
-      <input class="vol-slider" type="range" name="clap" value="0.50" step="0.01" min="0" max="1" />
-    </div>
-    <div class="track-volume">
-      <input class="vol-slider" type="range" name="snare" value="0.50" step="0.01" min="0" max="1" />
-    </div>
-    <div class="track-volume">
-      <input class="vol-slider" type="range" name="hat" value="0.50" step="0.01" min="0" max="1" />
-    </div>
-    <div class="track-volume">
-      <input class="vol-slider" type="range" name="shaker" value="0.50" step="0.01" min="0" max="1" />
-    </div>
-    <div class="track-volume">
-      <input class="vol-slider" type="range" name="bongo1" value="0.50" step="0.01" min="0" max="1" />
-    </div>
-    <div class="track-volume">
-      <input class="vol-slider" type="range" name="congaz" value="0.50" step="0.01" min="0" max="1" />
-    </div>
-    <div class="track-volume">
-      <input class="vol-slider" type="range" name="harmony" value="0.50" step="0.01" min="0" max="1" />
-    </div>
+    <div class="dm-label-container volume-output"></div>
+    <div class="dm"></div>
   </div>
-  <div class="dm-label-container volume-output"></div>
-  <div class="dm"></div>
+
+  <!-- Song Mode View -->
+  <div class="mode-view" id="song-view" style="display: none;">
+    <!-- SongView.js will populate this container -->
+  </div>
 
   <!-- Master Effects -->
   <div class="row mt-2">

@@ -9,6 +9,7 @@ import { SequenceModel } from '../models/SequenceModel.js';
 import { SongModel } from '../models/SongModel.js';
 import { SequencerView, ControlsView, VolumeControlsView } from '../views/SequencerView.js';
 import { SampleControlsView } from '../views/SampleControlsView.js';
+import { SongView } from '../views/SongView.js';
 import { AudioEngine } from '../libs/audio-engine.js';
 import { AudioScheduler } from '../libs/audio-scheduler.js';
 import { SongScheduler } from '../libs/song-scheduler.js';
@@ -25,6 +26,7 @@ export class SequencerController {
     this.volumeSliders = config.volumeSliders;
     this.volumeOutputContainer = config.volumeOutputContainer;
     this.sampleControlsContainer = config.sampleControlsContainer; // Phase 4
+    this.songViewContainer = config.songViewContainer; // Phase 6
 
     // Create Model
     this.model = config.model || new SequenceModel();
@@ -41,6 +43,11 @@ export class SequencerController {
         this.model.getDrumNames()
       );
       this.sampleLoader = null; // Initialized when audio engine starts
+    }
+
+    // Phase 6: Song view
+    if (this.songViewContainer) {
+      this.songView = new SongView(this.songViewContainer);
     }
 
     // Audio system
@@ -61,6 +68,11 @@ export class SequencerController {
 
     // Initialize song scheduler after construction
     this.songScheduler = new SongScheduler(this, this.songModel);
+    
+    // Initialize song view
+    if (this.songView) {
+      this.initializeSongView();
+    }
   }
 
   /**
@@ -89,6 +101,31 @@ export class SequencerController {
       this.sampleControlsView.on('pitchChange', this.handlePitchChange.bind(this));
       this.sampleControlsView.on('detuneChange', this.handleDetuneChange.bind(this));
       this.sampleControlsView.on('pitchReset', this.handlePitchReset.bind(this));
+    }
+
+    // Phase 6: Song view events
+    if (this.songView) {
+      // Song management
+      this.songView.on('songNew', this.handleSongNew.bind(this));
+      this.songView.on('songSave', this.handleSongSave.bind(this));
+      this.songView.on('songLoad', this.handleSongLoad.bind(this));
+      this.songView.on('songDelete', this.handleSongDelete.bind(this));
+      
+      // Playback control
+      this.songView.on('songPlay', this.handleSongPlay.bind(this));
+      this.songView.on('songStop', this.handleSongStop.bind(this));
+      this.songView.on('songPause', this.handleSongPause.bind(this));
+      this.songView.on('songResume', this.handleSongResume.bind(this));
+      this.songView.on('songSkipPrev', this.handleSongSkipPrev.bind(this));
+      this.songView.on('songSkipNext', this.handleSongSkipNext.bind(this));
+      this.songView.on('songLoopToggle', this.handleSongLoopToggle.bind(this));
+      
+      // Pattern chain editing
+      this.songView.on('patternAdd', this.handlePatternAdd.bind(this));
+      this.songView.on('patternRemove', this.handlePatternRemove.bind(this));
+      this.songView.on('patternMoveUp', this.handlePatternMoveUp.bind(this));
+      this.songView.on('patternMoveDown', this.handlePatternMoveDown.bind(this));
+      this.songView.on('patternRepeatChange', this.handlePatternRepeatChange.bind(this));
     }
   }
 
@@ -680,6 +717,247 @@ export class SequencerController {
   }
 
   /**
+   * Initialize song view with available patterns and songs
+   */
+  initializeSongView() {
+    // Render the song view
+    this.songView.render();
+    
+    // Load available patterns
+    const patternList = this.storage.list();
+    this.songView.updatePatternList(patternList.map(p => p.name));
+    
+    // Load available songs
+    const songNames = this.storage.getAllSongNames();
+    this.songView.updateSongList(songNames);
+    
+    // Render current song chain
+    this.songView.renderChain(this.songModel.chain);
+    
+    // Set up song scheduler callbacks
+    this.songScheduler.onStepChange = (stepIndex) => {
+      this.songView.highlightCurrentPattern(stepIndex);
+      const step = this.songModel.chain[stepIndex];
+      if (step) {
+        this.songView.setCurrentPattern(step.patternName);
+      }
+    };
+
+    this.songScheduler.onStateChange = () => {
+      const state = this.songScheduler.getState();
+      this.songView.setSongProgress(state.currentStepIndex + 1, this.songModel.chain.length);
+    };
+  }
+
+  /**
+   * Handle song new - create a new empty song
+   */
+  handleSongNew() {
+    this.songModel = new SongModel();
+    this.songScheduler.setSong(this.songModel);
+    this.songView.renderChain(this.songModel.chain);
+    this.songView.setSongName('');
+    this.songView.clear();
+    console.log('✓ New song created');
+  }
+
+  /**
+   * Handle song save
+   */
+  handleSongSave({ name }) {
+    if (!name) {
+      this.songView.showError('Please enter a song name');
+      return;
+    }
+
+    this.songModel.name = name;
+    this.storage.saveSong(name, this.songModel);
+    
+    // Update song list
+    const songNames = this.storage.getAllSongNames();
+    this.songView.updateSongList(songNames);
+    
+    this.songView.showSuccess(`Song "${name}" saved`);
+    console.log(`✓ Saved song: ${name}`);
+  }
+
+  /**
+   * Handle song load
+   */
+  handleSongLoad({ name }) {
+    const loadedSong = this.storage.loadSong(name);
+    
+    if (!loadedSong) {
+      this.songView.showError(`Failed to load song: ${name}`);
+      return;
+    }
+
+    // Stop current playback
+    if (this.songScheduler.isPlaying) {
+      this.songScheduler.stop();
+    }
+
+    this.songModel = loadedSong;
+    this.songScheduler.setSong(this.songModel);
+    
+    // Update view
+    this.songView.setSongName(name);
+    this.songView.renderChain(this.songModel.chain);
+    this.songView.clear();
+    
+    this.songView.showSuccess(`Song "${name}" loaded`);
+    console.log(`✓ Loaded song: ${name}`);
+  }
+
+  /**
+   * Handle song delete
+   */
+  handleSongDelete({ name }) {
+    if (!confirm(`Delete song "${name}"?`)) {
+      return;
+    }
+
+    this.storage.deleteSong(name);
+    
+    // Update song list
+    const songNames = this.storage.getAllSongNames();
+    this.songView.updateSongList(songNames);
+    
+    this.songView.showSuccess(`Song "${name}" deleted`);
+    console.log(`✓ Deleted song: ${name}`);
+  }
+
+  /**
+   * Handle song play
+   */
+  handleSongPlay() {
+    if (this.songModel.isEmpty()) {
+      this.songView.showError('Song is empty. Add patterns first.');
+      return;
+    }
+
+    this.songScheduler.start();
+    this.songView.setPlaybackState('playing');
+    console.log('▶ Playing song');
+  }
+
+  /**
+   * Handle song stop
+   */
+  handleSongStop() {
+    this.songScheduler.stop();
+    this.songView.setPlaybackState('stopped');
+    this.songView.clear();
+    
+    // Stop the pattern sequencer too
+    if (this.isPlaying) {
+      this.stop();
+    }
+    
+    console.log('■ Stopped song');
+  }
+
+  /**
+   * Handle song pause
+   */
+  handleSongPause() {
+    this.songScheduler.pause();
+    this.songView.setPlaybackState('paused');
+    console.log('⏸ Paused song');
+  }
+
+  /**
+   * Handle song resume
+   */
+  handleSongResume() {
+    this.songScheduler.resume();
+    this.songView.setPlaybackState('playing');
+    console.log('▶ Resumed song');
+  }
+
+  /**
+   * Handle skip to previous pattern
+   */
+  handleSongSkipPrev() {
+    this.songScheduler.skipPrevious();
+  }
+
+  /**
+   * Handle skip to next pattern
+   */
+  handleSongSkipNext() {
+    this.songScheduler.skipNext();
+  }
+
+  /**
+   * Handle loop toggle
+   */
+  handleSongLoopToggle({ loop }) {
+    this.songScheduler.setLoop(loop);
+    console.log(`Loop ${loop ? 'enabled' : 'disabled'}`);
+  }
+
+  /**
+   * Handle pattern add to chain
+   */
+  handlePatternAdd({ patternName, repeats }) {
+    // Validate pattern exists
+    if (!this.storage.songExists(patternName)) {
+      this.songView.showError(`Pattern "${patternName}" not found`);
+      return;
+    }
+
+    this.songModel.addPattern(patternName, repeats);
+    this.songView.renderChain(this.songModel.chain);
+    console.log(`✓ Added pattern: ${patternName} (${repeats}x)`);
+  }
+
+  /**
+   * Handle pattern remove from chain
+   */
+  handlePatternRemove({ index }) {
+    const removed = this.songModel.removeStep(index);
+    if (removed) {
+      this.songView.renderChain(this.songModel.chain);
+      console.log(`✓ Removed pattern at position ${index + 1}`);
+    }
+  }
+
+  /**
+   * Handle pattern move up in chain
+   */
+  handlePatternMoveUp({ index }) {
+    if (index > 0) {
+      this.songModel.moveStep(index, index - 1);
+      this.songView.renderChain(this.songModel.chain);
+      console.log(`✓ Moved pattern up`);
+    }
+  }
+
+  /**
+   * Handle pattern move down in chain
+   */
+  handlePatternMoveDown({ index }) {
+    if (index < this.songModel.chain.length - 1) {
+      this.songModel.moveStep(index, index + 1);
+      this.songView.renderChain(this.songModel.chain);
+      console.log(`✓ Moved pattern down`);
+    }
+  }
+
+  /**
+   * Handle pattern repeat count change
+   */
+  handlePatternRepeatChange({ index, repeats }) {
+    const step = this.songModel.chain[index];
+    if (step) {
+      step.repeats = repeats;
+      this.songView.renderChain(this.songModel.chain);
+      console.log(`✓ Updated repeats to ${repeats}`);
+    }
+  }
+
+  /**
    * Cleanup
    */
   destroy() {
@@ -703,6 +981,10 @@ export class SequencerController {
     
     if (this.sampleControlsView) {
       this.sampleControlsView.clear();
+    }
+    
+    if (this.songView) {
+      this.songView.destroy();
     }
   }
 }
