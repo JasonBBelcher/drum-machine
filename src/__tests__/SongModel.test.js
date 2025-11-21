@@ -403,11 +403,14 @@ describe('SongModel', () => {
       song.currentStepIndex = 1;
       
       const json = song.toJSON();
-      expect(json.version).toBe('1.0');
+      expect(json.version).toBe('1.2'); // Phase 8: Updated version
       expect(json.name).toBe('Test Song');
       expect(json.isLooping).toBe(false);
       expect(json.chain.length).toBe(2);
       expect(json.chain[0].patternName).toBe('pattern1');
+      expect(json.jumps).toEqual([]); // Phase 7: Jumps array included
+      expect(json.mode).toBe('chain'); // Phase 8: Mode included
+      expect(json.sceneChain).toEqual([]); // Phase 8: Scene chain included
       // currentStepIndex and isPlaying not serialized (runtime state)
     });
 

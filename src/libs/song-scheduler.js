@@ -13,6 +13,10 @@ export class SongScheduler {
     this.isPlaying = false;
     this.patternEndTimer = null;
     this.onStepChangeCallback = null;
+    this.visitedJumps = new Set(); // Phase 7: Track jumps to prevent infinite loops
+    this.maxJumpsPerPlaythrough = 100; // Phase 7: Safety limit
+    this.activeClips = []; // Phase 8: Track currently playing clips in scene mode
+    this.onSceneChangeCallback = null; // Phase 8: Scene change notification
   }
 
   /**
@@ -32,6 +36,7 @@ export class SongScheduler {
     this.isPlaying = true;
     this.songModel.reset();
     this.songModel.isPlaying = true;
+    this.visitedJumps.clear(); // Phase 7: Reset jump tracking
     this.playNextStep();
   }
 
@@ -168,16 +173,86 @@ export class SongScheduler {
   handlePatternComplete() {
     if (!this.isPlaying || !this.currentStep) return;
 
+    const currentStepIndex = this.songModel.currentStepIndex;
+    const currentRepeat = this.currentStep.currentRepeat;
+    
     const shouldAdvance = this.currentStep.incrementRepeat();
 
     if (shouldAdvance) {
-      // All repeats complete, move to next pattern
-      this.currentStep.reset();
-      this.songModel.advance();
+      // All repeats complete, check for jumps before advancing
+      const jump = this.checkForJump(currentStepIndex, currentRepeat);
+      
+      if (jump) {
+        // Execute jump
+        this.executeJump(jump);
+      } else {
+        // Normal advance to next pattern
+        this.currentStep.reset();
+        this.songModel.advance();
+      }
     }
 
-    // Play next (might be same pattern if repeating)
+    // Play next (might be same pattern if repeating, or jumped pattern)
     this.playNextStep();
+  }
+
+  /**
+   * Phase 7: Check if there's a valid jump from current position
+   * @param {number} stepIndex - Current step index
+   * @param {number} repeatIndex - Current repeat (before increment)
+   * @returns {Jump|null} Jump to execute, or null
+   */
+  checkForJump(stepIndex, repeatIndex) {
+    const jumps = this.songModel.getJumpsFrom(stepIndex);
+    
+    if (jumps.length === 0) return null;
+
+    const step = this.songModel.chain[stepIndex];
+    if (!step) return null;
+
+    // Check each jump's condition
+    for (const jump of jumps) {
+      // Prevent infinite loops
+      const jumpKey = `${jump.fromIndex}-${jump.toIndex}-${repeatIndex}`;
+      if (this.visitedJumps.has(jumpKey)) {
+        console.warn(`Skipping jump to prevent infinite loop: ${jumpKey}`);
+        continue;
+      }
+
+      if (this.visitedJumps.size >= this.maxJumpsPerPlaythrough) {
+        console.warn('Max jumps per playthrough reached, skipping jump');
+        continue;
+      }
+
+      // Check if condition is met
+      if (jump.shouldJump(repeatIndex, step.repeats)) {
+        return jump;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Phase 7: Execute a jump
+   * @param {Jump} jump - Jump to execute
+   */
+  executeJump(jump) {
+    const jumpKey = `${jump.fromIndex}-${jump.toIndex}-${this.currentStep.currentRepeat}`;
+    this.visitedJumps.add(jumpKey);
+
+    console.log(`🔀 Executing jump: ${jump.label || `${jump.fromIndex} → ${jump.toIndex}`}`);
+
+    // Reset current step
+    this.currentStep.reset();
+
+    // Jump to target
+    this.songModel.currentStepIndex = jump.toIndex;
+
+    // Notify listeners of jump
+    if (this.onJumpCallback) {
+      this.onJumpCallback(jump);
+    }
   }
 
   /**
@@ -254,10 +329,18 @@ export class SongScheduler {
 
   /**
    * Set callback for step change notifications
-   * @param {Function} callback - Called with (stepIndex) when step changes
+   * @param {Function} callback - Called with (stepIndex, progressInfo) when step changes
    */
   onStepChange(callback) {
     this.onStepChangeCallback = callback;
+  }
+
+  /**
+   * Phase 7: Set callback for jump notifications
+   * @param {Function} callback - Called with (jump) when jump executes
+   */
+  onJump(callback) {
+    this.onJumpCallback = callback;
   }
 
   /**
@@ -266,8 +349,38 @@ export class SongScheduler {
    */
   notifyStepChange(stepIndex) {
     if (this.onStepChangeCallback) {
-      this.onStepChangeCallback(stepIndex);
+      // Calculate progress info
+      const progressInfo = this.calculateProgress();
+      this.onStepChangeCallback(stepIndex, progressInfo);
     }
+  }
+
+  /**
+   * Calculate overall progress through the song
+   * @returns {Object} Progress information
+   */
+  calculateProgress() {
+    const chain = this.songModel.chain;
+    let totalRepeats = 0;
+    let completedRepeats = 0;
+
+    chain.forEach((step, index) => {
+      totalRepeats += step.repeats;
+      
+      if (index < this.songModel.currentStepIndex) {
+        // Previous steps are fully complete
+        completedRepeats += step.repeats;
+      } else if (index === this.songModel.currentStepIndex && this.currentStep) {
+        // Current step may be partially complete
+        completedRepeats += this.currentStep.currentRepeat;
+      }
+    });
+
+    return {
+      totalRepeats,
+      completedRepeats,
+      percentComplete: totalRepeats > 0 ? (completedRepeats / totalRepeats) * 100 : 0
+    };
   }
 
   /**
@@ -285,10 +398,86 @@ export class SongScheduler {
   }
 
   /**
+   * Phase 8: Launch a scene (play multiple patterns simultaneously)
+   * @param {Scene} scene - The scene to launch
+   * @returns {boolean} Success status
+   */
+  launchScene(scene) {
+    if (!scene || !scene.clips || scene.clips.length === 0) {
+      console.warn('Cannot launch empty scene');
+      return false;
+    }
+
+    // Stop any currently playing patterns
+    this.controller.handleStop();
+    
+    // Clear active clips
+    this.activeClips = [];
+
+    // For now, we'll play the first clip in the scene
+    // In a full implementation, this would handle multi-pattern playback
+    const firstClip = scene.clips[0];
+    const success = this.controller.loadPatternByName(firstClip.patternName);
+    
+    if (success) {
+      this.activeClips.push(firstClip);
+      this.notifySceneChange(scene);
+    }
+
+    return success;
+  }
+
+  /**
+   * Phase 8: Launch scene by index from the scene grid
+   * @param {number} sceneIndex - Index of the scene to launch
+   * @returns {boolean} Success status
+   */
+  launchSceneByIndex(sceneIndex) {
+    const scene = this.songModel.sceneGrid?.getScene(sceneIndex);
+    
+    if (!scene) {
+      console.warn(`Scene at index ${sceneIndex} not found`);
+      return false;
+    }
+
+    return this.launchScene(scene);
+  }
+
+  /**
+   * Phase 8: Register callback for scene changes
+   * @param {Function} callback - Called when scene changes
+   */
+  onSceneChange(callback) {
+    this.onSceneChangeCallback = callback;
+  }
+
+  /**
+   * Phase 8: Notify listeners of scene change
+   * @param {Scene} scene - The scene that was launched
+   */
+  notifySceneChange(scene) {
+    if (this.onSceneChangeCallback) {
+      this.onSceneChangeCallback(scene);
+    }
+  }
+
+  /**
+   * Phase 8: Get currently active clips
+   * @returns {Array} Array of active Clip instances
+   */
+  getActiveClips() {
+    return [...this.activeClips];
+  }
+
+  /**
    * Clean up resources
    */
   destroy() {
     this.stop();
     this.onStepChangeCallback = null;
+    this.onJumpCallback = null; // Phase 7
+    this.onSceneChangeCallback = null; // Phase 8
+    this.visitedJumps.clear(); // Phase 7
+    this.activeClips = []; // Phase 8
   }
 }

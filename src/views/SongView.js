@@ -82,6 +82,12 @@ export class SongView {
 
       <div class="pattern-chain-section">
         <h3>Pattern Chain</h3>
+        <div class="song-overall-progress">
+          <div class="overall-progress-label">Overall Progress:</div>
+          <div class="overall-progress-bar">
+            <div class="overall-progress-fill" style="width: 0%"></div>
+          </div>
+        </div>
         <div class="pattern-add-controls">
           <select class="pattern-select">
             <option value="">-- Select pattern --</option>
@@ -92,6 +98,7 @@ export class SongView {
         <div class="pattern-chain-list">
           <p class="empty-chain-message">No patterns added yet. Add patterns above to build your song.</p>
         </div>
+        <div class="pattern-preview-tooltip" style="display: none;"></div>
       </div>
     `;
 
@@ -168,6 +175,57 @@ export class SongView {
       const repeats = parseInt(this.elements.patternRepeatInput.value) || 1;
       if (patternName) this.emit('patternAdd', { patternName, repeats });
     });
+    
+    // Phase 6.3: Keyboard shortcuts
+    this.keyboardHandler = (e) => this.handleKeyboardShortcut(e);
+    document.addEventListener('keydown', this.keyboardHandler);
+  }
+  
+  /**
+   * Handle keyboard shortcuts
+   * @param {KeyboardEvent} e - Keyboard event
+   */
+  handleKeyboardShortcut(e) {
+    // Only handle shortcuts when song view is visible
+    if (this.container.style.display === 'none') return;
+    
+    // Don't interfere with text inputs
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'SELECT' || e.target.tagName === 'TEXTAREA') {
+      return;
+    }
+
+    switch(e.key) {
+      case ' ': // Space - play/pause toggle
+        e.preventDefault();
+        this.emit('keyboardTogglePlayPause');
+        break;
+      case 'ArrowLeft': // Left arrow - previous pattern
+        e.preventDefault();
+        this.emit('songSkipPrev');
+        break;
+      case 'ArrowRight': // Right arrow - next pattern
+        e.preventDefault();
+        this.emit('songSkipNext');
+        break;
+      case 'Escape': // Escape - stop
+        e.preventDefault();
+        this.emit('songStop');
+        break;
+      case 'l': // L - toggle loop
+      case 'L':
+        e.preventDefault();
+        this.elements.loopCheckbox.checked = !this.elements.loopCheckbox.checked;
+        this.emit('songLoopToggle', { loop: this.elements.loopCheckbox.checked });
+        break;
+      case 's': // S - save (with Ctrl/Cmd)
+      case 'S':
+        if (e.ctrlKey || e.metaKey) {
+          e.preventDefault();
+          const name = this.elements.songNameInput.value.trim();
+          if (name) this.emit('songSave', { name });
+        }
+        break;
+    }
   }
 
   /**
@@ -231,15 +289,25 @@ export class SongView {
     const item = document.createElement('div');
     item.className = 'chain-item';
     item.dataset.index = index;
+    
+    // Phase 6.3: Enable drag-and-drop
+    item.draggable = true;
+    
+    // Phase 6.3: Calculate progress percentage
+    const progressPercent = step.repeats > 0 
+      ? Math.round(((step.currentRepeat + 1) / step.repeats) * 100) 
+      : 0;
 
     item.innerHTML = `
       <div class="chain-item-header">
+        <span class="chain-item-drag-handle" title="Drag to reorder">⋮⋮</span>
         <span class="chain-item-number">#${index + 1}</span>
-        <span class="chain-item-pattern">${step.patternName}</span>
+        <span class="chain-item-pattern" title="Hover for pattern details">${step.patternName}</span>
         <div class="chain-item-controls">
-          <button class="btn-chain-up" data-index="${index}" ${index === 0 ? 'disabled' : ''}>▲</button>
-          <button class="btn-chain-down" data-index="${index}">▼</button>
-          <button class="btn-chain-remove" data-index="${index}">✕</button>
+          <button class="btn-chain-up" data-index="${index}" ${index === 0 ? 'disabled' : ''} title="Move up">▲</button>
+          <button class="btn-chain-down" data-index="${index}" title="Move down">▼</button>
+          <button class="btn-chain-jump" data-index="${index}" title="Add jump marker">🔀</button>
+          <button class="btn-chain-remove" data-index="${index}" title="Remove pattern">✕</button>
         </div>
       </div>
       <div class="chain-item-details">
@@ -252,23 +320,89 @@ export class SongView {
         </label>
         <span class="chain-progress">${step.currentRepeat + 1} / ${step.repeats}</span>
       </div>
+      <div class="chain-item-progress-bar">
+        <div class="chain-progress-fill" style="width: ${progressPercent}%"></div>
+      </div>
+      <div class="chain-item-jumps"></div>
     `;
 
     // Bind item-specific events
     const btnUp = item.querySelector('.btn-chain-up');
     const btnDown = item.querySelector('.btn-chain-down');
+    const btnJump = item.querySelector('.btn-chain-jump');
     const btnRemove = item.querySelector('.btn-chain-remove');
     const repeatInput = item.querySelector('.chain-repeat-input');
+    const patternNameEl = item.querySelector('.chain-item-pattern');
 
     btnUp.addEventListener('click', () => this.emit('patternMoveUp', { index }));
     btnDown.addEventListener('click', () => this.emit('patternMoveDown', { index }));
+    btnJump.addEventListener('click', () => this.showJumpDialog(index));
     btnRemove.addEventListener('click', () => this.emit('patternRemove', { index }));
     repeatInput.addEventListener('change', (e) => {
       const repeats = parseInt(e.target.value) || 1;
       this.emit('patternRepeatChange', { index, repeats });
     });
+    
+    // Phase 6.3: Pattern preview on hover
+    patternNameEl.addEventListener('mouseenter', () => {
+      this.emit('patternHover', { patternName: step.patternName, element: patternNameEl });
+    });
+    patternNameEl.addEventListener('mouseleave', () => {
+      this.emit('patternHoverEnd');
+    });
+
+    // Phase 6.3: Drag-and-drop handlers
+    this.attachDragHandlers(item, index);
 
     return item;
+  }
+  
+  /**
+   * Attach drag-and-drop event handlers to a chain item
+   * @param {HTMLElement} item - Chain item element
+   * @param {number} index - Item index
+   */
+  attachDragHandlers(item, index) {
+    item.addEventListener('dragstart', (e) => {
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', index.toString());
+      item.classList.add('dragging');
+      this.draggedIndex = index;
+    });
+
+    item.addEventListener('dragend', (e) => {
+      item.classList.remove('dragging');
+      this.draggedIndex = null;
+      // Remove all drag-over classes
+      document.querySelectorAll('.drag-over').forEach(el => {
+        el.classList.remove('drag-over');
+      });
+    });
+
+    item.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      
+      if (this.draggedIndex !== null && this.draggedIndex !== index) {
+        item.classList.add('drag-over');
+      }
+    });
+
+    item.addEventListener('dragleave', (e) => {
+      item.classList.remove('drag-over');
+    });
+
+    item.addEventListener('drop', (e) => {
+      e.preventDefault();
+      item.classList.remove('drag-over');
+      
+      if (this.draggedIndex !== null && this.draggedIndex !== index) {
+        this.emit('patternDragDrop', { 
+          fromIndex: this.draggedIndex, 
+          toIndex: index 
+        });
+      }
+    });
   }
 
   /**
@@ -288,6 +422,25 @@ export class SongView {
         item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     }
+  }
+
+  /**
+   * Phase 6.3: Update progress bar for a specific chain item
+   * @param {number} stepIndex - Index of the step
+   * @param {Object} step - Step object with currentRepeat and repeats
+   */
+  updateChainItemProgress(stepIndex, step) {
+    if (!step) return;
+    
+    const item = this.elements.chainList.querySelector(`[data-index="${stepIndex}"]`);
+    if (!item) return;
+    
+    const progressFill = item.querySelector('.chain-progress-fill');
+    if (!progressFill) return;
+    
+    // Calculate progress percentage
+    const progressPercent = ((step.currentRepeat + 1) / step.repeats) * 100;
+    progressFill.style.width = `${progressPercent}%`;
   }
 
   /**
@@ -329,6 +482,54 @@ export class SongView {
    */
   setLoopMode(loop) {
     this.elements.loopCheckbox.checked = loop;
+  }
+  
+  /**
+   * Update overall song progress bar
+   * @param {number} completedRepeats - Number of completed pattern repeats
+   * @param {number} totalRepeats - Total pattern repeats in song
+   */
+  setOverallProgress(completedRepeats, totalRepeats) {
+    const progressBar = this.container.querySelector('.overall-progress-fill');
+    if (progressBar && totalRepeats > 0) {
+      const percent = Math.round((completedRepeats / totalRepeats) * 100);
+      progressBar.style.width = `${percent}%`;
+      progressBar.textContent = `${percent}%`;
+    }
+  }
+  
+  /**
+   * Show pattern preview tooltip
+   * @param {Object} patternInfo - Pattern information
+   * @param {HTMLElement} targetElement - Element to position tooltip near
+   */
+  showPatternPreview(patternInfo, targetElement) {
+    const tooltip = this.container.querySelector('.pattern-preview-tooltip');
+    if (!tooltip) return;
+    
+    tooltip.innerHTML = `
+      <div class="preview-title">${patternInfo.name}</div>
+      <div class="preview-detail">Length: ${patternInfo.length || 16} steps</div>
+      <div class="preview-detail">Tempo: ${patternInfo.tempo || 120} BPM</div>
+      ${patternInfo.activeDrums ? `<div class="preview-detail">Active drums: ${patternInfo.activeDrums}</div>` : ''}
+    `;
+    
+    // Position tooltip near the target element
+    const rect = targetElement.getBoundingClientRect();
+    const containerRect = this.container.getBoundingClientRect();
+    tooltip.style.display = 'block';
+    tooltip.style.left = `${rect.left - containerRect.left}px`;
+    tooltip.style.top = `${rect.bottom - containerRect.top + 5}px`;
+  }
+  
+  /**
+   * Hide pattern preview tooltip
+   */
+  hidePatternPreview() {
+    const tooltip = this.container.querySelector('.pattern-preview-tooltip');
+    if (tooltip) {
+      tooltip.style.display = 'none';
+    }
   }
 
   /**
@@ -403,6 +604,172 @@ export class SongView {
   }
 
   /**
+   * Phase 7: Show jump creation dialog
+   * @param {number} fromIndex - Source step index
+   */
+  showJumpDialog(fromIndex) {
+    // Create modal
+    const modal = document.createElement('div');
+    modal.className = 'jump-dialog-overlay';
+    
+    modal.innerHTML = `
+      <div class="jump-dialog">
+        <h3>Add Jump Marker</h3>
+        <p>From pattern #${fromIndex + 1}</p>
+        
+        <label>
+          Jump to pattern:
+          <select class="jump-target-select" id="jumpTargetSelect">
+            <option value="">-- Select target --</option>
+          </select>
+        </label>
+        
+        <label>
+          Label (optional):
+          <input type="text" class="jump-label-input" id="jumpLabelInput" placeholder="e.g., Verse, Chorus" />
+        </label>
+        
+        <label>
+          Condition:
+          <select class="jump-condition-select" id="jumpConditionSelect">
+            <option value="always">Always</option>
+            <option value="on-first">On first repeat</option>
+            <option value="on-last">On last repeat</option>
+          </select>
+        </label>
+        
+        <div class="jump-dialog-buttons">
+          <button class="btn-jump-cancel">Cancel</button>
+          <button class="btn-jump-create">Create Jump</button>
+        </div>
+      </div>
+    `;
+    
+    document.body.appendChild(modal);
+    
+    // Populate target dropdown (all patterns except source)
+    const targetSelect = modal.querySelector('#jumpTargetSelect');
+    const chainItems = this.elements.chainList.querySelectorAll('.chain-item');
+    chainItems.forEach((item, index) => {
+      if (index !== fromIndex) {
+        const patternName = item.querySelector('.chain-item-pattern').textContent;
+        const option = document.createElement('option');
+        option.value = index;
+        option.textContent = `#${index + 1} - ${patternName}`;
+        targetSelect.appendChild(option);
+      }
+    });
+    
+    // Event handlers
+    modal.querySelector('.btn-jump-cancel').addEventListener('click', () => {
+      modal.remove();
+    });
+    
+    modal.querySelector('.btn-jump-create').addEventListener('click', () => {
+      const toIndex = parseInt(targetSelect.value);
+      const label = modal.querySelector('#jumpLabelInput').value.trim();
+      const condition = modal.querySelector('#jumpConditionSelect').value;
+      
+      if (isNaN(toIndex)) {
+        alert('Please select a target pattern');
+        return;
+      }
+      
+      this.emit('jumpAdd', { fromIndex, toIndex, label, condition });
+      modal.remove();
+    });
+    
+    // Close on overlay click
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.remove();
+      }
+    });
+  }
+
+  /**
+   * Phase 7: Render jump markers for all chain items
+   * @param {Jump[]} jumps - Array of jump objects
+   */
+  renderJumps(jumps) {
+    // Clear existing jump markers
+    this.elements.chainList.querySelectorAll('.chain-item-jumps').forEach(el => {
+      el.innerHTML = '';
+    });
+    
+    // Remove existing jump arrows
+    this.elements.chainList.querySelectorAll('.jump-arrow').forEach(el => {
+      el.remove();
+    });
+    
+    if (!jumps || jumps.length === 0) return;
+    
+    // Render each jump
+    jumps.forEach((jump, jumpIndex) => {
+      this.renderJump(jump, jumpIndex);
+    });
+  }
+
+  /**
+   * Phase 7: Render a single jump marker
+   * @param {Jump} jump - Jump object
+   * @param {number} jumpIndex - Jump index
+   */
+  renderJump(jump, jumpIndex) {
+    const fromItem = this.elements.chainList.querySelector(`[data-index="${jump.fromIndex}"]`);
+    const toItem = this.elements.chainList.querySelector(`[data-index="${jump.toIndex}"]`);
+    
+    if (!fromItem || !toItem) return;
+    
+    // Add jump badge to source item
+    const jumpsContainer = fromItem.querySelector('.chain-item-jumps');
+    const jumpBadge = document.createElement('div');
+    jumpBadge.className = 'jump-badge';
+    jumpBadge.dataset.jumpIndex = jumpIndex;
+    jumpBadge.innerHTML = `
+      <span class="jump-info">
+        🔀 → #${jump.toIndex + 1}
+        ${jump.label ? `<span class="jump-label">${jump.label}</span>` : ''}
+        <span class="jump-condition">${jump.getConditionText()}</span>
+      </span>
+      <button class="btn-jump-remove" data-jump-index="${jumpIndex}" title="Remove jump">✕</button>
+    `;
+    
+    jumpsContainer.appendChild(jumpBadge);
+    
+    // Event handler for remove button
+    jumpBadge.querySelector('.btn-jump-remove').addEventListener('click', () => {
+      this.emit('jumpRemove', { jumpIndex });
+    });
+    
+    // Add visual arrow (simplified, just a marker on target)
+    const targetIndicator = document.createElement('div');
+    targetIndicator.className = 'jump-target-indicator';
+    targetIndicator.textContent = `← Jump from #${jump.fromIndex + 1}`;
+    toItem.insertBefore(targetIndicator, toItem.firstChild);
+  }
+
+  /**
+   * Phase 7: Highlight active jump during playback
+   * @param {Jump|null} jump - Currently executing jump, or null
+   */
+  highlightJump(jump) {
+    // Clear previous highlights
+    this.elements.chainList.querySelectorAll('.jump-badge').forEach(badge => {
+      badge.classList.remove('jump-active');
+    });
+    
+    if (!jump) return;
+    
+    // Highlight the jump badge
+    const badge = this.elements.chainList.querySelector(`[data-jump-index]`);
+    if (badge) {
+      badge.classList.add('jump-active');
+      setTimeout(() => badge.classList.remove('jump-active'), 1000);
+    }
+  }
+
+  /**
    * Clear all highlights and reset view
    */
   clear() {
@@ -447,8 +814,15 @@ export class SongView {
    * Destroy the view and clean up
    */
   destroy() {
+    // Remove keyboard event listener
+    if (this.keyboardHandler) {
+      document.removeEventListener('keydown', this.keyboardHandler);
+      this.keyboardHandler = null;
+    }
+    
     this.eventHandlers.clear();
     this.container.innerHTML = '';
     this.elements = {};
+    this.draggedIndex = null;
   }
 }

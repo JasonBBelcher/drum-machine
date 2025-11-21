@@ -1218,6 +1218,234 @@ button:disabled {
     }
 }
 
+/* ===== Phase 6.3: Enhanced UI Features ===== */
+
+/* Drag and Drop */
+.chain-item-drag-handle {
+    cursor: move;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+    user-select: none;
+    transition: color 0.2s;
+}
+
+.chain-item-drag-handle:hover {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.chain-item.dragging {
+    opacity: 0.5;
+    transform: scale(0.95);
+    transition: all 0.2s;
+}
+
+.chain-item.drag-over {
+    border-top: 3px solid rgba(132, 255, 0, 0.8);
+    margin-top: 3px;
+    animation: dragOverPulse 0.5s ease-in-out infinite;
+}
+
+@keyframes dragOverPulse {
+    0%, 100% {
+        border-color: rgba(132, 255, 0, 0.8);
+    }
+    50% {
+        border-color: rgba(132, 255, 0, 0.4);
+    }
+}
+
+/* Progress Indicators */
+.chain-item-progress-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+}
+
+.chain-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.song-overall-progress {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.overall-progress-label {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.overall-progress-bar {
+    width: 100%;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.overall-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2196F3, #03A9F4, #00BCD4);
+    transition: width 0.5s ease;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Pattern Preview Tooltip */
+.pattern-preview-tooltip {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.95);
+    border: 1px solid rgba(132, 255, 0, 0.6);
+    border-radius: 4px;
+    padding: 0.75rem;
+    z-index: 1000;
+    pointer-events: none;
+    min-width: 200px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    animation: tooltipFadeIn 0.2s ease;
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.preview-title {
+    color: rgba(132, 255, 0, 0.9);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.preview-detail {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.85rem;
+    margin: 0.25rem 0;
+}
+
+/* Enhanced Visual Feedback */
+.chain-item {
+    transition: all 0.3s ease;
+}
+
+.chain-item:hover:not(.dragging) {
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(132, 255, 0, 0.3);
+}
+
+.chain-item-active {
+    animation: activePatternPulse 2s ease-in-out infinite;
+}
+
+@keyframes activePatternPulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(132, 255, 0, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(132, 255, 0, 0.6);
+    }
+}
+
+/* Button Animations */
+.btn-song-play:active,
+.btn-song-stop:active,
+.btn-song-pause:active,
+.btn-song-resume:active,
+.btn-song-skip-prev:active,
+.btn-song-skip-next:active {
+    transform: scale(0.95);
+    transition: transform 0.1s;
+}
+
+.btn-pattern-add {
+    transition: all 0.2s;
+}
+
+.btn-pattern-add:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.4);
+}
+
+.btn-pattern-add:active {
+    transform: scale(0.95);
+}
+
+/* Keyboard Shortcut Hints */
+.btn-song-play::after,
+.btn-song-stop::after,
+.btn-song-skip-prev::after,
+.btn-song-skip-next::after {
+    content: attr(data-shortcut);
+    display: block;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin-top: 2px;
+}
+
+/* Loading States */
+.chain-item.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.chain-item.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid rgba(132, 255, 0, 0.3);
+    border-top-color: rgba(132, 255, 0, 0.8);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Enhanced Chain Item Header */
+.chain-item-header {
+    display: flex;
+    align-items: center;
+}
+
+.chain-item-pattern {
+    cursor: help;
+    transition: color 0.2s;
+}
+
+.chain-item-pattern:hover {
+    color: rgba(132, 255, 0, 0.9);
+}
+
 /* Responsive Design */
 @media (max-width: 992px) {
     .song-controls-section {
@@ -1248,5 +1476,626 @@ button:disabled {
     .playback-navigation {
         flex-direction: column;
     }
+    
+    .chain-item-drag-handle {
+        font-size: 1rem;
+    }
+    
+    .pattern-preview-tooltip {
+        min-width: 150px;
+        font-size: 0.8rem;
+    }
 }
+
+/* ===== Phase 7: Jump Mode ===== */
+
+/* Jump Button */
+.btn-chain-jump {
+    background: linear-gradient(135deg, #9C27B0, #673AB7);
+    border: 1px solid rgba(156, 39, 176, 0.3);
+}
+
+.btn-chain-jump:hover {
+    background: linear-gradient(135deg, #AB47BC, #7E57C2);
+    box-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+}
+
+/* Jump Dialog */
+.jump-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    animation: fadeIn 0.2s ease;
+}
+
+.jump-dialog {
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    border: 2px solid rgba(132, 255, 0, 0.4);
+    border-radius: 8px;
+    padding: 2rem;
+    min-width: 400px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.jump-dialog h3 {
+    color: rgba(132, 255, 0, 0.9);
+    margin: 0 0 0.5rem 0;
+}
+
+.jump-dialog p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 1.5rem 0;
+    font-size: 0.9rem;
+}
+
+.jump-dialog label {
+    display: block;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.jump-dialog select,
+.jump-dialog input[type="text"] {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(132, 255, 0, 0.3);
+    border-radius: 4px;
+    color: white;
+    font-size: 1rem;
+}
+
+.jump-dialog select:focus,
+.jump-dialog input[type="text"]:focus {
+    outline: none;
+    border-color: rgba(132, 255, 0, 0.6);
+    box-shadow: 0 0 5px rgba(132, 255, 0, 0.3);
+}
+
+.jump-dialog-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    justify-content: flex-end;
+}
+
+.btn-jump-cancel,
+.btn-jump-create {
+    padding: 0.5rem 1.5rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.btn-jump-cancel {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.btn-jump-cancel:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-jump-create {
+    background: linear-gradient(135deg, #9C27B0, #673AB7);
+    color: white;
+}
+
+.btn-jump-create:hover {
+    background: linear-gradient(135deg, #AB47BC, #7E57C2);
+    box-shadow: 0 0 10px rgba(156, 39, 176, 0.5);
+}
+
+/* Jump Markers */
+.chain-item-jumps {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.jump-badge {
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.2), rgba(103, 58, 183, 0.2));
+    border: 1px solid rgba(156, 39, 176, 0.5);
+    border-radius: 4px;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s;
+}
+
+.jump-badge:hover {
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.3), rgba(103, 58, 183, 0.3));
+    border-color: rgba(156, 39, 176, 0.8);
+}
+
+.jump-badge.jump-active {
+    animation: jumpPulse 0.5s ease;
+    box-shadow: 0 0 15px rgba(156, 39, 176, 0.8);
+}
+
+@keyframes jumpPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+.jump-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.85rem;
+}
+
+.jump-label {
+    background: rgba(156, 39, 176, 0.3);
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.jump-condition {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.75rem;
+    font-style: italic;
+}
+
+.btn-jump-remove {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: rgba(244, 67, 54, 0.9);
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+}
+
+.btn-jump-remove:hover {
+    background: rgba(244, 67, 54, 0.3);
+    border-color: rgba(244, 67, 54, 0.6);
+}
+
+/* Jump Target Indicator */
+.jump-target-indicator {
+    background: linear-gradient(90deg, rgba(156, 39, 176, 0.3), transparent);
+    border-left: 3px solid rgba(156, 39, 176, 0.8);
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+    color: rgba(156, 39, 176, 0.9);
+    font-size: 0.85rem;
+    font-weight: bold;
+    animation: slideInLeft 0.3s ease;
+}
+
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .jump-dialog {
+        min-width: 90%;
+        padding: 1.5rem;
+    }
+    
+    .jump-info {
+        flex-wrap: wrap;
+    }
+}
+
+/* ============================================================================
+   PHASE 8: SCENE GRID
+   ============================================================================ */
+
+/* Scene Grid Container */
+.scene-grid-container {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+/* Scene Grid Header */
+.scene-grid-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.scene-grid-header h3 {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.2rem;
+}
+
+.add-scene-btn {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.add-scene-btn:hover {
+    background: linear-gradient(135deg, #1976D2, #1565C0);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Scene Grid */
+.scene-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.scene-grid-empty {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-style: italic;
+}
+
+/* Track Headers */
+.scene-grid-header-row {
+    display: grid;
+    grid-template-columns: 150px repeat(8, 1fr) 80px;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.scene-name-header,
+.track-header,
+.launch-header {
+    text-align: center;
+    padding: 0.5rem;
+}
+
+/* Scene Row */
+.scene-row {
+    display: grid;
+    grid-template-columns: 150px repeat(8, 1fr) 80px;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.scene-row:hover {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.scene-row.active {
+    background: rgba(76, 175, 80, 0.2);
+    border: 1px solid rgba(76, 175, 80, 0.5);
+}
+
+/* Scene Name Cell */
+.scene-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.scene-name-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.scene-name-input:focus {
+    outline: none;
+    border-color: rgba(33, 150, 243, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.delete-scene-btn {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: rgba(244, 67, 54, 0.9);
+    width: 30px;
+    height: 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.delete-scene-btn:hover {
+    background: rgba(244, 67, 54, 0.4);
+    transform: scale(1.1);
+}
+
+/* Clip Cell */
+.clip-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    min-height: 40px;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.clip-cell.empty-clip {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.clip-cell.has-clip {
+    background: rgba(76, 175, 80, 0.2);
+    border-color: rgba(76, 175, 80, 0.4);
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.5rem;
+}
+
+.clip-cell.has-clip:hover {
+    background: rgba(76, 175, 80, 0.3);
+}
+
+.clip-name {
+    color: white;
+    font-size: 0.8rem;
+    text-align: center;
+    word-break: break-word;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-clip-btn {
+    background: transparent;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.5);
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: all 0.2s;
+}
+
+.add-clip-btn:hover {
+    background: rgba(33, 150, 243, 0.2);
+    border-color: rgba(33, 150, 243, 0.5);
+    color: rgba(33, 150, 243, 0.9);
+}
+
+.remove-clip-btn {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: rgba(244, 67, 54, 0.9);
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1;
+    transition: all 0.2s;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+}
+
+.remove-clip-btn:hover {
+    background: rgba(244, 67, 54, 0.4);
+    transform: scale(1.1);
+}
+
+/* Launch Cell */
+.launch-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.launch-scene-btn {
+    background: linear-gradient(135deg, #4CAF50, #45A049);
+    border: none;
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: all 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.launch-scene-btn:hover {
+    background: linear-gradient(135deg, #45A049, #3D8B40);
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.launch-scene-btn:active {
+    transform: scale(0.95);
+}
+
+/* Clip Dialog */
+.clip-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    animation: fadeIn 0.2s;
+}
+
+.clip-dialog {
+    background: linear-gradient(135deg, #2c3e50, #34495e);
+    padding: 2rem;
+    border-radius: 8px;
+    min-width: 400px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.3s;
+}
+
+.clip-dialog h4 {
+    margin: 0 0 1rem 0;
+    color: white;
+    font-size: 1.3rem;
+}
+
+.pattern-select {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.75rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.pattern-select:focus {
+    outline: none;
+    border-color: rgba(33, 150, 243, 0.5);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.pattern-select option {
+    background: #34495e;
+    color: white;
+}
+
+.clip-dialog-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.clip-dialog-buttons button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.clip-dialog-buttons button:not(.primary) {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.clip-dialog-buttons button:not(.primary):hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.clip-dialog-buttons button.primary {
+    background: linear-gradient(135deg, #2196F3, #1976D2);
+    color: white;
+}
+
+.clip-dialog-buttons button.primary:hover {
+    background: linear-gradient(135deg, #1976D2, #1565C0);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Scene Grid */
+@media (max-width: 1200px) {
+    .scene-grid-header-row,
+    .scene-row {
+        grid-template-columns: 120px repeat(8, minmax(60px, 1fr)) 60px;
+        font-size: 0.8rem;
+    }
+    
+    .clip-name {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .scene-grid-container {
+        padding: 0.5rem;
+    }
+    
+    .scene-grid-header-row,
+    .scene-row {
+        grid-template-columns: 100px repeat(4, 1fr) 50px;
+        gap: 0.25rem;
+    }
+    
+    .track-header:nth-child(n+6),
+    .clip-cell:nth-child(n+6) {
+        display: none;
+    }
+    
+    .clip-dialog {
+        min-width: 90%;
+        padding: 1.5rem;
+    }
+    
+    .launch-scene-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
 }

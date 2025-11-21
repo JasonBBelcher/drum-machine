@@ -126,6 +126,26 @@ export class SequencerController {
       this.songView.on('patternMoveUp', this.handlePatternMoveUp.bind(this));
       this.songView.on('patternMoveDown', this.handlePatternMoveDown.bind(this));
       this.songView.on('patternRepeatChange', this.handlePatternRepeatChange.bind(this));
+      
+      // Phase 6.3: Enhanced UI features
+      this.songView.on('patternDragDrop', this.handlePatternDragDrop.bind(this));
+      this.songView.on('patternHover', this.handlePatternHover.bind(this));
+      this.songView.on('patternHoverEnd', this.handlePatternHoverEnd.bind(this));
+      this.songView.on('keyboardTogglePlayPause', this.handleKeyboardPlayPause.bind(this));
+      
+      // Phase 7: Jump Mode
+      this.songView.on('jumpAdd', this.handleJumpAdd.bind(this));
+      this.songView.on('jumpRemove', this.handleJumpRemove.bind(this));
+    }
+
+    // Phase 8: Scene Mode event handlers
+    if (this.sceneView) {
+      this.sceneView.container?.addEventListener('sceneAdd', this.handleSceneAdd.bind(this));
+      this.sceneView.container?.addEventListener('sceneRemove', this.handleSceneRemove.bind(this));
+      this.sceneView.container?.addEventListener('sceneRename', this.handleSceneRename.bind(this));
+      this.sceneView.container?.addEventListener('clipAdd', this.handleClipAdd.bind(this));
+      this.sceneView.container?.addEventListener('clipRemove', this.handleClipRemove.bind(this));
+      this.sceneView.container?.addEventListener('sceneLaunch', this.handleSceneLaunch.bind(this));
     }
   }
 
@@ -735,11 +755,19 @@ export class SequencerController {
     this.songView.renderChain(this.songModel.chain);
     
     // Set up song scheduler callbacks
-    this.songScheduler.onStepChange = (stepIndex) => {
+    this.songScheduler.onStepChange = (stepIndex, progressInfo) => {
       this.songView.highlightCurrentPattern(stepIndex);
       const step = this.songModel.chain[stepIndex];
       if (step) {
         this.songView.setCurrentPattern(step.patternName);
+        
+        // Phase 6.3: Update per-pattern progress
+        this.songView.updateChainItemProgress(stepIndex, this.songScheduler.currentStep);
+      }
+      
+      // Phase 6.3: Update overall progress
+      if (progressInfo) {
+        this.songView.setOverallProgress(progressInfo.completedRepeats, progressInfo.totalRepeats);
       }
     };
 
@@ -747,6 +775,11 @@ export class SequencerController {
       const state = this.songScheduler.getState();
       this.songView.setSongProgress(state.currentStepIndex + 1, this.songModel.chain.length);
     };
+
+    // Phase 7: Jump callback
+    this.songScheduler.onJump((jump) => {
+      this.songView.highlightJump(jump);
+    });
   }
 
   /**
@@ -803,6 +836,7 @@ export class SequencerController {
     // Update view
     this.songView.setSongName(name);
     this.songView.renderChain(this.songModel.chain);
+    this.songView.renderJumps(this.songModel.jumps); // Phase 7
     this.songView.clear();
     
     this.songView.showSuccess(`Song "${name}" loaded`);
@@ -954,6 +988,217 @@ export class SequencerController {
       step.repeats = repeats;
       this.songView.renderChain(this.songModel.chain);
       console.log(`✓ Updated repeats to ${repeats}`);
+    }
+  }
+
+  /**
+   * Phase 6.3: Handle drag and drop pattern reordering
+   */
+  handlePatternDragDrop({ fromIndex, toIndex }) {
+    if (fromIndex === toIndex) return;
+    
+    this.songModel.moveStep(fromIndex, toIndex);
+    this.songView.renderChain(this.songModel.chain);
+    console.log(`✓ Moved pattern from position ${fromIndex} to ${toIndex}`);
+  }
+
+  /**
+   * Phase 6.3: Handle pattern hover for preview
+   */
+  async handlePatternHover({ index, targetElement }) {
+    const step = this.songModel.chain[index];
+    if (!step) return;
+    
+    try {
+      // Load pattern details from storage
+      const pattern = await StorageManager.loadPattern(step.patternId);
+      
+      if (!pattern) {
+        console.warn(`Pattern ${step.patternId} not found`);
+        return;
+      }
+      
+      // Count active drums
+      const activeDrums = new Set();
+      pattern.steps.forEach(step => {
+        Object.entries(step.drums).forEach(([drumName, drumData]) => {
+          if (drumData.on) {
+            activeDrums.add(drumName);
+          }
+        });
+      });
+      
+      const patternInfo = {
+        name: pattern.name || step.patternId,
+        length: pattern.steps.length,
+        tempo: pattern.tempo || this.model.tempo,
+        activeDrums: Array.from(activeDrums)
+      };
+      
+      this.songView.showPatternPreview(patternInfo, targetElement);
+    } catch (error) {
+      console.error('Error loading pattern preview:', error);
+    }
+  }
+
+  /**
+   * Phase 6.3: Handle pattern hover end
+   */
+  handlePatternHoverEnd() {
+    this.songView.hidePatternPreview();
+  }
+
+  /**
+   * Phase 6.3: Handle keyboard play/pause toggle
+   */
+  handleKeyboardPlayPause() {
+    if (!this.songScheduler) return;
+    
+    const state = this.songScheduler.getState();
+    
+    if (state === 'stopped') {
+      this.handleSongPlay();
+    } else if (state === 'playing') {
+      this.handleSongPause();
+    } else if (state === 'paused') {
+      this.handleSongResume();
+    }
+  }
+
+  /**
+   * Phase 7: Handle jump add
+   */
+  handleJumpAdd({ fromIndex, toIndex, label, condition }) {
+    try {
+      this.songModel.addJump(fromIndex, toIndex, label, condition);
+      this.songView.renderJumps(this.songModel.jumps);
+      console.log(`✓ Added jump from #${fromIndex + 1} to #${toIndex + 1}`);
+    } catch (error) {
+      this.songView.showError(error.message);
+      console.error('Error adding jump:', error);
+    }
+  }
+
+  /**
+   * Phase 7: Handle jump remove
+   */
+  handleJumpRemove({ jumpIndex }) {
+    try {
+      const jump = this.songModel.getJump(jumpIndex);
+      if (jump) {
+        this.songModel.removeJump(jumpIndex);
+        this.songView.renderJumps(this.songModel.jumps);
+        console.log(`✓ Removed jump from #${jump.fromIndex + 1} to #${jump.toIndex + 1}`);
+      }
+    } catch (error) {
+      this.songView.showError(error.message);
+      console.error('Error removing jump:', error);
+    }
+  }
+
+  /**
+   * Phase 8: Handle scene add
+   */
+  handleSceneAdd(event) {
+    try {
+      const { name } = event.detail;
+      this.songModel.sceneGrid.addScene(name);
+      this.sceneView?.render(this.sceneView.container);
+      console.log(`✓ Added scene: ${name}`);
+    } catch (error) {
+      alert(error.message);
+      console.error('Error adding scene:', error);
+    }
+  }
+
+  /**
+   * Phase 8: Handle scene remove
+   */
+  handleSceneRemove(event) {
+    try {
+      const { sceneIndex } = event.detail;
+      const scene = this.songModel.sceneGrid.getScene(sceneIndex);
+      if (scene) {
+        this.songModel.sceneGrid.removeScene(sceneIndex);
+        this.sceneView?.render(this.sceneView.container);
+        console.log(`✓ Removed scene: ${scene.name}`);
+      }
+    } catch (error) {
+      alert(error.message);
+      console.error('Error removing scene:', error);
+    }
+  }
+
+  /**
+   * Phase 8: Handle scene rename
+   */
+  handleSceneRename(event) {
+    try {
+      const { sceneIndex, name } = event.detail;
+      const scene = this.songModel.sceneGrid.getScene(sceneIndex);
+      if (scene) {
+        scene.name = name;
+        console.log(`✓ Renamed scene to: ${name}`);
+      }
+    } catch (error) {
+      alert(error.message);
+      console.error('Error renaming scene:', error);
+    }
+  }
+
+  /**
+   * Phase 8: Handle clip add
+   */
+  handleClipAdd(event) {
+    try {
+      const { sceneIndex, trackIndex, patternName } = event.detail;
+      const scene = this.songModel.sceneGrid.getScene(sceneIndex);
+      if (scene) {
+        scene.addClip(patternName, trackIndex);
+        this.sceneView?.render(this.sceneView.container);
+        console.log(`✓ Added clip: ${patternName} to scene ${scene.name}, track ${trackIndex + 1}`);
+      }
+    } catch (error) {
+      alert(error.message);
+      console.error('Error adding clip:', error);
+    }
+  }
+
+  /**
+   * Phase 8: Handle clip remove
+   */
+  handleClipRemove(event) {
+    try {
+      const { sceneIndex, trackIndex } = event.detail;
+      const scene = this.songModel.sceneGrid.getScene(sceneIndex);
+      if (scene) {
+        scene.removeClip(trackIndex);
+        this.sceneView?.render(this.sceneView.container);
+        console.log(`✓ Removed clip from scene ${scene.name}, track ${trackIndex + 1}`);
+      }
+    } catch (error) {
+      alert(error.message);
+      console.error('Error removing clip:', error);
+    }
+  }
+
+  /**
+   * Phase 8: Handle scene launch
+   */
+  handleSceneLaunch(event) {
+    try {
+      const { sceneIndex } = event.detail;
+      const scene = this.songModel.sceneGrid.getScene(sceneIndex);
+      if (scene && this.songScheduler) {
+        const success = this.songScheduler.launchScene(scene);
+        if (success) {
+          this.sceneView?.highlightActiveScene(sceneIndex);
+          console.log(`✓ Launched scene: ${scene.name}`);
+        }
+      }
+    } catch (error) {
+      alert(error.message);
+      console.error('Error launching scene:', error);
     }
   }
 

@@ -7,6 +7,7 @@
  * Tests rendering, user interactions, and event handling
  */
 
+import { describe, test, expect, beforeEach, afterEach, jest } from '@jest/globals';
 import { SongView } from '../views/SongView.js';
 
 describe('SongView', () => {
@@ -17,6 +18,11 @@ describe('SongView', () => {
     // Create a container element
     container = document.createElement('div');
     document.body.appendChild(container);
+    
+    // Mock scrollIntoView for Phase 6.3
+    if (!Element.prototype.scrollIntoView) {
+      Element.prototype.scrollIntoView = () => {};
+    }
     
     songView = new SongView(container);
   });
