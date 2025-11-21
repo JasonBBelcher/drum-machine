@@ -6,12 +6,15 @@
  */
 
 import { SequenceModel } from '../models/SequenceModel.js';
+import { SongModel } from '../models/SongModel.js';
 import { SequencerView, ControlsView, VolumeControlsView } from '../views/SequencerView.js';
 import { SampleControlsView } from '../views/SampleControlsView.js';
 import { AudioEngine } from '../libs/audio-engine.js';
 import { AudioScheduler } from '../libs/audio-scheduler.js';
+import { SongScheduler } from '../libs/song-scheduler.js';
 import { DrumPlayer } from '../libs/audio-player.js';
 import { SampleLoader } from '../utils/SampleLoader.js';
+import { StorageManager } from '../utils/StorageManager.js';
 
 export class SequencerController {
   constructor(config) {
@@ -45,11 +48,19 @@ export class SequencerController {
     this.scheduler = null;
     this.isPlaying = false;
 
+    // Phase 6: Song mode
+    this.songModel = config.songModel || new SongModel();
+    this.songScheduler = null; // Initialized later
+    this.storage = new StorageManager();
+
     // Bind event handlers
     this.bindEvents();
 
     // Initial render
     this.render();
+
+    // Initialize song scheduler after construction
+    this.songScheduler = new SongScheduler(this, this.songModel);
   }
 
   /**
@@ -199,6 +210,42 @@ export class SequencerController {
     } else {
       console.error(`Failed to load pattern: ${name}`);
     }
+  }
+
+  /**
+   * Load pattern by name and start playing (for song mode)
+   * @param {string} name - Pattern name
+   * @returns {boolean} Success status
+   */
+  loadPatternByName(name) {
+    const loadedModel = this.storage.load(name);
+    
+    if (!loadedModel) {
+      console.error(`Failed to load pattern: ${name}`);
+      return false;
+    }
+
+    // Stop current playback
+    if (this.isPlaying) {
+      this.stop();
+    }
+
+    // Load the pattern
+    this.model = loadedModel;
+    this.render();
+
+    // Restore per-drum effects
+    this.restoreDrumEffects();
+
+    // Refresh drum effects UI
+    if (this.drumEffectsView) {
+      this.drumEffectsView.refresh();
+    }
+
+    // Start playing immediately (song scheduler expects this)
+    this.start();
+
+    return true;
   }
 
   /**

@@ -6,10 +6,12 @@
  */
 
 import { SequenceModel } from '../models/SequenceModel.js';
+import { SongModel } from '../models/SongModel.js';
 
 export class StorageManager {
   constructor(storageKey = 'drumSequences') {
     this.storageKey = storageKey;
+    this.songStorageKey = 'drumSongs'; // Separate key for songs
     this.storageAvailable = this.checkStorageAvailability();
   }
 
@@ -291,6 +293,204 @@ export class StorageManager {
       return true;
     } catch (e) {
       console.error('Failed to rename sequence:', e);
+      return false;
+    }
+  }
+
+  // ===== SONG MANAGEMENT METHODS =====
+
+  /**
+   * Save a song
+   * @param {SongModel} song - Song to save
+   * @returns {boolean} Success status
+   */
+  saveSong(song) {
+    if (!this.storageAvailable) {
+      console.error('Storage not available');
+      return false;
+    }
+
+    if (!song.name || typeof song.name !== 'string') {
+      console.error('Invalid song name');
+      return false;
+    }
+
+    try {
+      const songs = this.loadAllSongs();
+      songs[song.name] = {
+        data: song.toJSON(),
+        timestamp: Date.now(),
+        version: '1.0'
+      };
+
+      localStorage.setItem(this.songStorageKey, JSON.stringify(songs));
+      return true;
+    } catch (e) {
+      console.error('Failed to save song:', e);
+      return false;
+    }
+  }
+
+  /**
+   * Load a song by name
+   * @param {string} name - Song name
+   * @returns {SongModel|null}
+   */
+  loadSong(name) {
+    if (!this.storageAvailable) {
+      return null;
+    }
+
+    try {
+      const songs = this.loadAllSongs();
+      const entry = songs[name];
+
+      if (!entry) {
+        console.warn(`Song "${name}" not found`);
+        return null;
+      }
+
+      return SongModel.fromJSON(entry.data);
+    } catch (e) {
+      console.error('Failed to load song:', e);
+      return null;
+    }
+  }
+
+  /**
+   * Load all songs
+   * @returns {Object} Songs object keyed by name
+   */
+  loadAllSongs() {
+    if (!this.storageAvailable) {
+      return {};
+    }
+
+    try {
+      const data = localStorage.getItem(this.songStorageKey);
+      return data ? JSON.parse(data) : {};
+    } catch (e) {
+      console.error('Failed to load songs:', e);
+      return {};
+    }
+  }
+
+  /**
+   * Get array of all song names
+   * @returns {Array<string>}
+   */
+  getAllSongNames() {
+    const songs = this.loadAllSongs();
+    return Object.keys(songs).sort();
+  }
+
+  /**
+   * Delete a song
+   * @param {string} name - Song name
+   * @returns {boolean} Success status
+   */
+  deleteSong(name) {
+    if (!this.storageAvailable) {
+      return false;
+    }
+
+    try {
+      const songs = this.loadAllSongs();
+      
+      if (!songs[name]) {
+        console.warn(`Song "${name}" not found`);
+        return false;
+      }
+
+      delete songs[name];
+      localStorage.setItem(this.songStorageKey, JSON.stringify(songs));
+      return true;
+    } catch (e) {
+      console.error('Failed to delete song:', e);
+      return false;
+    }
+  }
+
+  /**
+   * Check if song name exists
+   * @param {string} name
+   * @returns {boolean}
+   */
+  songExists(name) {
+    const songs = this.loadAllSongs();
+    return songs.hasOwnProperty(name);
+  }
+
+  /**
+   * Rename a song
+   * @param {string} oldName
+   * @param {string} newName
+   * @returns {boolean} Success status
+   */
+  renameSong(oldName, newName) {
+    if (!this.storageAvailable) {
+      return false;
+    }
+
+    if (this.songExists(newName)) {
+      console.error(`Song "${newName}" already exists`);
+      return false;
+    }
+
+    try {
+      const songs = this.loadAllSongs();
+      
+      if (!songs[oldName]) {
+        console.error(`Song "${oldName}" not found`);
+        return false;
+      }
+
+      songs[newName] = songs[oldName];
+      delete songs[oldName];
+      
+      localStorage.setItem(this.songStorageKey, JSON.stringify(songs));
+      return true;
+    } catch (e) {
+      console.error('Failed to rename song:', e);
+      return false;
+    }
+  }
+
+  /**
+   * Export a song to JSON string
+   * @param {string} name - Song name
+   * @returns {string|null} JSON string
+   */
+  exportSong(name) {
+    const song = this.loadSong(name);
+    if (!song) return null;
+
+    try {
+      return JSON.stringify(song.toJSON(), null, 2);
+    } catch (e) {
+      console.error('Failed to export song:', e);
+      return null;
+    }
+  }
+
+  /**
+   * Import a song from JSON string
+   * @param {string} jsonString - JSON representation of song
+   * @param {string} name - Optional name override
+   * @returns {boolean} Success status
+   */
+  importSong(jsonString, name = null) {
+    try {
+      const data = JSON.parse(jsonString);
+      const song = SongModel.fromJSON(data);
+      
+      if (name) {
+        song.name = name;
+      }
+
+      return this.saveSong(song);
+    } catch (e) {
+      console.error('Failed to import song:', e);
       return false;
     }
   }
